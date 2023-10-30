@@ -17,11 +17,11 @@
 // 	return (num);
 // }
 Contact::Contact() 
-	: first_name("")
-	, last_name("")
-	, nick_name("")
-	, phone_number("")
-	, darkest_secret("") {
+	: first_name("None")
+	, last_name("None")
+	, nick_name("None")
+	, phone_number("None")
+	, darkest_secret("None") {
 
 	std::cout << "Contact con" << std::endl;
 }
