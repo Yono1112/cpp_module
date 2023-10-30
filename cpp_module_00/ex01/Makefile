@@ -1,15 +1,19 @@
-NAME = megaphone
+NAME = phonebook
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror --std=c++98
 RM = rm -rf
-SRCS = Megaphone.cpp
+SRCS =	src/main.cpp	\
+	src/Contact.cpp	\
+	src/Phonebook.cpp	\
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+
+INC = -I include
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS) $(INC)
 
 fclean:
 	$(RM) $(NAME)
