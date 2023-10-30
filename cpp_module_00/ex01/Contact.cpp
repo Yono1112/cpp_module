@@ -26,15 +26,18 @@ void	Contact::setContact(void)
 	std::cout << "Enter First Name: ";
 	std::getline(std::cin, new_str[0]);
 	first_name = new_str[0];
-	// std::cout << "Enter Last Name: ";
-	// std::getline(std::cin, new_str[1]);
-	// last_name = new_str;
-	// std::cout << "Enter Nick Name: ";
-	// std::getline(std::cin, new_str[2]);
-	// nick_name = new_str;
-	// std::cout << "Enter Phone Name: ";
-	// std::getline(std::cin, new_str[3]);
-	// nick_name = new_str;
+	std::cout << "Enter Last Name: ";
+	std::getline(std::cin, new_str[1]);
+	last_name = new_str[1];
+	std::cout << "Enter Nick Name: ";
+	std::getline(std::cin, new_str[2]);
+	nick_name = new_str[2];
+	std::cout << "Enter Phone Name: ";
+	std::getline(std::cin, new_str[3]);
+	phone_number = new_str[3];
+	std::cout << "Enter Darkest Secret: ";
+	std::getline(std::cin, new_str[4]);
+	darkest_secret = new_str[4];
 }
 
 std::string	Contact::getFirstName(void)
@@ -47,5 +50,9 @@ void	Contact::printContact(void)
 {
 	std::cout << "start printCotact" << std::endl;
 	// std::cout << "num: " << num << std::endl;
-	std::cout << "first_name: " << first_name << std::endl;
+	std::cout << "First Name: " << first_name << std::endl;
+	std::cout << "Last Name: " << last_name << std::endl;
+	std::cout << "Nick Name: " << nick_name << std::endl;
+	std::cout << "Phone Name: " << phone_number << std::endl;
+	std::cout << "Darkest Secret: " << darkest_secret << std::endl;
 }
