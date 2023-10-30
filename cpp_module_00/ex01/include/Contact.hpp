@@ -8,11 +8,11 @@ class Contact
 	public:
 		// void setNum(int new_num);
 		// int getNum(void);
-		void setContact(void);
-		void printContact(void);
-		std::string getFirstName(void);
 		Contact();
 		~Contact();
+		void setContact(void);
+		void printContact(int index, bool flag_all_print);
+		std::string getFirstName(void);
 	private:
 		// int num;
 		std::string first_name;

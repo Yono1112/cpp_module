@@ -21,14 +21,12 @@ Contact::Contact()
 	, phone_number("")
 	, darkest_secret("") {
 
-	std::cout << "con" << std::endl;
+	std::cout << "Contact con" << std::endl;
 }
 
 Contact::~Contact() {
-	std::cout << "des" << std::endl;
+	std::cout << "Contact des" << std::endl;
 }
-
-
 
 void	Contact::setContact(void)
 {
@@ -61,13 +59,16 @@ std::string	Contact::getFirstName(void)
 	return (first_name);
 }
 
-void	Contact::printContact(void)
+void	Contact::printContact(int index, bool flag_all_print)
 {
 	std::cout << "start printCotact" << std::endl;
-	// std::cout << "num: " << num << std::endl;
+	std::cout << "index: " << index << std::endl;
 	std::cout << "First Name: " << first_name << std::endl;
 	std::cout << "Last Name: " << last_name << std::endl;
 	std::cout << "Nick Name: " << nick_name << std::endl;
-	std::cout << "Phone Name: " << phone_number << std::endl;
-	std::cout << "Darkest Secret: " << darkest_secret << std::endl;
+	if (flag_all_print)
+	{
+		std::cout << "Phone Name: " << phone_number << std::endl;
+		std::cout << "Darkest Secret: " << darkest_secret << std::endl;
+	}
 } 
