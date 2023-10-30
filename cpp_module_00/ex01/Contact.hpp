@@ -6,13 +6,13 @@
 class Contact
 {
 	public:
-		void setNum(int new_num);
-		int getNum(void);
+		// void setNum(int new_num);
+		// int getNum(void);
 		void setContact(void);
 		void printContact(void);
 		std::string getFirstName(void);
 	private:
-		int num;
+		// int num;
 		std::string first_name;
 		std::string last_name;
 		std::string nick_name;

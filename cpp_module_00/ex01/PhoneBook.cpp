@@ -14,6 +14,6 @@ void	PhoneBook::add(Contact *contact)
 {
 	std::cout << "start add" << std::endl;
 	contact->setContact();
-	std::cout << contact->getNum() << std::endl;
-	std::cout << contact->getFirstName() << std::endl;
+	// std::cout << contact->getNum() << std::endl;
+	// std::cout << contact->getFirstName() << std::endl;
 }

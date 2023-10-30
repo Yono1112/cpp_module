@@ -31,8 +31,8 @@ int main(void)
 	PhoneBook	phone_book;
 	Contact		contact;
 
-	contact.setNum(0);
-	std::cout << contact.getNum() << std::endl;
+	// contact.setNum(0);
+	// std::cout << contact.getNum() << std::endl;
 	std::cout << "HELLO MY AWESOME PHONEBOOK!" << std::endl;
 	while (1)
 	{
