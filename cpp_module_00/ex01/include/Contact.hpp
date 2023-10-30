@@ -11,6 +11,8 @@ class Contact
 		void setContact(void);
 		void printContact(void);
 		std::string getFirstName(void);
+		Contact();
+		~Contact();
 	private:
 		// int num;
 		std::string first_name;

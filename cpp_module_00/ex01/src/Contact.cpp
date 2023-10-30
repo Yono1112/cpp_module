@@ -14,6 +14,21 @@
 // 	std::cout << "start getNum" << std::endl;
 // 	return (num);
 // }
+Contact::Contact() 
+	: first_name("")
+	, last_name("")
+	, nick_name("")
+	, phone_number("")
+	, darkest_secret("") {
+
+	std::cout << "con" << std::endl;
+}
+
+Contact::~Contact() {
+	std::cout << "des" << std::endl;
+}
+
+
 
 void	Contact::setContact(void)
 {
@@ -55,4 +70,4 @@ void	Contact::printContact(void)
 	std::cout << "Nick Name: " << nick_name << std::endl;
 	std::cout << "Phone Name: " << phone_number << std::endl;
 	std::cout << "Darkest Secret: " << darkest_secret << std::endl;
-}
+} 
