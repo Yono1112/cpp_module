@@ -42,7 +42,16 @@ bool	isSpaceOrEmpty(std::string str)
 	return (true);
 }
 
-std::string	inputMemberString(std::string str_member)
+bool	isOnlyDigit(std::string str)
+{
+	for (int i = 0; i < (int)str.length() ; i++) {
+		if (!std::isdigit(str[i]))
+			return (false);
+	}
+	return (true);
+}
+
+std::string	inputMemberString(std::string str_member, bool flag_num)
 {
 	std::string	new_str;
 
@@ -50,6 +59,11 @@ std::string	inputMemberString(std::string str_member)
 	{
 		std::cout << "Enter " << str_member;
 		std::getline(std::cin, new_str);
+		if (flag_num && !isOnlyDigit(new_str))
+		{
+			std::cout << "You Must Enter Only Number" << std::endl;
+			continue ;
+		}
 		if (!isSpaceOrEmpty(new_str))
 			break ;
 		std::cout << "You Must Enter At Least One Character" << std::endl;
@@ -60,11 +74,11 @@ std::string	inputMemberString(std::string str_member)
 void	Contact::setContact(void)
 {
 	std::cout << "start setContact" << std::endl;
-	first_name = inputMemberString("First Name: ");
-	last_name = inputMemberString("Last Name: ");
-	nick_name = inputMemberString("Nick Name: ");
-	phone_number = inputMemberString("Phone Number: ");
-	darkest_secret = inputMemberString("Darkest Secret: ");
+	first_name = inputMemberString("First Name: ", false);
+	last_name = inputMemberString("Last Name: ", false);
+	nick_name = inputMemberString("Nick Name: ", false);
+	phone_number = inputMemberString("Phone Number: ", true);
+	darkest_secret = inputMemberString("Darkest Secret: ", false);
 }
 
 std::string	Contact::getFirstName(void)
