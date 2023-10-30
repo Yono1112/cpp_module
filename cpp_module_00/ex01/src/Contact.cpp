@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <iomanip>
+#include <cstring>
 
 // void	Contact::setNum(int new_num)
 // {
@@ -59,16 +61,55 @@ std::string	Contact::getFirstName(void)
 	return (first_name);
 }
 
-void	Contact::printContact(int index, bool flag_all_print)
+std::string	check_length(std::string str)
 {
-	std::cout << "start printCotact" << std::endl;
-	std::cout << "index: " << index << std::endl;
-	std::cout << "First Name: " << first_name << std::endl;
-	std::cout << "Last Name: " << last_name << std::endl;
-	std::cout << "Nick Name: " << nick_name << std::endl;
-	if (flag_all_print)
+	if (str.length() > 10)
 	{
-		std::cout << "Phone Name: " << phone_number << std::endl;
-		std::cout << "Darkest Secret: " << darkest_secret << std::endl;
+		while (str.length() > 9)
+			str.pop_back();
+		str.push_back('.');
 	}
+	return (str);
+}
+
+void	Contact::printContactAll(int index)
+{
+	std::cout << std::setw(10);
+	std::cout << "Index";
+	std::cout << "|" << std::setw(10);
+	std::cout << index << std::endl;
+	std::cout << std::setw(10);
+	std::cout << "FirstName";
+	std::cout << "|" << std::setw(10);
+	std::cout << first_name << std::endl;
+	std::cout << std::setw(10);
+	std::cout << "LastName";
+	std::cout << "|" << std::setw(10);
+	std::cout << last_name << std::endl;
+	std::cout << std::setw(10);
+	std::cout << "NickName";
+	std::cout << "|" << std::setw(10);
+	std::cout << nick_name << std::endl;
+	std::cout << std::setw(10);
+	std::cout << "PhoneNum";
+	std::cout << "|" << std::setw(10);
+	std::cout << phone_number << std::endl;
+	std::cout << std::setw(10);
+	std::cout << "Secret";
+	std::cout << "|" << std::setw(10);
+	std::cout << darkest_secret << std::endl;
+}
+
+void	Contact::printContactOnlyName(int index)
+{
+	// std::cout << "start printCotact" << std::endl;
+	std::cout << "|" << std::setw(10);
+	std::cout << index;
+	std::cout << "|" << std::setw(10);
+	std::cout << check_length(first_name);
+	std::cout << "|" << std::setw(10);
+	std::cout << check_length(last_name);
+	std::cout << "|" << std::setw(10);
+	std::cout << check_length(nick_name) << "|";
+	std::cout << std::endl;
 } 

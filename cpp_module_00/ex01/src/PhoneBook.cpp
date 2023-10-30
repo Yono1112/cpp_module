@@ -1,6 +1,7 @@
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
 #include <iostream>
+#include <iomanip>
 
 PhoneBook::PhoneBook(void)
 	: index(0)
@@ -21,13 +22,20 @@ void	PhoneBook::search(void)
 	index = 0;
 	std::cout << "start search" << std::endl;
 	// contact.printContact();
+	std::cout << "|" << std::setw(10);
+	std::cout << "index";
+	std::cout << "|" << std::setw(10);
+	std::cout << "firstName";
+	std::cout << "|" << std::setw(10);
+	std::cout << "lastName";
+	std::cout << "|" << std::setw(10);
+	std::cout << "nickName" << "|" << std::endl;
 	for (index = 0; index < 8 ; index++)
-		contacts[index].printContact(index, false);
+		contacts[index].printContactOnlyName(index);
 	std::cout << "enter index: ";
 	std::getline(std::cin, new_str);
 	index = stoi(new_str);
-	std:: cout << index << std::endl;
-	contacts[index].printContact(index, true);
+	contacts[index].printContactAll(index);
 	// std::cout << "first_name: " << contacts[0].printContact() << std::endl;
 	// contacts[0].printContact();
 	// std::cout << contact.getNum() << std::endl;

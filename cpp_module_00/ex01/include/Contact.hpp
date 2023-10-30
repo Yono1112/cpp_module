@@ -11,7 +11,8 @@ class Contact
 		Contact();
 		~Contact();
 		void setContact(void);
-		void printContact(int index, bool flag_all_print);
+		void printContactOnlyName(int index);
+		void printContactAll(int index);
 		std::string getFirstName(void);
 	private:
 		// int num;
