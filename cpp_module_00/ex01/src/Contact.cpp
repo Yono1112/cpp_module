@@ -30,29 +30,41 @@ Contact::~Contact() {
 	std::cout << "Contact des" << std::endl;
 }
 
+bool	isSpaceOrEmpty(std::string str)
+{
+	// std::cout << (int)str.length();
+	if (str.length() == 0)
+		return (true);
+	for (int i = 0; i < (int)str.length() ; i++) {
+		if (str[i] != ' ' && str[i] != '\t')
+			return (false);
+	}
+	return (true);
+}
+
+std::string	inputMemberString(std::string str_member)
+{
+	std::string	new_str;
+
+	while (1)
+	{
+		std::cout << "Enter " << str_member;
+		std::getline(std::cin, new_str);
+		if (!isSpaceOrEmpty(new_str))
+			break ;
+		std::cout << "You Must Enter At Least One Character" << std::endl;
+	}
+	return (new_str);
+}
+
 void	Contact::setContact(void)
 {
-	std::string	new_str[5];
-
 	std::cout << "start setContact" << std::endl;
-	// std::cout << "Enter Num: ";
-	// std::getline(std::cin, new_str[0]);
-	// num = stoi(new_str);
-	std::cout << "Enter First Name: ";
-	std::getline(std::cin, new_str[0]);
-	first_name = new_str[0];
-	std::cout << "Enter Last Name: ";
-	std::getline(std::cin, new_str[1]);
-	last_name = new_str[1];
-	std::cout << "Enter Nick Name: ";
-	std::getline(std::cin, new_str[2]);
-	nick_name = new_str[2];
-	std::cout << "Enter Phone Name: ";
-	std::getline(std::cin, new_str[3]);
-	phone_number = new_str[3];
-	std::cout << "Enter Darkest Secret: ";
-	std::getline(std::cin, new_str[4]);
-	darkest_secret = new_str[4];
+	first_name = inputMemberString("First Name: ");
+	last_name = inputMemberString("Last Name: ");
+	nick_name = inputMemberString("Nick Name: ");
+	phone_number = inputMemberString("Phone Number: ");
+	darkest_secret = inputMemberString("Darkest Secret: ");
 }
 
 std::string	Contact::getFirstName(void)
@@ -61,7 +73,7 @@ std::string	Contact::getFirstName(void)
 	return (first_name);
 }
 
-std::string	check_length(std::string str)
+std::string	checkLength(std::string str)
 {
 	if (str.length() > 10)
 	{
@@ -106,10 +118,10 @@ void	Contact::printContactOnlyName(int index)
 	std::cout << "|" << std::setw(10);
 	std::cout << index;
 	std::cout << "|" << std::setw(10);
-	std::cout << check_length(first_name);
+	std::cout << checkLength(first_name);
 	std::cout << "|" << std::setw(10);
-	std::cout << check_length(last_name);
+	std::cout << checkLength(last_name);
 	std::cout << "|" << std::setw(10);
-	std::cout << check_length(nick_name) << "|";
+	std::cout << checkLength(nick_name) << "|";
 	std::cout << std::endl;
 } 
