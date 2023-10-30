@@ -5,19 +5,15 @@
 void	PhoneBook::search(Contact contact)
 {
 	std::cout << "start search" << std::endl;
-	std::cout << contact.getNum() << std::endl;
+	contact.printContact();
+	// std::cout << contact.getNum() << std::endl;
+	// std::cout << contact.getFirstName() << std::endl;
 }
 
 void	PhoneBook::add(Contact *contact)
 {
-	std::string	new_str;
-	int		new_num;
-
 	std::cout << "start add" << std::endl;
-	std::cout << "Enter Num: ";
-	// std::cin >> new_num;
-	std::getline(std::cin, new_str);
-	new_num = stoi(new_str);
-	contact->setNum(new_num);
+	contact->setContact();
 	std::cout << contact->getNum() << std::endl;
+	std::cout << contact->getFirstName() << std::endl;
 }
