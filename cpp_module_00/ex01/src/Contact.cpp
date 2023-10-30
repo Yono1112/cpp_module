@@ -81,12 +81,6 @@ void	Contact::setContact(void)
 	darkest_secret = inputMemberString("Darkest Secret: ", false);
 }
 
-std::string	Contact::getFirstName(void)
-{
-	std::cout << "start getContact" << std::endl;
-	return (first_name);
-}
-
 std::string	checkLength(std::string str)
 {
 	if (str.length() > 10)

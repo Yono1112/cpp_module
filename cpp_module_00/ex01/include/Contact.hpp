@@ -13,7 +13,6 @@ class Contact
 		void setContact(void);
 		void printContactOnlyName(int index);
 		void printContactAll(int index);
-		std::string getFirstName(void);
 	private:
 		// int num;
 		std::string first_name;
