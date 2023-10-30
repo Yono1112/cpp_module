@@ -23,4 +23,6 @@ class Contact
 		std::string darkest_secret;
 };
 
+bool	isOnlyDigit(std::string str);
+
 #endif

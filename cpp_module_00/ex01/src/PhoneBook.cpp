@@ -14,10 +14,39 @@ PhoneBook::~PhoneBook(void)
 	std::cout << "PhoneBook des" << std::endl;
 }
 
+int	setIndex()
+{
+	std::string	new_str;
+	int		index;
+
+	while (1)
+	{
+		std::cout << "enter index: ";
+		std::getline(std::cin, new_str);
+		if (isOnlyDigit(new_str))
+		{
+			index = stoi(new_str);
+			if (0 <= index && index <= 7)
+				break ;
+			else
+			{
+				std::cout << "You Must Enter Index From 0 To 7" << std::endl;
+				continue ;
+			}
+		}
+		else
+		{
+			std::cout << "You Must Enter Only Number" << std::endl;
+			continue ;
+		}
+	}
+	return (index);
+		
+}
+
 void	PhoneBook::search(void)
 {
 	int		index;
-	std::string	new_str;
 
 	index = 0;
 	std::cout << "start search" << std::endl;
@@ -32,9 +61,7 @@ void	PhoneBook::search(void)
 	std::cout << "nickName" << "|" << std::endl;
 	for (index = 0; index < 8 ; index++)
 		contacts[index].printContactOnlyName(index);
-	std::cout << "enter index: ";
-	std::getline(std::cin, new_str);
-	index = stoi(new_str);
+	index = setIndex();
 	contacts[index].printContactAll(index);
 	// std::cout << "first_name: " << contacts[0].printContact() << std::endl;
 	// contacts[0].printContact();
