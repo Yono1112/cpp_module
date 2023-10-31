@@ -29,7 +29,6 @@ int	setIndex()
 		{
 			std::stringstream ss(new_str);
 			ss >> index;
-			// index = stoi(new_str);
 			if (0 <= index && index <= 7)
 				break ;
 			else
@@ -54,7 +53,6 @@ void	PhoneBook::search(void)
 
 	index = 0;
 	std::cout << "start search" << std::endl;
-	// contact.printContact();
 	std::cout << "|" << std::setw(10);
 	std::cout << "index";
 	std::cout << "|" << std::setw(10);
@@ -69,23 +67,12 @@ void	PhoneBook::search(void)
 	if (index < 0)
 		return ;
 	_contacts[index].printContactAll(index);
-	// std::cout << "first_name: " << contacts[0].printContact() << std::endl;
-	// contacts[0].printContact();
-	// std::cout << contact.getNum() << std::endl;
-	// std::cout << contact.getFirstName() << std::endl;
 }
 
 void	PhoneBook::add(void)
 {
-	// contacts[0].printContact();
 	std::cout << "Set Contact In " << _index << " number" << std::endl;
 	_contacts[_index++].setContact();
 	if (_index == 8)
 		_index = 0;
-	// contacts[0].printContact();
-	// std::cout << "start add" << std::endl;
-	// contact->setContact();
-	// contacts[0].setContact();
-	// std::cout << contact->getNum() << std::endl;
-	// std::cout << contact->getFirstName() << std::endl;
 }

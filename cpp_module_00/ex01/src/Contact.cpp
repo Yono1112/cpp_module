@@ -5,24 +5,12 @@
 #include <iomanip>
 #include <cstring>
 
-// void	Contact::setNum(int new_num)
-// {
-// 	std::cout << "start setNum" << std::endl;
-// 	num = new_num;
-// }
-// 
-// int	Contact::getNum(void)
-// {
-// 	std::cout << "start getNum" << std::endl;
-// 	return (num);
-// }
 Contact::Contact() 
 	: _first_name("None")
 	, _last_name("None")
 	, _nick_name("None")
 	, _phone_number("None")
 	, _darkest_secret("None") {
-
 	// std::cout << "Contact con" << std::endl;
 }
 
@@ -32,7 +20,6 @@ Contact::~Contact() {
 
 bool	isSpaceOrEmpty(std::string str)
 {
-	// std::cout << (int)str.length();
 	if (str.length() == 0)
 		return (true);
 	for (int i = 0; i < (int)str.length() ; i++) {
@@ -61,10 +48,7 @@ std::string	inputMemberString(std::string str_member, bool flag_num)
 	{
 		std::cout << "Enter " << str_member;
 		if (!std::getline(std::cin, new_str))
-		{
-			// std::cin.clear();
 			return ("");
-		}
 		if (flag_num && !isOnlyDigit(new_str))
 		{
 			std::cout << "You Must Enter Only Number" << std::endl;
@@ -73,8 +57,6 @@ std::string	inputMemberString(std::string str_member, bool flag_num)
 		if (!isSpaceOrEmpty(new_str))
 			break ;
 		std::cout << "You Must Enter At Least One Character" << std::endl;
-	// std::cin.clear();
-	// std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 	return (new_str);
 }
@@ -105,7 +87,6 @@ std::string	checkLength(std::string str)
 	{
 		while (str.length() > 9)
 			str.erase(str.length() - 1);
-			// str.pop_back();
 		str.push_back('.');
 	}
 	return (str);
@@ -141,7 +122,6 @@ void	Contact::printContactAll(int index)
 
 void	Contact::printContactOnlyName(int index)
 {
-	// std::cout << "start printCotact" << std::endl;
 	std::cout << "|" << std::setw(10);
 	std::cout << index;
 	std::cout << "|" << std::setw(10);
