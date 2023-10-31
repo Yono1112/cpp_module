@@ -5,14 +5,14 @@
 #include <sstream>
 
 PhoneBook::PhoneBook(void)
-	: index(0)
+	: _index(0)
 {
-	std::cout << "PhoneBook con" << std::endl;
+	// std::cout << "PhoneBook con" << std::endl;
 }
 
 PhoneBook::~PhoneBook(void)
 {
-	std::cout << "PhoneBook des" << std::endl;
+	// std::cout << "PhoneBook des" << std::endl;
 }
 
 int	setIndex()
@@ -24,10 +24,7 @@ int	setIndex()
 	{
 		std::cout << "enter index: ";
 		if (!std::getline(std::cin, new_str))
-		{
-			std::cin.clear();
 			return (-1);
-		}
 		if (isOnlyDigit(new_str))
 		{
 			std::stringstream ss(new_str);
@@ -67,11 +64,11 @@ void	PhoneBook::search(void)
 	std::cout << "|" << std::setw(10);
 	std::cout << "nickName" << "|" << std::endl;
 	for (index = 0; index < 8 ; index++)
-		contacts[index].printContactOnlyName(index);
+		_contacts[index].printContactOnlyName(index);
 	index = setIndex();
 	if (index < 0)
 		return ;
-	contacts[index].printContactAll(index);
+	_contacts[index].printContactAll(index);
 	// std::cout << "first_name: " << contacts[0].printContact() << std::endl;
 	// contacts[0].printContact();
 	// std::cout << contact.getNum() << std::endl;
@@ -81,10 +78,10 @@ void	PhoneBook::search(void)
 void	PhoneBook::add(void)
 {
 	// contacts[0].printContact();
-	std::cout << "Set Contact In " << index << " number" << std::endl;
-	contacts[index++].setContact();
-	if (index == 8)
-		index = 0;
+	std::cout << "Set Contact In " << _index << " number" << std::endl;
+	_contacts[_index++].setContact();
+	if (_index == 8)
+		_index = 0;
 	// contacts[0].printContact();
 	// std::cout << "start add" << std::endl;
 	// contact->setContact();

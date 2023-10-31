@@ -11,8 +11,8 @@ class PhoneBook
 		void	add(void);
 		void	search(void);
 	private:
-		Contact	contacts[8];
-		int	index;
+		Contact	_contacts[8];
+		int	_index;
 };
 
 #endif

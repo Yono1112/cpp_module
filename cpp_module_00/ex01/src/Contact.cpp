@@ -23,11 +23,11 @@ Contact::Contact()
 	, _phone_number("None")
 	, _darkest_secret("None") {
 
-	std::cout << "Contact con" << std::endl;
+	// std::cout << "Contact con" << std::endl;
 }
 
 Contact::~Contact() {
-	std::cout << "Contact des" << std::endl;
+	// std::cout << "Contact des" << std::endl;
 }
 
 bool	isSpaceOrEmpty(std::string str)
@@ -62,7 +62,7 @@ std::string	inputMemberString(std::string str_member, bool flag_num)
 		std::cout << "Enter " << str_member;
 		if (!std::getline(std::cin, new_str))
 		{
-			std::cin.clear();
+			// std::cin.clear();
 			return ("");
 		}
 		if (flag_num && !isOnlyDigit(new_str))
@@ -84,17 +84,19 @@ void	Contact::setContact(void)
 	std::cout << "start setContact" << std::endl;
 	_first_name = inputMemberString("First Name: ", false);
 	if (_first_name == "")
-	{
-		if (std::cin.eof())
-			std::cout << "hello" << std::endl;
-		else
-			std::cout << "hello1" << std::endl;
-		return;
-	}
+		return ;
 	_last_name = inputMemberString("Last Name: ", false);
+	if (_last_name == "")
+		return ;
 	_nick_name = inputMemberString("Nick Name: ", false);
+	if (_last_name == "")
+		return ;
 	_phone_number = inputMemberString("Phone Number: ", true);
+	if (_phone_number == "")
+		return ;
 	_darkest_secret = inputMemberString("Darkest Secret: ", false);
+	if (_darkest_secret == "")
+		return ;
 }
 
 std::string	checkLength(std::string str)
