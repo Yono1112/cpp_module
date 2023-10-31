@@ -2,22 +2,30 @@ NAME = phonebook
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror --std=c++98
 RM = rm -rf
-SRCS =	src/main.cpp	\
-	src/Contact.cpp	\
-	src/Phonebook.cpp	\
+SRCS = $(wildcard $(SRC_DIR)/*.cpp)	
 
-OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+OBJ_DIR = obj
+SRC_DIR = src
+
+OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
 INC = -I include
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS) $(INC)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
-fclean:
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) $(INC) -c $< -o $@
+
+clean:
+	$(RM) $(OBJ_DIR)
+
+fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
 
-.PHONY: all fclean re
+.PHONY: all fclean clean re
