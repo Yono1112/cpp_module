@@ -34,7 +34,7 @@ void	PhoneBook::search(void)
 
 void	PhoneBook::add(void)
 {
-	std::cout << "Set Contact In " << _index << " number" << std::endl;
+	std::cout << "Set In The #" << _index << " Index Contact" << std::endl;
 	_contacts[_index++].setContact();
 	if (_index == 8)
 		_index = 0;
@@ -47,7 +47,7 @@ static int	setIndex()
 
 	while (1)
 	{
-		std::cout << "enter index: ";
+		std::cout << "ENTER THE INDEX OF THE CONTACT YOU WANT TO SEE: ";
 		if (!std::getline(std::cin, new_str))
 			return (-1);
 		if (isOnlyDigit(new_str))

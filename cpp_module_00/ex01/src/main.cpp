@@ -12,15 +12,9 @@ static void	check_command(std::string str, PhoneBook& phone_book)
 		exit(EXIT_SUCCESS);
 	}
 	else if (str == "SEARCH")
-	{
-		std::cout << "You Enter SEARCH COMMAND" << std::endl;
 		phone_book.search();
-	}
 	else if (str == "ADD")
-	{
-		std::cout << "You Enter ADD COMMAND" << std::endl;
 		phone_book.add();
-	}
 	else
 		std::cout << "You Don't Enter Any COMMAND" << std::endl;
 }
