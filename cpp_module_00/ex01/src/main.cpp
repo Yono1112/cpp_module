@@ -4,7 +4,7 @@
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
 
-void	check_command(std::string str, PhoneBook& phone_book)
+static void	check_command(std::string str, PhoneBook& phone_book)
 {
 	if (str == "EXIT")
 	{
@@ -25,7 +25,7 @@ void	check_command(std::string str, PhoneBook& phone_book)
 		std::cout << "You Don't Enter Any COMMAND" << std::endl;
 }
 
-void	commandInputLoop()
+static void	commandInputLoop()
 {
 	std::string	str;
 	PhoneBook	phone_book;

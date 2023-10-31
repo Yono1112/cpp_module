@@ -1,10 +1,7 @@
 #include "Contact.hpp"
-#include <iostream>
-#include <string>
-#include <cstdlib>
-#include <iomanip>
-#include <cstring>
-#include <sstream>
+static std::string	toString(const int& num);
+static std::string	setMemberValue(const std::string& member_name, bool flag_num);
+static bool	isSpaceOrEmpty(const std::string& str);
 
 Contact::Contact() 
 	: _first_name("None")
@@ -19,49 +16,6 @@ Contact::Contact()
 Contact::~Contact()
 {
 	// std::cout << "Contact des" << std::endl;
-}
-
-bool	isSpaceOrEmpty(const std::string& str)
-{
-	if (str.length() == 0)
-		return (true);
-	for (int i = 0; i < (int)str.length() ; i++) {
-		if (str[i] != ' ' && str[i] != '\t')
-			return (false);
-	}
-	return (true);
-}
-
-bool	isOnlyDigit(const std::string& str)
-{
-	if (str.length() == 0)
-		return (false);
-	for (int i = 0; i < (int)str.length() ; i++) {
-		if (!std::isdigit(str[i]))
-			return (false);
-	}
-	return (true);
-}
-
-std::string	setMemberValue(const std::string& member_name, bool flag_num)
-{
-	std::string	new_str;
-
-	while (1)
-	{
-		std::cout << "Enter " << member_name;
-		if (!std::getline(std::cin, new_str))
-			return ("");
-		if (flag_num && !isOnlyDigit(new_str))
-		{
-			std::cout << "You Must Enter Only Number" << std::endl;
-			continue ;
-		}
-		if (!isSpaceOrEmpty(new_str))
-			break ;
-		std::cout << "You Must Enter At Least One Character" << std::endl;
-	}
-	return (new_str);
 }
 
 void	Contact::setContact(void)
@@ -83,28 +37,14 @@ void	Contact::setContact(void)
 		return ;
 }
 
-std::string	Contact::trimToNineAndAddDot(std::string str)
+void	Contact::printContactOnlyName(int index)
 {
-	if (str.length() > 10)
-	{
-		while (str.length() > 9)
-			str.erase(str.length() - 1);
-		str.push_back('.');
-	}
-	return (str);
-}
-
-void	Contact::printField(const std::string& name, const std::string& value)
-{
-	std::cout << std::setw(10) << name << ": " << value << std::endl;
-}
-
-std::string	toString(const int& num)
-{
-	std::stringstream	ss;
-	ss << num;
-	return (ss.str());
-}
+	printTrimedField(toString(index));
+	printTrimedField(_first_name);
+	printTrimedField(_last_name);
+	printTrimedField(_nick_name);
+	std::cout << "|" << std::endl;
+} 
 
 void	Contact::printContactAll(int index)
 {
@@ -116,16 +56,73 @@ void	Contact::printContactAll(int index)
 	printField("Secret", _darkest_secret);
 }
 
+void	Contact::printField(const std::string& name, const std::string& value)
+{
+	std::cout << std::setw(10) << name << ": " << value << std::endl;
+}
+
+std::string	Contact::trimToNineAndAddDot(std::string str)
+{
+	if (str.length() > 10)
+	{
+		while (str.length() > 9)
+			str.erase(str.length() - 1);
+		str.push_back('.');
+	}
+	return (str);
+}
+
 void	Contact::printTrimedField(const std::string& value)
 {
 	std::cout << "|" << std::setw(10) << trimToNineAndAddDot(value);
 }
 
-void	Contact::printContactOnlyName(int index)
+bool	isOnlyDigit(const std::string& str)
 {
-	printTrimedField(toString(index));
-	printTrimedField(_first_name);
-	printTrimedField(_last_name);
-	printTrimedField(_nick_name);
-	std::cout << "|" << std::endl;
-} 
+	if (str.length() == 0)
+		return (false);
+	for (int i = 0; i < (int)str.length() ; i++) {
+		if (!std::isdigit(str[i]))
+			return (false);
+	}
+	return (true);
+}
+
+static bool	isSpaceOrEmpty(const std::string& str)
+{
+	if (str.length() == 0)
+		return (true);
+	for (int i = 0; i < (int)str.length() ; i++) {
+		if (str[i] != ' ' && str[i] != '\t')
+			return (false);
+	}
+	return (true);
+}
+
+static std::string	setMemberValue(const std::string& member_name, bool flag_num)
+{
+	std::string	new_str;
+
+	while (1)
+	{
+		std::cout << "Enter " << member_name;
+		if (!std::getline(std::cin, new_str))
+			return ("");
+		if (flag_num && !isOnlyDigit(new_str))
+		{
+			std::cout << "You Must Enter Only Number" << std::endl;
+			continue ;
+		}
+		if (!isSpaceOrEmpty(new_str))
+			break ;
+		std::cout << "You Must Enter At Least One Character" << std::endl;
+	}
+	return (new_str);
+}
+
+static std::string	toString(const int& num)
+{
+	std::stringstream	ss;
+	ss << num;
+	return (ss.str());
+}

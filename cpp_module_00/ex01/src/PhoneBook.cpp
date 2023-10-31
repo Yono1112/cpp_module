@@ -1,8 +1,7 @@
 #include "PhoneBook.hpp"
-#include "Contact.hpp"
-#include <iostream>
-#include <iomanip>
-#include <sstream>
+static int	setIndex();
+static void	printPrefixFieldName(const std::string& name);
+
 
 PhoneBook::PhoneBook(void)
 	: _index(0)
@@ -15,7 +14,33 @@ PhoneBook::~PhoneBook(void)
 	// std::cout << "PhoneBook des" << std::endl;
 }
 
-int	setIndex()
+void	PhoneBook::search(void)
+{
+	int		index;
+
+	index = 0;
+	printPrefixFieldName("index");
+	printPrefixFieldName("firstName");
+	printPrefixFieldName("lastName");
+	printPrefixFieldName("nickName");
+	std::cout << "|" << std::endl;
+	for (index = 0; index < 8 ; index++)
+		_contacts[index].printContactOnlyName(index);
+	index = setIndex();
+	if (index < 0)
+		return ;
+	_contacts[index].printContactAll(index);
+}
+
+void	PhoneBook::add(void)
+{
+	std::cout << "Set Contact In " << _index << " number" << std::endl;
+	_contacts[_index++].setContact();
+	if (_index == 8)
+		_index = 0;
+}
+
+static int	setIndex()
 {
 	std::string	new_str;
 	int			index;
@@ -47,33 +72,7 @@ int	setIndex()
 		
 }
 
-void	printPrefixFieldName(const std::string& name)
+static void	printPrefixFieldName(const std::string& name)
 {
 	std::cout << "|" << std::setw(10) << name;
-}
-
-void	PhoneBook::search(void)
-{
-	int		index;
-
-	index = 0;
-	printPrefixFieldName("index");
-	printPrefixFieldName("firstName");
-	printPrefixFieldName("lastName");
-	printPrefixFieldName("nickName");
-	std::cout << "|" << std::endl;
-	for (index = 0; index < 8 ; index++)
-		_contacts[index].printContactOnlyName(index);
-	index = setIndex();
-	if (index < 0)
-		return ;
-	_contacts[index].printContactAll(index);
-}
-
-void	PhoneBook::add(void)
-{
-	std::cout << "Set Contact In " << _index << " number" << std::endl;
-	_contacts[_index++].setContact();
-	if (_index == 8)
-		_index = 0;
 }
