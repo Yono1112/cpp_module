@@ -17,11 +17,11 @@
 // 	return (num);
 // }
 Contact::Contact() 
-	: first_name("None")
-	, last_name("None")
-	, nick_name("None")
-	, phone_number("None")
-	, darkest_secret("None") {
+	: _first_name("None")
+	, _last_name("None")
+	, _nick_name("None")
+	, _phone_number("None")
+	, _darkest_secret("None") {
 
 	std::cout << "Contact con" << std::endl;
 }
@@ -58,7 +58,11 @@ std::string	inputMemberString(std::string str_member, bool flag_num)
 	while (1)
 	{
 		std::cout << "Enter " << str_member;
-		std::getline(std::cin, new_str);
+		if (!std::getline(std::cin, new_str))
+		{
+			std::cin.clear();
+			return ("");
+		}
 		if (flag_num && !isOnlyDigit(new_str))
 		{
 			std::cout << "You Must Enter Only Number" << std::endl;
@@ -67,6 +71,8 @@ std::string	inputMemberString(std::string str_member, bool flag_num)
 		if (!isSpaceOrEmpty(new_str))
 			break ;
 		std::cout << "You Must Enter At Least One Character" << std::endl;
+	// std::cin.clear();
+	// std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 	return (new_str);
 }
@@ -74,11 +80,19 @@ std::string	inputMemberString(std::string str_member, bool flag_num)
 void	Contact::setContact(void)
 {
 	std::cout << "start setContact" << std::endl;
-	first_name = inputMemberString("First Name: ", false);
-	last_name = inputMemberString("Last Name: ", false);
-	nick_name = inputMemberString("Nick Name: ", false);
-	phone_number = inputMemberString("Phone Number: ", true);
-	darkest_secret = inputMemberString("Darkest Secret: ", false);
+	_first_name = inputMemberString("First Name: ", false);
+	if (_first_name == "")
+	{
+		if (std::cin.eof())
+			std::cout << "hello" << std::endl;
+		else
+			std::cout << "hello1" << std::endl;
+		return;
+	}
+	_last_name = inputMemberString("Last Name: ", false);
+	_nick_name = inputMemberString("Nick Name: ", false);
+	_phone_number = inputMemberString("Phone Number: ", true);
+	_darkest_secret = inputMemberString("Darkest Secret: ", false);
 }
 
 std::string	checkLength(std::string str)
@@ -86,7 +100,8 @@ std::string	checkLength(std::string str)
 	if (str.length() > 10)
 	{
 		while (str.length() > 9)
-			str.pop_back();
+			str.erase(str.length() - 1);
+			// str.pop_back();
 		str.push_back('.');
 	}
 	return (str);
@@ -101,23 +116,23 @@ void	Contact::printContactAll(int index)
 	std::cout << std::setw(10);
 	std::cout << "FirstName";
 	std::cout << "|" << std::setw(10);
-	std::cout << first_name << std::endl;
+	std::cout << _first_name << std::endl;
 	std::cout << std::setw(10);
 	std::cout << "LastName";
 	std::cout << "|" << std::setw(10);
-	std::cout << last_name << std::endl;
+	std::cout << _last_name << std::endl;
 	std::cout << std::setw(10);
 	std::cout << "NickName";
 	std::cout << "|" << std::setw(10);
-	std::cout << nick_name << std::endl;
+	std::cout << _nick_name << std::endl;
 	std::cout << std::setw(10);
 	std::cout << "PhoneNum";
 	std::cout << "|" << std::setw(10);
-	std::cout << phone_number << std::endl;
+	std::cout << _phone_number << std::endl;
 	std::cout << std::setw(10);
 	std::cout << "Secret";
 	std::cout << "|" << std::setw(10);
-	std::cout << darkest_secret << std::endl;
+	std::cout << _darkest_secret << std::endl;
 }
 
 void	Contact::printContactOnlyName(int index)
@@ -126,10 +141,10 @@ void	Contact::printContactOnlyName(int index)
 	std::cout << "|" << std::setw(10);
 	std::cout << index;
 	std::cout << "|" << std::setw(10);
-	std::cout << checkLength(first_name);
+	std::cout << checkLength(_first_name);
 	std::cout << "|" << std::setw(10);
-	std::cout << checkLength(last_name);
+	std::cout << checkLength(_last_name);
 	std::cout << "|" << std::setw(10);
-	std::cout << checkLength(nick_name) << "|";
+	std::cout << checkLength(_nick_name) << "|";
 	std::cout << std::endl;
 } 

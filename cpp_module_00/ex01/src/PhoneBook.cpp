@@ -2,6 +2,7 @@
 #include "Contact.hpp"
 #include <iostream>
 #include <iomanip>
+#include <sstream>
 
 PhoneBook::PhoneBook(void)
 	: index(0)
@@ -22,10 +23,16 @@ int	setIndex()
 	while (1)
 	{
 		std::cout << "enter index: ";
-		std::getline(std::cin, new_str);
+		if (!std::getline(std::cin, new_str))
+		{
+			std::cin.clear();
+			return (-1);
+		}
 		if (isOnlyDigit(new_str))
 		{
-			index = stoi(new_str);
+			std::stringstream ss(new_str);
+			ss >> index;
+			// index = stoi(new_str);
 			if (0 <= index && index <= 7)
 				break ;
 			else
@@ -62,6 +69,8 @@ void	PhoneBook::search(void)
 	for (index = 0; index < 8 ; index++)
 		contacts[index].printContactOnlyName(index);
 	index = setIndex();
+	if (index < 0)
+		return ;
 	contacts[index].printContactAll(index);
 	// std::cout << "first_name: " << contacts[0].printContact() << std::endl;
 	// contacts[0].printContact();
@@ -72,7 +81,7 @@ void	PhoneBook::search(void)
 void	PhoneBook::add(void)
 {
 	// contacts[0].printContact();
-	std::cout << "Sec Contact In " << index << " number" << std::endl;
+	std::cout << "Set Contact In " << index << " number" << std::endl;
 	contacts[index++].setContact();
 	if (index == 8)
 		index = 0;

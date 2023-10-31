@@ -34,12 +34,24 @@ int main(void)
 	// std::cout << contact.getNum() << std::endl;
 		
 	std::cout << "HELLO MY AWESOME PHONEBOOK!" << std::endl;
+	// while (1)
+	// {
 	while (1)
 	{
 		std::cout << "ENTER COMMAND (ADD, SEARCH or EXIT): ";
-		std::getline(std::cin, str);
+		if (!std::getline(std::cin, str))
+		{
+			std::cin.clear();
+			// std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "main eof break" << std::endl;
+			if (std::getline(std::cin, str))
+				std::cout << "main eof break true" << std::endl;
+			else
+				std::cout << "main eof break false" << std::endl;
+			break ;
+		}
 		check_command(str, &phone_book);
-		// std::cout << "getNum:" << contact.getNum() << std::endl;
 	}
+	// }
 	return (0);
 }

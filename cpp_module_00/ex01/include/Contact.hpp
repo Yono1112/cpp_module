@@ -15,11 +15,11 @@ class Contact
 		void printContactAll(int index);
 	private:
 		// int num;
-		std::string first_name;
-		std::string last_name;
-		std::string nick_name;
-		std::string phone_number;
-		std::string darkest_secret;
+		std::string _first_name;
+		std::string _last_name;
+		std::string _nick_name;
+		std::string _phone_number;
+		std::string _darkest_secret;
 };
 
 bool	isOnlyDigit(std::string str);
