@@ -29,3 +29,12 @@ fclean: clean
 re: fclean all
 
 .PHONY: all fclean clean re
+cppcheck:
+	mkdir -p log
+	cppcheck --enable=all --check-config --error-exitcode=1 --inconclusive --force --suppress=missingIncludeSystem --std=c++11 $(INCLUDE) $(SRCS). 2> ./log/resule.log
+
+tidy:
+	@find ./ -name '*.cpp' -or -name '*.hpp' | while read file; do \
+		clang-tidy $$file -- -Wall -Wextra -Werror -std=c++98 $(INCLUDE) >> ./log/tidy.log; \
+	done
+

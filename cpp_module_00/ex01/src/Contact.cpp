@@ -44,6 +44,8 @@ bool	isSpaceOrEmpty(std::string str)
 
 bool	isOnlyDigit(std::string str)
 {
+	if (str.length() == 0)
+		return (false);
 	for (int i = 0; i < (int)str.length() ; i++) {
 		if (!std::isdigit(str[i]))
 			return (false);

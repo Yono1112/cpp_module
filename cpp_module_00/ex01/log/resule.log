@@ -1,0 +1,15 @@
+[1msrc/Contact.cpp:1:0: [31minformation:[39m Include file: "Contact.hpp" not found. [missingInclude][0m
+
+^
+[1msrc/PhoneBook.cpp:1:0: [31minformation:[39m Include file: "PhoneBook.hpp" not found. [missingInclude][0m
+
+^
+[1msrc/PhoneBook.cpp:2:0: [31minformation:[39m Include file: "Contact.hpp" not found. [missingInclude][0m
+
+^
+[1msrc/main.cpp:4:0: [31minformation:[39m Include file: "PhoneBook.hpp" not found. [missingInclude][0m
+
+^
+[1msrc/main.cpp:5:0: [31minformation:[39m Include file: "Contact.hpp" not found. [missingInclude][0m
+
+^

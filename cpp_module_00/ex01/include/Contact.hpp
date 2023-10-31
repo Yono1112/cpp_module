@@ -23,5 +23,6 @@ class Contact
 };
 
 bool	isOnlyDigit(std::string str);
+bool	isSpaceOrEmpty(std::string str);
 
 #endif
