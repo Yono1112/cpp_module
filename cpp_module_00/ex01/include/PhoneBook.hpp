@@ -12,7 +12,7 @@ class PhoneBook
 		void	search(void);
 	private:
 		Contact	_contacts[8];
-		int	_index;
+		int		_index;
 };
 
 #endif

@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include <cstring>
+#include <sstream>
 
 Contact::Contact() 
 	: _first_name("None")
@@ -18,7 +19,7 @@ Contact::~Contact() {
 	// std::cout << "Contact des" << std::endl;
 }
 
-bool	isSpaceOrEmpty(std::string str)
+bool	isSpaceOrEmpty(const std::string& str)
 {
 	if (str.length() == 0)
 		return (true);
@@ -29,7 +30,7 @@ bool	isSpaceOrEmpty(std::string str)
 	return (true);
 }
 
-bool	isOnlyDigit(std::string str)
+bool	isOnlyDigit(const std::string& str)
 {
 	if (str.length() == 0)
 		return (false);
@@ -40,13 +41,13 @@ bool	isOnlyDigit(std::string str)
 	return (true);
 }
 
-std::string	inputMemberString(std::string str_member, bool flag_num)
+std::string	setMemberValue(const std::string& member_name, bool flag_num)
 {
 	std::string	new_str;
 
 	while (1)
 	{
-		std::cout << "Enter " << str_member;
+		std::cout << "Enter " << member_name;
 		if (!std::getline(std::cin, new_str))
 			return ("");
 		if (flag_num && !isOnlyDigit(new_str))
@@ -63,25 +64,24 @@ std::string	inputMemberString(std::string str_member, bool flag_num)
 
 void	Contact::setContact(void)
 {
-	std::cout << "start setContact" << std::endl;
-	_first_name = inputMemberString("First Name: ", false);
+	_first_name = setMemberValue("First Name: ", false);
 	if (_first_name == "")
 		return ;
-	_last_name = inputMemberString("Last Name: ", false);
+	_last_name = setMemberValue("Last Name: ", false);
 	if (_last_name == "")
 		return ;
-	_nick_name = inputMemberString("Nick Name: ", false);
+	_nick_name = setMemberValue("Nick Name: ", false);
 	if (_last_name == "")
 		return ;
-	_phone_number = inputMemberString("Phone Number: ", true);
+	_phone_number = setMemberValue("Phone Number: ", true);
 	if (_phone_number == "")
 		return ;
-	_darkest_secret = inputMemberString("Darkest Secret: ", false);
+	_darkest_secret = setMemberValue("Darkest Secret: ", false);
 	if (_darkest_secret == "")
 		return ;
 }
 
-std::string	checkLength(std::string str)
+std::string	Contact::trimToNineAndAddDot(std::string str)
 {
 	if (str.length() > 10)
 	{
@@ -92,43 +92,38 @@ std::string	checkLength(std::string str)
 	return (str);
 }
 
+void	Contact::printField(const std::string& name, const std::string& value)
+{
+	std::cout << std::setw(10) << name << "|" << std::setw(10) << value << std::endl;
+}
+
+std::string	toString(const int& num)
+{
+	std::stringstream	ss;
+	ss << num;
+	return (ss.str());
+}
+
 void	Contact::printContactAll(int index)
 {
-	std::cout << std::setw(10);
-	std::cout << "Index";
-	std::cout << "|" << std::setw(10);
-	std::cout << index << std::endl;
-	std::cout << std::setw(10);
-	std::cout << "FirstName";
-	std::cout << "|" << std::setw(10);
-	std::cout << _first_name << std::endl;
-	std::cout << std::setw(10);
-	std::cout << "LastName";
-	std::cout << "|" << std::setw(10);
-	std::cout << _last_name << std::endl;
-	std::cout << std::setw(10);
-	std::cout << "NickName";
-	std::cout << "|" << std::setw(10);
-	std::cout << _nick_name << std::endl;
-	std::cout << std::setw(10);
-	std::cout << "PhoneNum";
-	std::cout << "|" << std::setw(10);
-	std::cout << _phone_number << std::endl;
-	std::cout << std::setw(10);
-	std::cout << "Secret";
-	std::cout << "|" << std::setw(10);
-	std::cout << _darkest_secret << std::endl;
+	printField("Index", toString(index));
+	printField("FirstName", _first_name);
+	printField("LastName", _first_name);
+	printField("NickName", _first_name);
+	printField("PhoneNum", _first_name);
+	printField("Secret", _first_name);
+}
+
+void	Contact::printTrimedField(const std::string& value)
+{
+	std::cout << "|" << std::setw(10) << trimToNineAndAddDot(value);
 }
 
 void	Contact::printContactOnlyName(int index)
 {
-	std::cout << "|" << std::setw(10);
-	std::cout << index;
-	std::cout << "|" << std::setw(10);
-	std::cout << checkLength(_first_name);
-	std::cout << "|" << std::setw(10);
-	std::cout << checkLength(_last_name);
-	std::cout << "|" << std::setw(10);
-	std::cout << checkLength(_nick_name) << "|";
-	std::cout << std::endl;
+	printTrimedField(toString(index));
+	printTrimedField(_first_name);
+	printTrimedField(_last_name);
+	printTrimedField(_nick_name);
+	std::cout << "|" << std::endl;
 } 

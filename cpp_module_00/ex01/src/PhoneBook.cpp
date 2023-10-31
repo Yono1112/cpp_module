@@ -47,20 +47,21 @@ int	setIndex()
 		
 }
 
+void	printPrefixFieldName(const std::string& name)
+{
+	std::cout << "|" << std::setw(10) << name;
+}
+
 void	PhoneBook::search(void)
 {
 	int		index;
 
 	index = 0;
-	std::cout << "start search" << std::endl;
-	std::cout << "|" << std::setw(10);
-	std::cout << "index";
-	std::cout << "|" << std::setw(10);
-	std::cout << "firstName";
-	std::cout << "|" << std::setw(10);
-	std::cout << "lastName";
-	std::cout << "|" << std::setw(10);
-	std::cout << "nickName" << "|" << std::endl;
+	printPrefixFieldName("index");
+	printPrefixFieldName("firstName");
+	printPrefixFieldName("lastName");
+	printPrefixFieldName("nickName");
+	std::cout << "|" << std::endl;
 	for (index = 0; index < 8 ; index++)
 		_contacts[index].printContactOnlyName(index);
 	index = setIndex();
