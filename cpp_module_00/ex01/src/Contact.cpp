@@ -11,11 +11,13 @@ Contact::Contact()
 	, _last_name("None")
 	, _nick_name("None")
 	, _phone_number("None")
-	, _darkest_secret("None") {
+	, _darkest_secret("None")
+{
 	// std::cout << "Contact con" << std::endl;
 }
 
-Contact::~Contact() {
+Contact::~Contact()
+{
 	// std::cout << "Contact des" << std::endl;
 }
 
@@ -94,7 +96,7 @@ std::string	Contact::trimToNineAndAddDot(std::string str)
 
 void	Contact::printField(const std::string& name, const std::string& value)
 {
-	std::cout << std::setw(10) << name << "|" << std::setw(10) << value << std::endl;
+	std::cout << std::setw(10) << name << ": " << value << std::endl;
 }
 
 std::string	toString(const int& num)
@@ -108,10 +110,10 @@ void	Contact::printContactAll(int index)
 {
 	printField("Index", toString(index));
 	printField("FirstName", _first_name);
-	printField("LastName", _first_name);
-	printField("NickName", _first_name);
-	printField("PhoneNum", _first_name);
-	printField("Secret", _first_name);
+	printField("LastName", _last_name);
+	printField("NickName", _nick_name);
+	printField("PhoneNum", _phone_number);
+	printField("Secret", _darkest_secret);
 }
 
 void	Contact::printTrimedField(const std::string& value)

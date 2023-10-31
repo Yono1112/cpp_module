@@ -18,7 +18,7 @@ PhoneBook::~PhoneBook(void)
 int	setIndex()
 {
 	std::string	new_str;
-	int		index;
+	int			index;
 
 	while (1)
 	{
