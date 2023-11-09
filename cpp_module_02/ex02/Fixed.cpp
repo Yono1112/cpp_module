@@ -63,6 +63,42 @@ Fixed&	Fixed::operator=(const Fixed& fix)
 	return (*this);
 }
 
+Fixed&	Fixed::min(Fixed& first, Fixed& second)
+{
+	std::cout << "min function called" << std::endl;
+	if (first < second)
+		return (first);
+	else
+		return (second);
+}
+
+const Fixed&	Fixed::min(const Fixed& first, const Fixed& second)
+{
+	std::cout << "const min function called" << std::endl;
+	if (first < second)
+		return (first);
+	else
+		return (second);
+}
+
+Fixed&	Fixed::max(Fixed& first, Fixed& second)
+{
+	std::cout << "max function called" << std::endl;
+	if (first > second)
+		return (first);
+	else
+		return (second);
+}
+
+const Fixed&	Fixed::max(const Fixed& first, const Fixed& second)
+{
+	std::cout << "const max function called" << std::endl;
+	if (first > second)
+		return (first);
+	else
+		return (second);
+}
+
 std::ostream&	operator<<(std::ostream& stream, const Fixed& fix)
 {
 	stream << fix.toFloat();

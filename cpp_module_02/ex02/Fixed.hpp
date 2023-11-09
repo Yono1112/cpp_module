@@ -16,6 +16,10 @@ class Fixed
 		void	setRawBits(int const raw);
 		int		toInt(void) const;
 		float	toFloat(void) const;
+		static Fixed&	min(Fixed& first, Fixed& second);
+		static const Fixed&	min(const Fixed& first, const Fixed& second);
+		static Fixed&	max(Fixed& first, Fixed& second);
+		static const Fixed&	max(const Fixed& first, const Fixed& second);
 		Fixed&	operator=(const Fixed& fix);
 		bool	operator>(const Fixed& fix) const;
 		bool	operator<(const Fixed& fix) const;
