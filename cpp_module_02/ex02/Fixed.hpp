@@ -27,6 +27,10 @@ class Fixed
 		Fixed	operator-(const Fixed& fix) const;
 		Fixed	operator*(const Fixed& fix) const;
 		Fixed	operator/(const Fixed& fix) const;
+		Fixed	operator++();
+		Fixed	operator--();
+		Fixed	operator++(int);
+		Fixed	operator--(int);
 	private:
 		int			_fixed_point_num;
 		static const int	_bits = 8;

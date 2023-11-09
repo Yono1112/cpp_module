@@ -138,3 +138,31 @@ Fixed		Fixed::operator/(const Fixed& fix) const
 	result = Fixed(this->toFloat() / fix.toFloat());
 	return (result);
 }
+
+Fixed		Fixed::operator++()
+{
+	++(this->_fixed_point_num);
+	return (*this);
+}
+
+Fixed		Fixed::operator--()
+{
+	--(this->_fixed_point_num);
+	return (*this);
+}
+
+Fixed		Fixed::operator++(int)
+{
+	Fixed	result;
+	result = *this;
+	++(this->_fixed_point_num);
+	return (result);
+}
+
+Fixed		Fixed::operator--(int)
+{
+	Fixed	result;
+	result = *this;
+	--(this->_fixed_point_num);
+	return (result);
+}

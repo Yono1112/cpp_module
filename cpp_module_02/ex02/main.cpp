@@ -27,5 +27,12 @@ int	main(void)
 	std::cout << "a - b " <<(a - b) << std::endl;
 	std::cout << "a * b " <<(a * b) << std::endl;
 	std::cout << "a / b " <<(a / b) << std::endl;
+	std::cout << "++a " << ++a << std::endl;
+	std::cout << "--a " << --a << std::endl;
+	std::cout << "a is " << a << std::endl;
+	std::cout << "a++ " << a++ << std::endl;
+	std::cout << "a is " << a << std::endl;
+	std::cout << "a-- " << a-- << std::endl;
+	std::cout << "a is " << a << std::endl;
 	return (0);
 }
