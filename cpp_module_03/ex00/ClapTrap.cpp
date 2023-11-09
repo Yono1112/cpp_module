@@ -8,9 +8,6 @@ ClapTrap::ClapTrap(std::string name)
 {
 	std::cout << "Constructor Called" << std::endl;
 	std::cout << "name is " << _name << std::endl;
-	(void)_hit_points;
-	(void)_energy_points;
-	(void)_attack_damage;
 }
 
 ClapTrap::~ClapTrap()
@@ -18,19 +15,27 @@ ClapTrap::~ClapTrap()
 	std::cout << "Destructor Called" << std::endl;
 }
 
-// void	attack(const std::string& target)
-// {
+void	ClapTrap::attack(const std::string& target)
+{
+	std::cout << this->_name << " use ATTACK" << std::endl;
+	if (checkPoints())
+	{
+		(this->_energy_points)--;
+		std::cout << "ClapTrap " << this->_name << " attacks " << target << ", causing " << this->_attack_damage << " points of damage!" << std::endl;
+	}
+}
 
-// }
-
-// void	takeDamage(unsigned int amount)
-// {
-
-// }
+void	ClapTrap::takeDamage(unsigned int amount)
+{
+	this->_hit_points -= amount;
+	if (this->_hit_points < 0)
+		this->_hit_points = 0;
+	std::cout << "ClapTrap " << this->_name << " takes " << amount << " points of damage! Hit Points are now " << this->_hit_points << " left" << std::endl;
+}
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	std::cout << this->_name << " use repair itself" << std::endl;
+	std::cout << this->_name << " use REPAIR" << std::endl;
 	if (checkPoints())
 	{
 		(this->_energy_points)--;
@@ -43,12 +48,12 @@ bool	ClapTrap::checkPoints(void)
 {
 	if (this->_energy_points < 1)
 	{
-		std::cout << this->_name << " has no energy points left" << std::endl;
+		std::cout << "FAIL: " << this->_name << " has no energy points left" << std::endl;
 		return (false);
 	}
 	else if (this->_hit_points < 1)
 	{
-		std::cout << this->_name << " has no hit points left" << std::endl;
+		std::cout << "FAIL: " << this->_name << " has no hit points left" << std::endl;
 		return (false);
 	}
 	return (true);
