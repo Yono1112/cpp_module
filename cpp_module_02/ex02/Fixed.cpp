@@ -80,3 +80,33 @@ void	Fixed::setRawBits(int const raw)
 	// std::cout << "setRawBits member function called" << std::endl;
 	this->_fixed_point_num = raw;
 }
+
+bool	Fixed::operator>(const Fixed& fix) const
+{
+	return (this->_fixed_point_num > fix._fixed_point_num);
+}
+
+bool	Fixed::operator<(const Fixed& fix) const
+{
+	return (this->_fixed_point_num < fix._fixed_point_num);
+}
+
+bool	Fixed::operator>=(const Fixed& fix) const
+{
+	return (this->_fixed_point_num >= fix._fixed_point_num);
+}
+
+bool	Fixed::operator<=(const Fixed& fix) const
+{
+	return (this->_fixed_point_num <= fix._fixed_point_num);
+}
+
+bool	Fixed::operator==(const Fixed& fix) const
+{
+	return (this->_fixed_point_num == fix._fixed_point_num);
+}
+
+bool	Fixed::operator!=(const Fixed& fix) const
+{
+	return (this->_fixed_point_num != fix._fixed_point_num);
+}

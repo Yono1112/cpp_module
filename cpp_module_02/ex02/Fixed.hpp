@@ -14,9 +14,15 @@ class Fixed
 		~Fixed();
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
-		Fixed&	operator=(const Fixed& fix);
 		int		toInt(void) const;
-		float		toFloat(void) const;
+		float	toFloat(void) const;
+		Fixed&	operator=(const Fixed& fix);
+		bool	operator>(const Fixed& fix) const;
+		bool	operator<(const Fixed& fix) const;
+		bool	operator>=(const Fixed& fix) const;
+		bool	operator<=(const Fixed& fix) const;
+		bool	operator==(const Fixed& fix) const;
+		bool	operator!=(const Fixed& fix) const;
 	private:
 		int			_fixed_point_num;
 		static const int	_bits = 8;
