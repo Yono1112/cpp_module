@@ -23,6 +23,10 @@ class Fixed
 		bool	operator<=(const Fixed& fix) const;
 		bool	operator==(const Fixed& fix) const;
 		bool	operator!=(const Fixed& fix) const;
+		Fixed	operator+(const Fixed& fix) const;
+		Fixed	operator-(const Fixed& fix) const;
+		Fixed	operator*(const Fixed& fix) const;
+		Fixed	operator/(const Fixed& fix) const;
 	private:
 		int			_fixed_point_num;
 		static const int	_bits = 8;

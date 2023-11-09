@@ -3,25 +3,25 @@
 Fixed::Fixed()
 	: _fixed_point_num(0)
 {
-	std::cout << "Default constructor called" << std::endl;
+	// std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& fix)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	// std::cout << "Copy constructor called" << std::endl;
 	operator=(fix);
 }
 
 Fixed::Fixed(const int& num)
 {
-	std::cout << "Int constructor called" << std::endl;
+	// std::cout << "Int constructor called" << std::endl;
 	this->_fixed_point_num = num << _bits;
 	// std::cout << "_fixed_point_num: " << this->_fixed_point_num << std::endl;
 }
 
 Fixed::Fixed(float num)
 {
-	std::cout << "Float constructor called" << std::endl;
+	// std::cout << "Float constructor called" << std::endl;
 	float	fixed_point_num;
 	int		int_num;
 	float	fraction_num;
@@ -41,7 +41,7 @@ Fixed::Fixed(float num)
 
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
+	// std::cout << "Destructor called" << std::endl;
 }
 
 int		Fixed::toInt(void) const
@@ -57,7 +57,7 @@ float		Fixed::toFloat(void) const
 
 Fixed&	Fixed::operator=(const Fixed& fix)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
+	// std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &fix)
 		this->_fixed_point_num = fix.getRawBits();
 	return (*this);
@@ -109,4 +109,32 @@ bool	Fixed::operator==(const Fixed& fix) const
 bool	Fixed::operator!=(const Fixed& fix) const
 {
 	return (this->_fixed_point_num != fix._fixed_point_num);
+}
+
+Fixed		Fixed::operator+(const Fixed& fix) const
+{
+	Fixed	result;
+	result = Fixed(this->toFloat() + fix.toFloat());
+	return (result);
+}
+
+Fixed		Fixed::operator-(const Fixed& fix) const
+{
+	Fixed	result;
+	result = Fixed(this->toFloat() - fix.toFloat());
+	return (result);
+}
+
+Fixed		Fixed::operator*(const Fixed& fix) const
+{
+	Fixed	result;
+	result = Fixed(this->toFloat() * fix.toFloat());
+	return (result);
+}
+
+Fixed		Fixed::operator/(const Fixed& fix) const
+{
+	Fixed	result;
+	result = Fixed(this->toFloat() / fix.toFloat());
+	return (result);
 }
