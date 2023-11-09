@@ -17,6 +17,7 @@ class ClapTrap
 		int			_hit_points;
 		int			_energy_points;
 		int			_attack_damage;
+		bool		checkPoints(void);
 };
 
 #endif

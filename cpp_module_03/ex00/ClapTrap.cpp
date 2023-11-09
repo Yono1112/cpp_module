@@ -31,12 +31,25 @@ ClapTrap::~ClapTrap()
 void	ClapTrap::beRepaired(unsigned int amount)
 {
 	std::cout << this->_name << " use repair itself" << std::endl;
-	if (this->_energy_points < 1)
-		std::cout << "Repair Fail: " << this->_name << " has no energy points left" << std::endl;
-	else
+	if (checkPoints())
 	{
 		(this->_energy_points)--;
 		this->_hit_points += amount;
 		std::cout << "Repair Success: " << this->_name << " has been repaired for " << this->_hit_points << " hit points, leaving " << this->_energy_points << " energy points" << std::endl;
 	}
+}
+
+bool	ClapTrap::checkPoints(void)
+{
+	if (this->_energy_points < 1)
+	{
+		std::cout << this->_name << " has no energy points left" << std::endl;
+		return (false);
+	}
+	else if (this->_hit_points < 1)
+	{
+		std::cout << this->_name << " has no hit points left" << std::endl;
+		return (false);
+	}
+	return (true);
 }
