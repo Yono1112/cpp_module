@@ -7,17 +7,19 @@
 class ClapTrap
 {
 	public:
+		ClapTrap();
 		ClapTrap(std::string name);
 		~ClapTrap();
 		void	attack(const std::string& target);
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
-	private:
+		bool		checkPoints(void);
+	protected:
 		std::string	_name;
 		int			_hit_points;
 		int			_energy_points;
 		int			_attack_damage;
-		bool		checkPoints(void);
+	private:
 };
 
 #endif

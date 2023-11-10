@@ -1,18 +1,23 @@
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap()
+{
+	std::cout << "ClapTrap Default Constructor Called" << std::endl;
+}
+
 ClapTrap::ClapTrap(std::string name)
 	: _name(name),
 	_hit_points(10),
 	_energy_points(10),
 	_attack_damage(0)
 {
-	std::cout << "Constructor Called" << std::endl;
+	std::cout << "ClapTrap Constructor Called" << std::endl;
 	std::cout << "name is " << _name << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "Destructor Called" << std::endl;
+	std::cout << "ClapTrap Destructor Called" << std::endl;
 }
 
 void	ClapTrap::attack(const std::string& target)
