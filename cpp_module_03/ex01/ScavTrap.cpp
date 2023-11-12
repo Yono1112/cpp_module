@@ -15,13 +15,23 @@ ScavTrap::ScavTrap(std::string name)
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << "ClapTrap Destructor Called" << std::endl;
+	std::cout << "ScavTrap Destructor Called" << std::endl;
 }
 
 void	ScavTrap::guardGate(void)
 {
 	if (checkPoints())
 	{
-		std::cout << "ClapTrap " << this->_name << " is now in Gate keeper mode" << std::endl;
+		std::cout << "ScavTrap " << this->_name << " is now in Gate keeper mode" << std::endl;
+	}
+}
+
+void	ScavTrap::attack(const std::string& target)
+{
+	std::cout << this->_name << " use ATTACK" << std::endl;
+	if (checkPoints())
+	{
+		(this->_energy_points)--;
+		std::cout << "ScavTrap " << this->_name << " attacks " << target << ", causing " << this->_attack_damage << " points of damage!" << std::endl;
 	}
 }

@@ -8,8 +8,8 @@ int	main(void)
 
 	// for (int i = 0; i < 11; i++)
 	// 	bob.beRepaired(10);
-	bob.attack("jim");
-	jim.takeDamage(0);
+	// bob.attack("jim");
+	// jim.takeDamage(0);
 
 	jim.attack("bob");
 	bob.takeDamage(20);
@@ -17,5 +17,4 @@ int	main(void)
 	jim.guardGate();
 
 	bob.beRepaired(10);
-	jim.beRepaired(10);
 }
