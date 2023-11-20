@@ -5,7 +5,7 @@
 int	main(void)
 {
 	// ClapTrap	bob("bob");
-	ScavTrap	jim("jim");
+	// ScavTrap	jim("jim");
 	FragTrap	michael("michael");
 
 	// for (int i = 0; i < 11; i++)
@@ -20,6 +20,5 @@ int	main(void)
 
 	// bob.beRepaired(10);
 
-	michael.attack("jim");
-	jim.takeDamage(30);
+	michael.highFivesGuys();
 }

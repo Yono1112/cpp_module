@@ -23,12 +23,12 @@ void	FragTrap::highFivesGuys(void)
 	std::cout << "FragTrap " << _name << ", you're amazing! High five for being awesome!" << std::endl;
 }
 
-void	FragTrap::attack(const std::string& target)
-{
-	std::cout << this->_name << " use ATTACK" << std::endl;
-	if (checkPoints())
-	{
-		(this->_energy_points)--;
-		std::cout << "FragTrap " << this->_name << " attacks " << target << ", causing " << this->_attack_damage << " points of damage!" << std::endl;
-	}
-}
+// void	FragTrap::attack(const std::string& target)
+// {
+// 	std::cout << this->_name << " use ATTACK" << std::endl;
+// 	if (checkPoints())
+// 	{
+// 		(this->_energy_points)--;
+// 		std::cout << "FragTrap " << this->_name << " attacks " << target << ", causing " << this->_attack_damage << " points of damage!" << std::endl;
+// 	}
+// }
