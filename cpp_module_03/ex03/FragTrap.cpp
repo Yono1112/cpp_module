@@ -1,11 +1,16 @@
 #include "FragTrap.hpp"
 
+FragTrap::FragTrap(void)
+{
+	std::cout << "FragTrap Default Constructor Called" << std::endl;
+}
+
 FragTrap::FragTrap(std::string name)
 {
 	setName(name);
-	setHitPoints(100);
-	setEnergyPoints(100);
-	setAttackDamage(30);
+	setHitPoints(_frag_hit_points);
+	setEnergyPoints(_frag_energy_points);
+	setAttackDamage(_frag_attack_damage);
 	std::cout << "FragTrap Constructor Called" << std::endl;
 	std::cout << "name is " << getName() << std::endl;
 	std::cout << "_hit_points is " << getHitPoints() << std::endl;

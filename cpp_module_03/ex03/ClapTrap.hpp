@@ -13,16 +13,19 @@ class ClapTrap
 		void	attack(const std::string& target);
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
-		bool		checkPoints(void);
+		int		getAttackDamage(void);
+		std::string	getName(void);
 	protected:
+		bool	checkPoints(void);
 		void	setName(std::string name);
 		void	setHitPoints(int num);
 		void	setEnergyPoints(int num);
 		void	setAttackDamage(int num);
-		std::string	getName(void);
 		int		getHitPoints(void);
 		int		getEnergyPoints(void);
-		int		getAttackDamage(void);
+		static const int	_clap_hit_points = 10;
+		static const int	_clap_energy_points = 10;
+		static const int	_clap_attack_damage = 0;
 	private:
 		std::string	_name;
 		int			_hit_points;

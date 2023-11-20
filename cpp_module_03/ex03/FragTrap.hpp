@@ -3,14 +3,18 @@
 
 #include "ClapTrap.hpp"
 
-class FragTrap: public ClapTrap
+class FragTrap: virtual public ClapTrap
 {
 	public:
+		FragTrap();
 		FragTrap(std::string name);
 		~FragTrap();
 		void	highFivesGuys(void);
+	protected:
+		static const int	_frag_hit_points = 100;
+		static const int	_frag_energy_points = 100;
+		static const int	_frag_attack_damage = 30;
 	private:
 };
-
 
 #endif

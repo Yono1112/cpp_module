@@ -7,9 +7,9 @@ ClapTrap::ClapTrap()
 
 ClapTrap::ClapTrap(std::string name)
 	: _name(name),
-	_hit_points(10),
-	_energy_points(10),
-	_attack_damage(0)
+	_hit_points(_clap_hit_points),
+	_energy_points(_clap_energy_points),
+	_attack_damage(_clap_attack_damage)
 {
 	std::cout << "ClapTrap Constructor Called" << std::endl;
 	std::cout << "name is " << _name << std::endl;
