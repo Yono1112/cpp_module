@@ -2,15 +2,15 @@
 
 FragTrap::FragTrap(std::string name)
 {
-	_name = name;
-	_hit_points = 100;
-	_energy_points = 100;
-	_attack_damage = 30;
+	setName(name);
+	setHitPoints(100);
+	setEnergyPoints(100);
+	setAttackDamage(30);
 	std::cout << "FragTrap Constructor Called" << std::endl;
-	std::cout << "name is " << _name << std::endl;
-	std::cout << "_hit_points is " << _hit_points << std::endl;
-	std::cout << "_energy_points is " << _energy_points << std::endl;
-	std::cout << "_attack_damage is " << _attack_damage << std::endl;
+	std::cout << "name is " << getName() << std::endl;
+	std::cout << "_hit_points is " << getHitPoints() << std::endl;
+	std::cout << "_energy_points is " << getEnergyPoints() << std::endl;
+	std::cout << "_attack_damage is " << getAttackDamage() << std::endl;
 }
 
 FragTrap::~FragTrap()
@@ -20,7 +20,7 @@ FragTrap::~FragTrap()
 
 void	FragTrap::highFivesGuys(void)
 {
-	std::cout << "FragTrap " << _name << ", you're amazing! High five for being awesome!" << std::endl;
+	std::cout << "FragTrap " << getName() << ", you're amazing! High five for being awesome!" << std::endl;
 }
 
 // void	FragTrap::attack(const std::string& target)

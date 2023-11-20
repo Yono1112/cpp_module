@@ -20,6 +20,46 @@ ClapTrap::~ClapTrap()
 	std::cout << "ClapTrap Destructor Called" << std::endl;
 }
 
+void	ClapTrap::setName(std::string name)
+{
+	_name = name;
+}
+
+void	ClapTrap::setHitPoints(int num)
+{
+	_hit_points = num;
+}
+
+void	ClapTrap::setEnergyPoints(int num)
+{
+	_energy_points = num;
+}
+
+void	ClapTrap::setAttackDamage(int num)
+{
+	_attack_damage = num;
+}
+
+std::string	ClapTrap::getName(void)
+{
+	return (_name);
+}
+
+int	ClapTrap::getHitPoints(void)
+{
+	return (_hit_points);
+}
+
+int	ClapTrap::getEnergyPoints(void)
+{
+	return (_energy_points);
+}
+
+int	ClapTrap::getAttackDamage(void)
+{
+	return (_attack_damage);
+}
+
 void	ClapTrap::attack(const std::string& target)
 {
 	std::cout << this->_name << " use ATTACK" << std::endl;
