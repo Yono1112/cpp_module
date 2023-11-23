@@ -13,7 +13,7 @@ class Cat: public Animal
 		~Cat();
 		void	makeSound(void) const;
 	private:
-		Brain*	brain_ptr;
+		Brain*	_brain_ptr;
 };
 
 #endif

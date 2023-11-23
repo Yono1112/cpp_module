@@ -3,12 +3,13 @@
 Cat::Cat()
 {
 	this->type = "cat";
-	this->brain_ptr = new Brain();
+	this->_brain_ptr = new Brain();
 	std::cout << "Cat Default Constructor Called" << std::endl;
 }
 
 Cat::~Cat()
 {
+	delete this->_brain_ptr;
 	std::cout << "Cat Destructor Called" << std::endl;
 }
 
