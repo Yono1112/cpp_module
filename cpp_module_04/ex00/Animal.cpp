@@ -16,12 +16,12 @@ void	Animal::setType(std::string new_name)
 	this->type = new_name;
 }
 
-std::string	Animal::getType(void)
+std::string	Animal::getType(void) const
 {
 	return (this->type);
 }
 
-void	Animal::makeSound(void)
+void	Animal::makeSound(void) const
 {
 	std::cout << "Animal Class makeSound" << std::endl;
 }

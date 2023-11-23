@@ -10,7 +10,7 @@ class Cat: public Animal
 	public:
 		Cat();
 		~Cat();
-		void		makeSound(void);
+		void	makeSound(void) const;
 };
 
 #endif

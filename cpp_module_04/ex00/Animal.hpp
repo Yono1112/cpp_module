@@ -10,8 +10,8 @@ class Animal
 		Animal();
 		~Animal();
 		void		setType(std::string new_type);
-		std::string	getType(void);
-		virtual void		makeSound(void);
+		std::string	getType(void) const;
+		virtual void		makeSound(void) const;
 	protected:
 		std::string	type;
 };
