@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Dog: public Animal
 {
@@ -11,6 +12,8 @@ class Dog: public Animal
 		Dog();
 		~Dog();
 		void	makeSound(void) const;
+	private:
+		Brain*	brain_ptr;
 };
 
 #endif

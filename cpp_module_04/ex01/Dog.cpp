@@ -3,6 +3,7 @@
 Dog::Dog()
 {
 	this->type = "dog";
+	this->brain_ptr = new Brain();
 	std::cout << "Dog Default Constructor Called" << std::endl;
 }
 
