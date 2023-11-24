@@ -15,6 +15,7 @@ Dog::~Dog()
 
 Dog::Dog(const Dog& other)
 	: Animal(other)
+	, _brain_ptr(other._brain_ptr)
 {
 	std::cout << "Dog Copy Constructor Called" << std::endl;
 }
@@ -25,6 +26,7 @@ Dog&	Dog::operator=(const Dog& other)
 	if (this != &other)
 	{
 		this->type = other.type;
+		this->_brain_ptr = other._brain_ptr;
 	}
 	return (*this);
 }
