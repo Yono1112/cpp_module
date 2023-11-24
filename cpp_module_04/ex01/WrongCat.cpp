@@ -12,6 +12,7 @@ WrongCat::~WrongCat()
 }
 
 WrongCat::WrongCat(const WrongCat& other)
+	: WrongAnimal(other)
 {
 	std::cout << "WrongCat Copy Constructor Called" << std::endl;
 }

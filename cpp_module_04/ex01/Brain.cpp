@@ -13,6 +13,7 @@ Brain::~Brain()
 Brain::Brain(const Brain& other)
 {
 	std::cout << "Brain Copy Constructor Called" << std::endl;
+	operator=(other);
 }
 
 Brain&	Brain::operator=(const Brain& other)
