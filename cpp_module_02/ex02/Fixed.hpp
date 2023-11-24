@@ -8,7 +8,7 @@ class Fixed
 {
 	public:
 		Fixed();
-		Fixed(const Fixed& fixed);
+		Fixed(const Fixed& fix);
 		Fixed(const int& num);
 		Fixed(float num);
 		~Fixed();
