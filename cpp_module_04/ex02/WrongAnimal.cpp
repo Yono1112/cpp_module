@@ -27,9 +27,9 @@ WrongAnimal&	WrongAnimal::operator=(const WrongAnimal& other)
 	return (*this);
 }
 
-void	WrongAnimal::setType(std::string new_name)
+void	WrongAnimal::setType(std::string new_type)
 {
-	this->type = new_name;
+	this->type = new_type;
 }
 
 std::string	WrongAnimal::getType(void) const
