@@ -1,12 +1,13 @@
 #include "DiamondTrap.hpp"
 
 DiamondTrap::DiamondTrap(std::string name)
+	: ClapTrap(name, 100, 20, 30)
 {
 	setNameDiamond(name);
 	setName(name.append("_clap_name"));
-	setHitPoints(_frag_hit_points);
-	setEnergyPoints(_scav_energy_points);
-	setAttackDamage(_frag_attack_damage);
+	// setHitPoints(_frag_hit_points);
+	// setEnergyPoints(_scav_energy_points);
+	// setAttackDamage(_frag_attack_damage);
 	std::cout << "Diamond Constructor Called" << std::endl;
 	std::cout << "name is " << getNameDiamond() << std::endl;
 	std::cout << "ClapTrap name is " << getName() << std::endl;

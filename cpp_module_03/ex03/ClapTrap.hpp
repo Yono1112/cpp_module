@@ -10,6 +10,9 @@ class ClapTrap
 		ClapTrap();
 		ClapTrap(std::string name);
 		~ClapTrap();
+		ClapTrap(const ClapTrap& other);
+		ClapTrap(const std::string& name, const int& hit_points, const int& energy_points, const int& attack_damage);
+		ClapTrap&	operator=(const ClapTrap& other);
 		void	attack(const std::string& target);
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);

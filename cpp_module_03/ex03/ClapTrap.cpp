@@ -1,6 +1,10 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap()
+	: _name(""),
+	_hit_points(10),
+	_energy_points(10),
+	_attack_damage(0)
 {
 	std::cout << "ClapTrap Default Constructor Called" << std::endl;
 }
@@ -11,13 +15,44 @@ ClapTrap::ClapTrap(std::string name)
 	_energy_points(_clap_energy_points),
 	_attack_damage(_clap_attack_damage)
 {
-	std::cout << "ClapTrap Constructor Called" << std::endl;
+	std::cout << "ClapTrap only name Constructor Called" << std::endl;
 	std::cout << "name is " << _name << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
 	std::cout << "ClapTrap Destructor Called" << std::endl;
+}
+
+ClapTrap::ClapTrap(const ClapTrap& other)
+	: _name(other._name)
+	, _hit_points(other._hit_points)
+	, _energy_points(other._energy_points)
+	, _attack_damage(other._attack_damage)
+{
+	std::cout << "ClapTrap Copy Constructor Called" << std::endl;
+}
+
+ClapTrap::ClapTrap(const std::string& name, const int& hit_points, const int& energy_points, const int& attack_damage)
+	: _name(name)
+	, _hit_points(hit_points)
+	, _energy_points(energy_points)
+	, _attack_damage(attack_damage)
+{
+	std::cout << "ClapTrap all member value Constructor Called" << std::endl;
+}
+
+ClapTrap&	ClapTrap::operator=(const ClapTrap& other)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	if (this != &other)
+	{
+		this->_name = other._name;
+		this->_hit_points = other._hit_points;
+		this->_energy_points = other._energy_points;
+		this->_attack_damage = other._attack_damage;
+	}
+	return (*this);
 }
 
 void	ClapTrap::setName(std::string name)

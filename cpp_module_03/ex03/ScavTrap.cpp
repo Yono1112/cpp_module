@@ -1,16 +1,19 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap(void)
+	// : _scav_hit_points(100)
+	// , _scav_energy_points(50)
+	// , _scav_attack_damage(20)
 {
 	std::cout << "ScavTrap Default Constructor Called" << std::endl;
 }
 
 ScavTrap::ScavTrap(std::string name)
+	: ClapTrap(name, 100, 50, 20)
+	// , _scav_hit_points(100)
+	// , _scav_energy_points(50)
+	// , _scav_attack_damage(20)
 {
-	setName(name);
-	setHitPoints(_scav_hit_points);
-	setEnergyPoints(_scav_energy_points);
-	setAttackDamage(_scav_attack_damage);
 	std::cout << "ScavTrap Constructor Called" << std::endl;
 	std::cout << "name is " << getName() << std::endl;
 	std::cout << "_hit_points is " << getHitPoints() << std::endl;
