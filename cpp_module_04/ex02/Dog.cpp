@@ -3,8 +3,8 @@
 Dog::Dog()
 {
 	this->type = "dog";
-	this->_brain_ptr = new Brain();
 	std::cout << "Dog Default Constructor Called" << std::endl;
+	this->_brain_ptr = new Brain();
 }
 
 Dog::~Dog()
@@ -15,9 +15,9 @@ Dog::~Dog()
 
 Dog::Dog(const Dog& other)
 	: Animal(other)
-	, _brain_ptr(other._brain_ptr)
 {
 	std::cout << "Dog Copy Constructor Called" << std::endl;
+	operator=(other);
 }
 
 Dog&	Dog::operator=(const Dog& other)
@@ -26,7 +26,9 @@ Dog&	Dog::operator=(const Dog& other)
 	if (this != &other)
 	{
 		this->type = other.type;
-		this->_brain_ptr = other._brain_ptr;
+		if (this->_brain_ptr)
+			delete this->_brain_ptr;
+		this->_brain_ptr = new Brain(*other._brain_ptr);
 	}
 	return (*this);
 }

@@ -3,8 +3,8 @@
 Cat::Cat()
 {
 	this->type = "cat";
-	this->_brain_ptr = new Brain();
 	std::cout << "Cat Default Constructor Called" << std::endl;
+	this->_brain_ptr = new Brain();
 }
 
 Cat::~Cat()
@@ -15,9 +15,9 @@ Cat::~Cat()
 
 Cat::Cat(const Cat& other)
 	: Animal(other)
-	, _brain_ptr(other._brain_ptr)
 {
 	std::cout << "Cat Copy Constructor Called" << std::endl;
+	operator=(other);
 }
 
 Cat&	Cat::operator=(const Cat& other)
@@ -26,7 +26,9 @@ Cat&	Cat::operator=(const Cat& other)
 	if (this != &other)
 	{
 		this->type = other.type;
-		this->_brain_ptr = other._brain_ptr;
+		if (this->_brain_ptr)
+			delete this->_brain_ptr;
+		this->_brain_ptr = new Brain(*other._brain_ptr);
 	}
 	return (*this);
 }
