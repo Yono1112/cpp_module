@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 
-std::string	replace_str(std::string input_line, std::string before_str, std::string after_str)
+std::string	replace_str(const std::string& input_line, const std::string& before_str, const std::string& after_str)
 {
 	size_t		i;
 	std::string	replaced_str;
