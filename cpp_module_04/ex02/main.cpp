@@ -53,3 +53,9 @@ int	main(void)
 	}
 	return (0);
 }
+
+// __attribute__((destructor))
+// static void	destructor(void)
+// {
+// 	system("leaks -q animal");
+// }
