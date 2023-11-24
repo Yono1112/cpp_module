@@ -11,9 +11,9 @@ Animal::~Animal()
 	std::cout << "Animal Destructor Called" << std::endl;
 }
 
-void	Animal::setType(std::string new_name)
+void	Animal::setType(std::string new_type)
 {
-	this->type = new_name;
+	this->type = new_type;
 }
 
 std::string	Animal::getType(void) const
