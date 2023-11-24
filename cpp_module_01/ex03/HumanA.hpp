@@ -9,11 +9,11 @@ class HumanA
 {
 	public:
 		~HumanA();
-		HumanA(const std::string name, Weapon& weapon);
+		HumanA(const std::string& name, Weapon& weapon);
 		void	attack();
 	private:
 		std::string	_name;
-		Weapon*		_weapon;
+		Weapon&	_weapon;
 };
 
 #endif
