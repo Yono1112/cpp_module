@@ -13,3 +13,9 @@ int	main(void)
 	delete(new_zombie2);
 	return (0);
 }
+
+// __attribute__((destructor))
+// static void	destructor(void)
+// {
+// 	system("leaks -q zombie");
+// }
