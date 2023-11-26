@@ -14,16 +14,6 @@ void	testValidGrade(void)
 		a.downGrade();
 		std::cout << a << " is now " << a.getGrade() << "." << std::endl;
 	}
-	catch (const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cerr << "Catch GradeTooHighException: " << e.what() << std::endl;
-		return ;
-	}
-	catch (const Bureaucrat::GradeTooLowException& e)
-	{
-		std::cerr << "Catch GradeTooLowException: " << e.what() << std::endl;
-		return ;
-	}
 	catch(const std::exception& e)
 	{
 		std::cerr << "Catch std::exception: " << e.what() << std::endl;
@@ -55,16 +45,6 @@ void	testCopyGrade(void)
 		c.downGrade();
 		std::cout << c << " is now " << c.getGrade() << "." << std::endl;
 	}
-	catch (const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cerr << "Catch GradeTooHighException: " << e.what() << std::endl;
-		return ;
-	}
-	catch (const Bureaucrat::GradeTooLowException& e)
-	{
-		std::cerr << "Catch GradeTooLowException: " << e.what() << std::endl;
-		return ;
-	}
 	catch(const std::exception& e)
 	{
 		std::cerr << "Catch std::exception: " << e.what() << std::endl;
@@ -81,16 +61,6 @@ void	testGradeTooHighException(void)
 		Bureaucrat	a("jim", 1000);
 		std::cout << a << ", bureaucrat grade " << a.getGrade() << "." << std::endl;
 	}
-	catch (const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cerr << "Catch GradeTooHighException: " << e.what() << std::endl;
-		return ;
-	}
-	catch (const Bureaucrat::GradeTooLowException& e)
-	{
-		std::cerr << "Catch GradeTooLowException: " << e.what() << std::endl;
-		return ;
-	}
 	catch(const std::exception& e)
 	{
 		std::cerr << "Catch std::exception: " << e.what() << std::endl;
@@ -106,16 +76,6 @@ void	testGradeTooLowException(void)
 	{
 		Bureaucrat	a("jim", -1);
 		std::cout << a << ", bureaucrat grade " << a.getGrade() << "." << std::endl;
-	}
-	catch (const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cerr << "Catch GradeTooHighException: " << e.what() << std::endl;
-		return ;
-	}
-	catch (const Bureaucrat::GradeTooLowException& e)
-	{
-		std::cerr << "Catch GradeTooLowException: " << e.what() << std::endl;
-		return ;
 	}
 	catch(const std::exception& e)
 	{
@@ -136,16 +96,6 @@ void	testInvalidUpGrade(void)
 		a.upGrade();
 		std::cout << a << " is now " << a.getGrade() << "." << std::endl;
 	}
-	catch (const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cerr << "Catch GradeTooHighException: " << e.what() << std::endl;
-		return ;
-	}
-	catch (const Bureaucrat::GradeTooLowException& e)
-	{
-		std::cerr << "Catch GradeTooLowException: " << e.what() << std::endl;
-		return ;
-	}
 	catch(const std::exception& e)
 	{
 		std::cerr << "Catch std::exception: " << e.what() << std::endl;
@@ -164,16 +114,6 @@ void	testInvalidDownGrade(void)
 		std::cout << a << " is downGraded!" << std::endl;
 		a.downGrade();
 		std::cout << a << " is now " << a.getGrade() << "." << std::endl;
-	}
-	catch (const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cerr << "Catch GradeTooHighException: " << e.what() << std::endl;
-		return ;
-	}
-	catch (const Bureaucrat::GradeTooLowException& e)
-	{
-		std::cerr << "Catch GradeTooLowException: " << e.what() << std::endl;
-		return ;
 	}
 	catch(const std::exception& e)
 	{
