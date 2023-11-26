@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 void	testValidGrade(void)
 {
@@ -184,11 +185,13 @@ void	testInvalidDownGrade(void)
 
 int	main(void)
 {
-	testValidGrade();
-	testCopyGrade();
-	testGradeTooHighException();
-	testGradeTooLowException();
-	testInvalidUpGrade();
-	testInvalidDownGrade();
+	// testValidGrade();
+	// testCopyGrade();
+	// testGradeTooHighException();
+	// testGradeTooLowException();
+	// testInvalidUpGrade();
+	// testInvalidDownGrade();
+	Form	form1("form1", false, 100, 100);
+	std::cout << form1 << std::endl;
 	return (0);
 }
