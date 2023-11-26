@@ -1,8 +1,8 @@
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat()
-	: _name("")
-	, _grade(0)
+	: _name("default")
+	, _grade(150)
 {
 	std::cout << "Bureaucrat Default Constructor Called" << std::endl;
 }
@@ -12,6 +12,11 @@ Bureaucrat::Bureaucrat(const std::string& name, const int& grade)
 	, _grade(grade)
 {
 	std::cout << "Bureaucrat Argument Constructor Called" << std::endl;
+	if (grade < 1) {
+		throw GradeTooHighException("Grade Is Too High");
+	} else if (grade > 150) {
+		throw GradeTooLowException("Grade Is Too Low");
+	}
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other)
@@ -19,6 +24,11 @@ Bureaucrat::Bureaucrat(const Bureaucrat& other)
 	, _grade(other._grade)
 {
 	std::cout << "Bureaucrat Copy Constructor Called" << std::endl;
+	if (other._grade < 1) {
+		throw GradeTooHighException("Grade Is Too High");
+	} else if (other._grade > 150) {
+		throw GradeTooLowException("Grade Is Too Low");
+	}
 }
 
 Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& other)
@@ -26,6 +36,11 @@ Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& other)
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
+		if (other._grade < 1) {
+			throw GradeTooHighException("Grade Is Too High");
+		} else if (other._grade > 150) {
+			throw GradeTooLowException("Grade Is Too Low");
+		}
 		this->_name = other._name;
 		this->_grade = other._grade;
 	}
@@ -43,16 +58,6 @@ Bureaucrat::~Bureaucrat()
 	std::cout << "Bureaucrat Destructor Called" << std::endl;
 }
 
-void		Bureaucrat::setName(const std::string& name)
-{
-	_name = name;
-}
-
-void		Bureaucrat::setGrade(const int& grade)
-{
-	_grade = grade;
-}
-
 std::string	Bureaucrat::getName(void) const
 {
 	return (_name);
@@ -61,4 +66,48 @@ std::string	Bureaucrat::getName(void) const
 int	Bureaucrat::getGrade(void) const
 {
 	return (_grade);
+}
+
+void	Bureaucrat::upGrade(void)
+{
+	int	result;
+
+	result = this->_grade;
+	if (--result < 1) {
+		throw GradeTooHighException("Grade Is Too High");
+	} else {
+		this->_grade = result;
+	}
+}
+
+void	Bureaucrat::downGrade(void)
+{
+	int	result;
+
+	result = this->_grade;
+	if (++result > 150) {
+		throw GradeTooLowException("Grade Is Too Low");
+	} else {
+		this->_grade = result;
+	}
+}
+
+Bureaucrat::GradeTooHighException::GradeTooHighException(std::string message)
+	: _error_message(message)
+{
+}
+
+const char*	Bureaucrat::GradeTooHighException::what(void) const throw()
+{
+	return (_error_message.c_str());
+}
+
+Bureaucrat::GradeTooLowException::GradeTooLowException(std::string message)
+	: _error_message(message)
+{
+}
+
+const char*	Bureaucrat::GradeTooLowException::what(void) const throw()
+{
+	return (_error_message.c_str());
 }
