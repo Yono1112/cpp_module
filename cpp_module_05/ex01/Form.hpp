@@ -5,6 +5,8 @@
 #include <iostream>
 #include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form
 {
 	public:
@@ -13,7 +15,7 @@ class Form
 		Form(const std::string& name, const bool& is_signed, const int& required_sign_grade, const int& required_execute_grade);
 		Form(const Form& other);
 		Form&	operator=(const Form& other);
-		void	beSigned(const Form& other);
+		void	beSigned(const Bureaucrat& bureaucrat);
 		std::string	getName(void) const;
 		std::string	getIsSigned(void) const;
 		int			getRequiredSignGrade(void) const;
@@ -37,10 +39,10 @@ class Form
 				std::string	_error_message;
 		};
 	private:
-		std::string	_name;
-		bool		_is_signed;
-		int			_required_sign_grade;
-		int			_required_execute_grade;
+		const std::string	_name;
+		bool				_is_signed;
+		const int			_required_sign_grade;
+		const int			_required_execute_grade;
 };
 
 std::ostream&	operator<<(std::ostream& stream, const Form& other);

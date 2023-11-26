@@ -191,7 +191,22 @@ int	main(void)
 	// testGradeTooLowException();
 	// testInvalidUpGrade();
 	// testInvalidDownGrade();
-	Form	form1("form1", false, 100, 100);
-	std::cout << form1 << std::endl;
+	try
+	{
+		Form	form1("form1", false, 100, 100);
+		Form	form2("form2", false, 1, 1);
+		Bureaucrat	trump("trump", 1);
+		Bureaucrat	kishida("kishida", 150);
+		std::cout << form1 << std::endl;
+		kishida.signForm(form1);
+		trump.signForm(form1);
+		kishida.signForm(form1);
+		trump.signForm(form2);
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+		return (1);
+	}
 	return (0);
 }
