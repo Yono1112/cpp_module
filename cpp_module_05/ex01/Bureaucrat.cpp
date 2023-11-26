@@ -42,7 +42,6 @@ Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& other)
 		} else if (other._grade > 150) {
 			throw GradeTooLowException("ERROR: Bureaucrat Copy assignment operator: Grade Is Too Low");
 		}
-		this->_name = other._name;
 		this->_grade = other._grade;
 	}
 	return (*this);

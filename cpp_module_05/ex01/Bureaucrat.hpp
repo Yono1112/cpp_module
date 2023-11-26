@@ -39,7 +39,7 @@ class Bureaucrat
 				std::string	_error_message;
 		};
 	private:
-		std::string	_name;
+		const std::string	_name;
 		int			_grade;
 };
 
