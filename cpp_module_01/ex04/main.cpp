@@ -49,6 +49,11 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	std::ofstream	ofs(filename.append(".replace").c_str());
+	if (ofs.fail())
+	{
+		std::cerr << "cannnot open file" << std::endl;
+		return (1);
+	}
 	if (getline(ifs, input_line))
 	{
 		current_line = input_line;
