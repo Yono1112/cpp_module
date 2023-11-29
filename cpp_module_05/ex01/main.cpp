@@ -1,212 +1,108 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
-void	testValidGrade(void)
+void testFormConstructors()
 {
-	std::cout << "run testValidGrade" << std::endl;
-	try
-	{
-		Bureaucrat	a("jim", 100);
-		std::cout << a << ", bureaucrat grade " << a.getGrade() << "." << std::endl;
-		std::cout << a << " is upGraded!" << std::endl;
-		a.upGrade();
-		std::cout << a << " is now " << a.getGrade() << "." << std::endl;
-		std::cout << a << " is downGraded!" << std::endl;
-		a.downGrade();
-		std::cout << a << " is now " << a.getGrade() << "." << std::endl;
-	}
-	catch (const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cerr << "Catch GradeTooHighException: " << e.what() << std::endl;
-		return ;
-	}
-	catch (const Bureaucrat::GradeTooLowException& e)
-	{
-		std::cerr << "Catch GradeTooLowException: " << e.what() << std::endl;
-		return ;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << "Catch std::exception: " << e.what() << std::endl;
-		return ;
-	}
+	std::cout << "Testing Form Constructors..." << std::endl;
+	Form form1;
+	Form form2("Form2", false, 30, 50);
+	Form form3(form2);
+	form1 = form3;
+
+	std::cout << form1 << std::endl;
+	std::cout << form2 << std::endl;
+	std::cout << form3 << std::endl;
 }
 
-void	testCopyGrade(void)
+void testSignSuccess()
 {
 	std::cout << "=========================================" << std::endl;
-	std::cout << "run testCopyGrade" << std::endl;
-	try
-	{
-		Bureaucrat	a("jim", 150);
-		Bureaucrat	b(a);
-		Bureaucrat	c;
+	std::cout << "Testing Sign Success..." << std::endl;
+	Bureaucrat bureaucrat("John", 10);
+	Form form("Form", false, 20, 40);
 
-		std::cout << a << ", bureaucrat grade " << a.getGrade() << "." << std::endl;
-		std::cout << b << ", bureaucrat grade " << b.getGrade() << "." << std::endl;
-		std::cout << c << ", bureaucrat grade " << c.getGrade() << "." << std::endl;
-		c = b;
-		std::cout << c << ", bureaucrat grade " << c.getGrade() << "." << std::endl;
-
-		std::cout << b << " is upGraded!" << std::endl;
-		b.upGrade();
-		std::cout << b << " is now " << b.getGrade() << "." << std::endl;
-
-		std::cout << c << " is downGraded!" << std::endl;
-		c.downGrade();
-		std::cout << c << " is now " << c.getGrade() << "." << std::endl;
-	}
-	catch (const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cerr << "Catch GradeTooHighException: " << e.what() << std::endl;
-		return ;
-	}
-	catch (const Bureaucrat::GradeTooLowException& e)
-	{
-		std::cerr << "Catch GradeTooLowException: " << e.what() << std::endl;
-		return ;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << "Catch std::exception: " << e.what() << std::endl;
-		return ;
-	}
+	std::cout << bureaucrat << std::endl;
+	bureaucrat.signForm(form);
+	std::cout << form << std::endl;
 }
 
-void	testGradeTooHighException(void)
+void testSignFailure()
 {
 	std::cout << "=========================================" << std::endl;
-	std::cout << "run testGradeTooHighException" << std::endl;
-	try
-	{
-		Bureaucrat	a("jim", 1000);
-		std::cout << a << ", bureaucrat grade " << a.getGrade() << "." << std::endl;
-	}
-	catch (const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cerr << "Catch GradeTooHighException: " << e.what() << std::endl;
-		return ;
-	}
-	catch (const Bureaucrat::GradeTooLowException& e)
-	{
-		std::cerr << "Catch GradeTooLowException: " << e.what() << std::endl;
-		return ;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << "Catch std::exception: " << e.what() << std::endl;
-		return ;
-	}
+	std::cout << "Testing Sign Failure..." << std::endl;
+	Bureaucrat bureaucrat("Doe", 50);
+	Form form("Form", false, 10, 20);
+
+	std::cout << bureaucrat << std::endl;
+	std::cout << form << std::endl;
+	bureaucrat.signForm(form);
 }
 
-void	testGradeTooLowException(void)
+void testUpgradeAndSign()
 {
 	std::cout << "=========================================" << std::endl;
-	std::cout << "run testGradeTooLowException" << std::endl;
-	try
-	{
-		Bureaucrat	a("jim", -1);
-		std::cout << a << ", bureaucrat grade " << a.getGrade() << "." << std::endl;
+	std::cout << "Testing Upgrade and Sign..." << std::endl;
+	Bureaucrat bureaucrat("Jane", 50);
+	Form form("Form", false, 45, 50);
+
+	bureaucrat.signForm(form);
+	std::cout << bureaucrat << std::endl;
+	std::cout << form << std::endl;
+	while (bureaucrat.getGrade() > 45) {
+		bureaucrat.upGrade();
 	}
-	catch (const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cerr << "Catch GradeTooHighException: " << e.what() << std::endl;
-		return ;
-	}
-	catch (const Bureaucrat::GradeTooLowException& e)
-	{
-		std::cerr << "Catch GradeTooLowException: " << e.what() << std::endl;
-		return ;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << "Catch std::exception: " << e.what() << std::endl;
-		return ;
-	}
+	bureaucrat.signForm(form);
+	std::cout << form << std::endl;
 }
 
-void	testInvalidUpGrade(void)
+void testDowngradeAndFailToSign()
 {
 	std::cout << "=========================================" << std::endl;
-	std::cout << "run testInvalidUpGrade" << std::endl;
-	try
-	{
-		Bureaucrat	a("jim", 1);
-		std::cout << a << ", bureaucrat grade " << a.getGrade() << "." << std::endl;
-		std::cout << a << " is upGraded!" << std::endl;
-		a.upGrade();
-		std::cout << a << " is now " << a.getGrade() << "." << std::endl;
-	}
-	catch (const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cerr << "Catch GradeTooHighException: " << e.what() << std::endl;
-		return ;
-	}
-	catch (const Bureaucrat::GradeTooLowException& e)
-	{
-		std::cerr << "Catch GradeTooLowException: " << e.what() << std::endl;
-		return ;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << "Catch std::exception: " << e.what() << std::endl;
-		return ;
-	}
+	std::cout << "Testing Downgrade and Fail to Sign..." << std::endl;
+	Bureaucrat bureaucrat("Max", 20);
+	Form form1("Form1", false, 20, 20);
+	Form form2("Form2", false, 20, 20);
+
+	std::cout << bureaucrat << std::endl;
+	std::cout << form1 << std::endl;
+	std::cout << form2 << std::endl;
+	bureaucrat.signForm(form1);
+	bureaucrat.downGrade();
+	bureaucrat.signForm(form2);
+	std::cout << form1 << std::endl;
+	std::cout << form2 << std::endl;
 }
 
-void	testInvalidDownGrade(void)
+void testEdgeCases()
 {
 	std::cout << "=========================================" << std::endl;
-	std::cout << "run testInvalidDownGrade" << std::endl;
-	try
-	{
-		Bureaucrat	a("jim", 150);
-		std::cout << a << ", bureaucrat grade " << a.getGrade() << "." << std::endl;
-		std::cout << a << " is downGraded!" << std::endl;
-		a.downGrade();
-		std::cout << a << " is now " << a.getGrade() << "." << std::endl;
+	std::cout << "Testing Edge Cases..." << std::endl;
+	try {
+		Bureaucrat high("High", 0);
+		std::cout << high << std::endl;
+	} catch (const std::exception& e) {
+		std::cout << "Exception caught: " << e.what() << std::endl;
 	}
-	catch (const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cerr << "Catch GradeTooHighException: " << e.what() << std::endl;
-		return ;
-	}
-	catch (const Bureaucrat::GradeTooLowException& e)
-	{
-		std::cerr << "Catch GradeTooLowException: " << e.what() << std::endl;
-		return ;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << "Catch std::exception: " << e.what() << std::endl;
-		return ;
+
+	try {
+		Bureaucrat low("Low", 151);
+		std::cout << low << std::endl;
+	} catch (const std::exception& e) {
+		std::cout << "Exception caught: " << e.what() << std::endl;
 	}
 }
 
-int	main(void)
+int main()
 {
-	// testValidGrade();
-	// testCopyGrade();
-	// testGradeTooHighException();
-	// testGradeTooLowException();
-	// testInvalidUpGrade();
-	// testInvalidDownGrade();
-	try
-	{
-		Form	form1("form1", false, 100, 100);
-		Form	form2("form2", false, 1, 1);
-		Bureaucrat	trump("trump", 1);
-		Bureaucrat	kishida("kishida", 150);
-		std::cout << form1 << std::endl;
-		kishida.signForm(form1);
-		trump.signForm(form1);
-		kishida.signForm(form1);
-		trump.signForm(form2);
-	}
-	catch (const std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-		return (1);
+	try {
+		testFormConstructors();
+		testSignSuccess();
+		testSignFailure();
+		testUpgradeAndSign();
+		testDowngradeAndFailToSign();
+		testEdgeCases();
+	} catch (const std::exception& e) {
+		std::cerr << "Exception caught in main: " << e.what() << std::endl;
 	}
 	return (0);
 }
