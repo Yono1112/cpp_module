@@ -12,5 +12,7 @@ int	main(void)
 	harl.complain("WARNING");
 	std::cout << "[ ERROR ]" << std::endl;
 	harl.complain("ERROR");
+	std::cout << "[ undefine ]" << std::endl;
+	harl.complain("UNDEFINE");
 	return (0);
 }

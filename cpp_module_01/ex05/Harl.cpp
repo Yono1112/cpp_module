@@ -11,16 +11,13 @@ Harl::~Harl()
 void	Harl::complain(const std::string& level)
 {
 	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
-	levelPtr	funcPtr[4] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+	levelPtr	funcPtr[5] = {&Harl::undefine, &Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 
-	for (int i = 0; i < 4; i++)
-	{
-		if (levels[i] == level)
-		{
-			(this->*funcPtr[i])();
-			break ;
-		}
-	}
+	int	index = (level == levels[0]) * 1
+			+ (level == levels[1]) * 2
+			+ (level == levels[2]) * 3
+			+ (level == levels[3]) * 4;
+	(this->*funcPtr[index])();
 }
 
 void	Harl::debug(void)
@@ -41,4 +38,9 @@ void	Harl::warning(void)
 void	Harl::error(void)
 {
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
+}
+
+void	Harl::undefine(void)
+{
+	std::cout << "ERROR: undefined level" << std::endl;
 }
