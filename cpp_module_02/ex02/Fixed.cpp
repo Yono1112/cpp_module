@@ -7,6 +7,7 @@ Fixed::Fixed()
 }
 
 Fixed::Fixed(const Fixed& fix)
+	: _fixed_point_num(fix._fixed_point_num)
 {
 	// std::cout << "Copy constructor called" << std::endl;
 	operator=(fix);
@@ -65,7 +66,7 @@ Fixed&	Fixed::operator=(const Fixed& fix)
 
 Fixed&	Fixed::min(Fixed& first, Fixed& second)
 {
-	std::cout << "min function called" << std::endl;
+	// std::cout << "min function called" << std::endl;
 	if (first < second)
 		return (first);
 	else
@@ -74,7 +75,7 @@ Fixed&	Fixed::min(Fixed& first, Fixed& second)
 
 const Fixed&	Fixed::min(const Fixed& first, const Fixed& second)
 {
-	std::cout << "const min function called" << std::endl;
+	// std::cout << "const min function called" << std::endl;
 	if (first < second)
 		return (first);
 	else
@@ -83,7 +84,7 @@ const Fixed&	Fixed::min(const Fixed& first, const Fixed& second)
 
 Fixed&	Fixed::max(Fixed& first, Fixed& second)
 {
-	std::cout << "max function called" << std::endl;
+	// std::cout << "max function called" << std::endl;
 	if (first > second)
 		return (first);
 	else
@@ -92,7 +93,7 @@ Fixed&	Fixed::max(Fixed& first, Fixed& second)
 
 const Fixed&	Fixed::max(const Fixed& first, const Fixed& second)
 {
-	std::cout << "const max function called" << std::endl;
+	// std::cout << "const max function called" << std::endl;
 	if (first > second)
 		return (first);
 	else

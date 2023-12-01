@@ -26,12 +26,12 @@ void	print_comparison(void)
 	std::cout << "run print_comparison()" << std::endl;
 	std::cout << "a is " << a << std::endl;
 	std::cout << "b is " << b << std::endl;
-	std::cout << "a > b " << (a > b) << std::endl;
-	std::cout << "a < b " <<(a < b) << std::endl;
-	std::cout << "a >= b " <<(a >= b) << std::endl;
-	std::cout << "a <= b " <<(a <= b) << std::endl;
-	std::cout << "a == b " <<(a == b) << std::endl;
-	std::cout << "a != b " <<(a != b) << std::endl;
+	std::cout << "a > b " << ((a > b) ? "true" : "false") << std::endl;
+	std::cout << "a < b " << ((a < b) ? "true" : "false") << std::endl;
+	std::cout << "a >= b " << ((a >= b) ? "true" : "false") << std::endl;
+	std::cout << "a <= b " << ((a <= b) ? "true" : "false") << std::endl;
+	std::cout << "a == b " << ((a == b) ? "true" : "false")<< std::endl;
+	std::cout << "a != b " << ((a != b) ? "true" : "false") << std::endl;
 	std::cout << "===========================================" << std::endl;
 }
 
@@ -43,10 +43,10 @@ void	print_arithmetic(void)
 	std::cout << "run print_arithmetic()" << std::endl;
 	std::cout << "a is " << a << std::endl;
 	std::cout << "b is " << b << std::endl;
-	std::cout << "a + b " <<(a + b) << std::endl;
-	std::cout << "a - b " <<(a - b) << std::endl;
-	std::cout << "a * b " <<(a * b) << std::endl;
-	std::cout << "a / b " <<(a / b) << std::endl;
+	std::cout << "a + b " << (a + b) << std::endl;
+	std::cout << "a - b " << (a - b) << std::endl;
+	std::cout << "a * b " << (a * b) << std::endl;
+	std::cout << "a / b " << (a / b) << std::endl;
 	std::cout << "===========================================" << std::endl;
 }
 
