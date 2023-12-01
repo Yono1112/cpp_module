@@ -19,7 +19,7 @@ Fixed::Fixed(const int& num)
 	// std::cout << "_fixed_point_num: " << this->_fixed_point_num << std::endl;
 }
 
-Fixed::Fixed(float num)
+Fixed::Fixed(const float& num)
 {
 	std::cout << "Float constructor called" << std::endl;
 	float	fixed_point_num;
