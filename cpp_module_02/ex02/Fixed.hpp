@@ -31,8 +31,8 @@ class Fixed
 		Fixed	operator-(const Fixed& fix) const;
 		Fixed	operator*(const Fixed& fix) const;
 		Fixed	operator/(const Fixed& fix) const;
-		Fixed	operator++();
-		Fixed	operator--();
+		Fixed&	operator++();
+		Fixed&	operator--();
 		Fixed	operator++(int);
 		Fixed	operator--(int);
 	private:

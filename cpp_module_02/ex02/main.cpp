@@ -64,6 +64,10 @@ void	print_increment_decrement(void)
 	std::cout << "a is " << a << std::endl;
 	std::cout << "a-- " << a-- << std::endl;
 	std::cout << "a is " << a << std::endl;
+	std::cout << "++(++a) is " << ++(++a) << std::endl;
+	std::cout << "a is " << a << std::endl;
+	std::cout << "--(--a) is " << --(--a) << std::endl;
+	std::cout << "a is " << a << std::endl;
 	std::cout << "===========================================" << std::endl;
 }
 

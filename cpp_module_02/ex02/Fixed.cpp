@@ -176,13 +176,13 @@ Fixed		Fixed::operator/(const Fixed& fix) const
 	return (result);
 }
 
-Fixed		Fixed::operator++()
+Fixed&		Fixed::operator++()
 {
 	++(this->_fixed_point_num);
 	return (*this);
 }
 
-Fixed		Fixed::operator--()
+Fixed&		Fixed::operator--()
 {
 	--(this->_fixed_point_num);
 	return (*this);
