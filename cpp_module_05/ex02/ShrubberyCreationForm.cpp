@@ -13,5 +13,5 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 
 void	ShrubberyCreationForm::execute(Bureaucrat const& executor) const
 {
-	std::cout << "Hello " << executor.getName() << "!" << std::endl;
+	std::cout << "ShrubberyCreationForm Hello " << executor.getName() << "!" << std::endl;
 }

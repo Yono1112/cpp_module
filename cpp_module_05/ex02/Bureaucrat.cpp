@@ -113,7 +113,8 @@ void		Bureaucrat::executeForm(AForm const& form)
 {
 	try
 	{
-		if (form.getIsSigned() == "false") {
+		if (form.getIsSigned() == "False") {
+			std::cout << "getIsSigned is false" << std::endl;
 			throw "this form has not yet been signed";
 		}
 		else if (form.getRequiredExecuteGrade() < this->_grade) {
