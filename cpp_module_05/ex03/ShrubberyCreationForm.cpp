@@ -13,7 +13,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 	std::cout << "ShrubberyCreationForm Destructor Called" << std::endl;
 }
 
-void	write_ascii_tree(std::ofstream& ofs)
+void	writeAsciiTree(std::ofstream& ofs)
 {
    	int padding = 9;
 	for (int i = 1; i <= 15; i += 2) {
@@ -35,5 +35,5 @@ void	ShrubberyCreationForm::execute(Bureaucrat const& executor) const
 	std::ofstream	ofs(executor.getName() + "_shrubbery");
 	if (ofs.fail())
 		throw "cannot open file";
-	write_ascii_tree(ofs);
+	writeAsciiTree(ofs);
 }
