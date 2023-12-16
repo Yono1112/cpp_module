@@ -14,4 +14,5 @@ PresidentialPardonForm::~PresidentialPardonForm()
 void	PresidentialPardonForm::execute(Bureaucrat const& executor) const
 {
 	std::cout << "PresidentialPardonForm Hello " << executor.getName() << "!" << std::endl;
+	std::cout << "Good news! " << executor.getName() << " has received a pardon form Zaphod Beeblebrox(a fictional character in 'The Hichhiker's Guide to the Galaxy')." << std::endl;
 }
