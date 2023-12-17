@@ -169,7 +169,10 @@ void	test_valid_intern()
 		Intern  	someRandomIntern;
 		AForm*   	rrf;
 
-		rrf = someRandomIntern.makeForm("shrubbery creation", "Bender");
+		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+		president.signForm(*rrf);
+		president.executeForm(*rrf);
+		rrf = someRandomIntern.makeForm("president pardon", "Bender");
 		president.signForm(*rrf);
 		president.executeForm(*rrf);
 	}

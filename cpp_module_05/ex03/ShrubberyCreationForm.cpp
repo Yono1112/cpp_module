@@ -36,5 +36,6 @@ void	ShrubberyCreationForm::execute(Bureaucrat const& executor) const
 	if (ofs.fail())
 		throw "cannot open file";
 	writeAsciiTree(ofs);
+	ofs.close();
 	std::cout << "write successfully!" << std::endl;
 }

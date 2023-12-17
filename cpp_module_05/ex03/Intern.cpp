@@ -35,5 +35,6 @@ AForm*	Intern::makeForm(const std::string& name, const std::string& target)
 		default:
 			throw "the form name passed as parameter doesn’t exist";
 	}
+	std::cout << "Intern create " << form_list[i] << "." << std::endl;
 	return (obj);
 }
