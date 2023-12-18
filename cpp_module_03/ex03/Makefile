@@ -5,17 +5,26 @@ CXXFLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98
 # Enables warnings for variable shadowing. This occurs when a variable declared in a local scope
 # has the same name as a variable in an outer scope, potentially leading to unexpected behavior.
 RM = rm -rf
-SRCS = $(wildcard ./*.cpp)	
-OBJS = $(SRCS:%.c=%.o)
+SRCS = $(wildcard *.cpp)	
+OBJ_DIR = obj
+OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
+
+$(OBJ_DIR)/%.o: %.cpp
+	mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
-fclean:
+clean:
+	$(RM) $(OBJS)
+	$(RM) $(OBJ_DIR)
+
+fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
 
-.PHONY: all fclean re
+.PHONY: all fclean clean re
