@@ -34,9 +34,12 @@ void	test_valid_ShrubberyCreationForm()
 	{
 		Bureaucrat				president("president", 3);
 		ShrubberyCreationForm	form1("form1");
+		ShrubberyCreationForm	form2("form2");
 
 		president.signForm(form1);
 		president.executeForm(form1);
+		form2 = form1;
+		president.executeForm(form2);
 	}
 	catch(const char* e)
 	{
