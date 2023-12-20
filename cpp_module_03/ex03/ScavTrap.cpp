@@ -10,9 +10,6 @@ ScavTrap::ScavTrap(void)
 
 ScavTrap::ScavTrap(std::string name)
 	: ClapTrap(name, 100, 50, 20)
-	// , _scav_hit_points(100)
-	// , _scav_energy_points(50)
-	// , _scav_attack_damage(20)
 {
 	std::cout << "ScavTrap Constructor Called" << std::endl;
 	std::cout << "name is " << getName() << std::endl;
