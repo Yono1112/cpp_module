@@ -1,5 +1,4 @@
 #include "ScalarConverter.hpp"
-// static bool	checkCharLiteral(const std::string& str);
 
 void	ScalarConverter::convert(const std::string& str) {
 	std::cout << "str: " << str << std::endl;
@@ -51,25 +50,43 @@ bool	ScalarConverter::checkIntLiteral(const std::string& str) {
 }
 
 bool	ScalarConverter::checkPreudoLiteral(const std::string& str) {
-	if (str == "-inff" || str == "+inff" || str == "nanf" || str == "-inf" || str == "+inf" || str == "nan") {
-		return (true);
-	}
-	else {
+	return (str == "-inff" || str == "+inff" || str == "nanf" || str == "-inf" || str == "+inf" || str == "nan");
+}
+
+bool	ScalarConverter::checkDoubleLiteral(const std::string& str) {
+	if (str.find(".") == std::string::npos) {
 		return (false);
 	}
+	double num;
+	std::istringstream iss(str);
+	iss >> num;
+
+	return (!iss.fail() && iss.eof());
+}
+
+bool	ScalarConverter::checkFloatLiteral(std::string str) {
+	size_t pos = str.find("f");
+	if (pos == std::string::npos) {
+		return (false);
+	}
+	str.erase(pos, 1);
+	float num;
+	std::istringstream iss(str);
+	iss >> num;
+	return (!iss.fail() && iss.eof());
 }
 
 int	ScalarConverter::detectLiteral(const std::string& str) {
 	if (ScalarConverter::checkCharLiteral(str))
 		return (CHAR_LITERAL);
+	else if (checkFloatLiteral(str))
+		return (FLOAT_LITERAL);
+	else if (checkDoubleLiteral(str))
+		return (DOUBLE_LITERAL);
 	else if (checkIntLiteral(str))
 		return (INT_LITERAL);
 	else if (checkPreudoLiteral(str))
 		return (PSEUDO_LITERAL);
-	// else if (checkDoubleLiteral(str))
-	// 	return (DOUBLE_LITERAL);
-	// else if (checkFloatLiteral(str))
-	// 	return (DOUBLE_LITERAL);
 	else
 		return (-1);
 }
