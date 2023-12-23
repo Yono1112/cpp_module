@@ -50,16 +50,25 @@ bool	ScalarConverter::checkIntLiteral(const std::string& str) {
 	return (true);
 }
 
+bool	ScalarConverter::checkPreudoLiteral(const std::string& str) {
+	if (str == "-inff" || str == "+inff" || str == "nanf" || str == "-inf" || str == "+inf" || str == "nan") {
+		return (true);
+	}
+	else {
+		return (false);
+	}
+}
+
 int	ScalarConverter::detectLiteral(const std::string& str) {
 	if (ScalarConverter::checkCharLiteral(str))
 		return (CHAR_LITERAL);
 	else if (checkIntLiteral(str))
 		return (INT_LITERAL);
+	else if (checkPreudoLiteral(str))
+		return (PSEUDO_LITERAL);
 	// else if (checkDoubleLiteral(str))
 	// 	return (DOUBLE_LITERAL);
 	// else if (checkFloatLiteral(str))
-	// 	return (DOUBLE_LITERAL);
-	// else if (checkPreudoLiteral(str))
 	// 	return (DOUBLE_LITERAL);
 	else
 		return (-1);

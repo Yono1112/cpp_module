@@ -29,9 +29,9 @@ class ScalarConverter {
 		static int	detectLiteral(const std::string& str);
 		static bool	checkCharLiteral(const std::string& str);
 		static bool	checkIntLiteral(const std::string& str);
+		static bool	checkPreudoLiteral(const std::string& str);
 		// static bool	checkDoubleLiteral(const std::string& str);
 		// static bool	checkFloatLiteral(const std::string& str);
-		// static bool	checkPreudoLiteral(const std::string& str);
 };
 
 #endif
