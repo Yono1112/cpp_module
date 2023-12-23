@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <sstream>
 #include <cstring>
 
 #define CHAR_LITERAL 0
@@ -14,15 +15,23 @@
 class ScalarConverter {
 	public:
 		static void	convert(const std::string& str);
+		class LiteralException: public std::exception {
+			public:
+				LiteralException(const std::string& e): _error_message(e) {};
+				virtual const char* what(void) const throw();
+				~LiteralException() throw() {};
+			private:
+				std::string	_error_message;
+		};
 	private:
 		ScalarConverter();
 		~ScalarConverter();
 		static int	detectLiteral(const std::string& str);
 		static bool	checkCharLiteral(const std::string& str);
-		// bool	checkDoubleLiteral(const std::string& str);
-		// bool	checkFloatLiteral(const std::string& str);
-		// bool	checkIntLiteral(const std::string& str);
-		// bool	checkPreudoLiteral(const std::string& str);
+		static bool	checkIntLiteral(const std::string& str);
+		// static bool	checkDoubleLiteral(const std::string& str);
+		// static bool	checkFloatLiteral(const std::string& str);
+		// static bool	checkPreudoLiteral(const std::string& str);
 };
 
 #endif
