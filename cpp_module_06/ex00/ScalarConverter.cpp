@@ -1,10 +1,14 @@
 #include "ScalarConverter.hpp"
 
 void	ScalarConverter::printCharLiteral(const std::string& str) {
-	std::cout << "char: '" << static_cast<char>(str[0]) << "'" << std::endl;
+	if (!std::isprint(str[0])) {
+		std::cout << "char: Non displayable" << std::endl;
+	} else {
+		std::cout << "char: '" << static_cast<char>(str[0]) << "'" << std::endl;
+	}
 	std::cout << "int: " << static_cast<int>(str[0]) << std::endl;
-	std::cout << "float: " << static_cast<float>(str[0]) << std::endl;
-	std::cout << "double: " << static_cast<double>(str[0]) << std::endl;
+	std::cout << "float: " << static_cast<float>(str[0]) << ".0f" << std::endl;
+	std::cout << "double: " << static_cast<double>(str[0]) << ".0" << std::endl;
 }
 
 void	ScalarConverter::printPreudoLiteral(const std::string& str) {
@@ -20,6 +24,21 @@ void	ScalarConverter::printPreudoLiteral(const std::string& str) {
 	}
 }
 
+void	ScalarConverter::printIntLiteral(const std::string& str) {
+	std::istringstream	iss(str);
+	int num;
+
+	iss >> num;
+	if (num < 32 || 126 < num) {
+		std::cout << "char: Non displayable" << std::endl;
+	} else {
+		std::cout << "char: '" << static_cast<char>(num) << "'" << std::endl;
+	}
+	std::cout << "int: " << num << std::endl;
+	std::cout << "float: " << static_cast<float>(num) << ".0f" << std::endl;
+	std::cout << "float: " << static_cast<double>(num) << ".0" << std::endl;
+}
+
 void	ScalarConverter::convert(const std::string& str) {
 	std::cout << "str: " << str << std::endl;
 	int literal_type = detectLiteral(str);
@@ -30,6 +49,7 @@ void	ScalarConverter::convert(const std::string& str) {
 			break;
 		case INT_LITERAL:
 			std::cout << "int literal" << std::endl;
+			printIntLiteral(str);
 			break;
 		case FLOAT_LITERAL:
 			std::cout << "float literal" << std::endl;
@@ -47,13 +67,7 @@ void	ScalarConverter::convert(const std::string& str) {
 }
 
 bool	ScalarConverter::checkCharLiteral(const std::string& str) {
-	if (str.length() != 1) {
-		return (false);
-	}
-	if (!std::isprint(str[0])) {
-		throw LiteralException("not displayable");
-	}
-	return (true);
+	return (str.length() == 1);
 }
 
 bool	ScalarConverter::checkIntLiteral(const std::string& str) {
