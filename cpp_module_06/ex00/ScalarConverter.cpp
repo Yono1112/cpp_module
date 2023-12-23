@@ -25,12 +25,17 @@ void	ScalarConverter::convert(const std::string& str) {
 }
 
 bool	ScalarConverter::checkCharLiteral(const std::string& str) {
-	return (str.length() == 1 && std::isprint(str[0]) && !std::isdigit(str[0]));
+	if (str.length() != 1) {
+		return (false);
+	}
+	if (!std::isprint(str[0])) {
+		throw LiteralException("not displayable");
+	}
+	return (true);
 }
 
 bool	ScalarConverter::checkIntLiteral(const std::string& str) {
 	if (str.find(".") != std::string::npos || str.find("f") != std::string::npos) {
-		std::cout << "false" << std::endl;
 		return (false);
 	}
 	for (size_t i = 0; i < str.length(); i++) {
@@ -42,7 +47,6 @@ bool	ScalarConverter::checkIntLiteral(const std::string& str) {
 	int num;
 
 	iss >> num;
-	std::cout << "str: " << str << ", num: " << num << std::endl;
 	oss << num;
 	if (oss.str() != str)
 		throw LiteralException("int overflow");
@@ -77,14 +81,14 @@ bool	ScalarConverter::checkFloatLiteral(std::string str) {
 }
 
 int	ScalarConverter::detectLiteral(const std::string& str) {
-	if (ScalarConverter::checkCharLiteral(str))
-		return (CHAR_LITERAL);
-	else if (checkFloatLiteral(str))
+	if (checkFloatLiteral(str))
 		return (FLOAT_LITERAL);
 	else if (checkDoubleLiteral(str))
 		return (DOUBLE_LITERAL);
 	else if (checkIntLiteral(str))
 		return (INT_LITERAL);
+	else if (checkCharLiteral(str))
+		return (CHAR_LITERAL);
 	else if (checkPreudoLiteral(str))
 		return (PSEUDO_LITERAL);
 	else
