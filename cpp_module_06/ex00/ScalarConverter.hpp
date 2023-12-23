@@ -26,6 +26,8 @@ class ScalarConverter {
 	private:
 		ScalarConverter();
 		~ScalarConverter();
+		static void	printCharLiteral(const std::string& str);
+		static void	printPreudoLiteral(const std::string& str);
 		static int	detectLiteral(const std::string& str);
 		static bool	checkCharLiteral(const std::string& str);
 		static bool	checkIntLiteral(const std::string& str);
