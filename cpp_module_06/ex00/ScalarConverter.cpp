@@ -36,7 +36,73 @@ void	ScalarConverter::printIntLiteral(const std::string& str) {
 	}
 	std::cout << "int: " << num << std::endl;
 	std::cout << "float: " << static_cast<float>(num) << ".0f" << std::endl;
-	std::cout << "float: " << static_cast<double>(num) << ".0" << std::endl;
+	std::cout << "double: " << static_cast<double>(num) << ".0" << std::endl;
+}
+
+void	ScalarConverter::printFloatLiteral(std::string str) {
+	size_t pos = str.find("f");
+	str.erase(pos, 1);
+	double num;
+	std::istringstream iss(str);
+	iss >> num;
+	float float_num = static_cast<float>(num);
+
+	if (std::isinf(num) || std::isnan(num)) {
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: " << num << "f" << std::endl;
+		std::cout << "double: " << num << std::endl;
+	} else {
+		if (static_cast<int>(num) < 32 || 126 < static_cast<int>(num)) {
+			std::cout << "char: Non displayable" << std::endl;
+		} else {
+			std::cout << "char: '" << static_cast<char>(num) << "'" << std::endl;
+		}
+		if (static_cast<long>(num) < std::numeric_limits<int>::min() || std::numeric_limits<int>::max() < static_cast<long>(num)) {
+			std::cout << "int: impossible ( overflow )" << std::endl;
+		} else {
+			std::cout << "int: " << static_cast<int>(num) << std::endl;
+		}
+		if (str.find(".") == std::string::npos || num == static_cast<int>(num)) {
+			std::cout << "float: " << float_num << ".0f" << std::endl;
+			std::cout << "double: " << num << ".0" << std::endl;
+		} else {
+			std::cout << "float: " << float_num << "f" << std::endl;
+			std::cout << "double: " << num << std::endl;
+		}
+	}
+}
+
+void	ScalarConverter::printDoubleLiteral(std::string str) {
+	double num;
+	std::istringstream iss(str);
+	iss >> num;
+
+	if (std::isinf(num) || std::isnan(num)) {
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: " << num << "f" << std::endl;
+		std::cout << "double: " << num << std::endl;
+	} else {
+		if (static_cast<int>(num) < 32 || 126 < static_cast<int>(num)) {
+			std::cout << "char: Non displayable" << std::endl;
+		} else {
+			std::cout << "char: '" << static_cast<char>(num) << "'" << std::endl;
+		}
+		if (static_cast<long>(num) < std::numeric_limits<int>::min() || std::numeric_limits<int>::max() < static_cast<long>(num)) {
+			std::cout << "int: impossible ( overflow )" << std::endl;
+		} else {
+			// std::cout << "int: " << std::numeric_limits<double>::quiet_NaN() << std::endl;
+			std::cout << "int: " << static_cast<int>(num) << std::endl;
+		}
+		if (str.find(".") == std::string::npos || num == static_cast<int>(num)) {
+			std::cout << "float: " << num << ".0f" << std::endl;
+			std::cout << "double: " << static_cast<double>(num) << ".0" << std::endl;
+		} else {
+			std::cout << "float: " << num << "f" << std::endl;
+			std::cout << "double: " << static_cast<double>(num) << std::endl;
+		}
+	}
 }
 
 void	ScalarConverter::convert(const std::string& str) {
@@ -53,9 +119,11 @@ void	ScalarConverter::convert(const std::string& str) {
 			break;
 		case FLOAT_LITERAL:
 			std::cout << "float literal" << std::endl;
+			printFloatLiteral(str);
 			break;
 		case DOUBLE_LITERAL:
 			std::cout << "double literal" << std::endl;
+			printDoubleLiteral(str);
 			break;
 		case PSEUDO_LITERAL:
 			std::cout << "pseudo literal" << std::endl;
@@ -91,9 +159,6 @@ bool	ScalarConverter::checkPreudoLiteral(const std::string& str) {
 }
 
 bool	ScalarConverter::checkDoubleLiteral(const std::string& str) {
-	if (str.find(".") == std::string::npos) {
-		return (false);
-	}
 	double num;
 	std::istringstream iss(str);
 	iss >> num;
@@ -114,14 +179,14 @@ bool	ScalarConverter::checkFloatLiteral(std::string str) {
 }
 
 int	ScalarConverter::detectLiteral(const std::string& str) {
-	if (checkPreudoLiteral(str))
-		return (PSEUDO_LITERAL);
-	else if (checkFloatLiteral(str))
+	// if (checkPreudoLiteral(str))
+	// 	return (PSEUDO_LITERAL);
+	if (checkFloatLiteral(str))
 		return (FLOAT_LITERAL);
-	else if (checkDoubleLiteral(str))
-		return (DOUBLE_LITERAL);
 	else if (checkIntLiteral(str))
 		return (INT_LITERAL);
+	else if (checkDoubleLiteral(str))
+		return (DOUBLE_LITERAL);
 	else if (checkCharLiteral(str))
 		return (CHAR_LITERAL);
 	else
