@@ -20,17 +20,47 @@ Base*	generate(void) {
 	}
 }
 
-// void	identify(Base* p) {
-// 
-// }
-// 
-// void	identify(Base& p) {
-// 
-// }
+void	identify(Base* p) {
+	std::cout << "actual type: ";
+	if (dynamic_cast<A *>(p) != NULL) {
+		std::cout << "A";
+	} else if (dynamic_cast<B *>(p) != NULL) {
+		std::cout << "B";
+	} else if (dynamic_cast<C *>(p) != NULL) {
+		std::cout << "C";
+	}
+	std::cout << std::endl;
+}
+
+void	identify(Base& p) {
+	std::cout << "actual type: ";
+	try {
+		A& ref = dynamic_cast<A &>(p);
+		std::cout << "A";
+		(void)ref;
+	} catch (const std::bad_cast&) {
+	}
+	try {
+		B& ref = dynamic_cast<B &>(p);
+		std::cout << "B";
+		(void)ref;
+	} catch (const std::bad_cast&) {
+	}
+	try {
+		C& ref = dynamic_cast<C &>(p);
+		std::cout << "C";
+		(void)ref;
+	} catch (const std::bad_cast&) {
+	}
+	std::cout << std::endl;
+}
 
 int main() {
 	Base* ptr = generate();
-	std::cout << ptr << std::endl;
+	identify(ptr);
+	Base& ref = *ptr;
+	identify(ref);
+	(void)ref;
 	delete ptr;
 	return (0);
 }
