@@ -138,7 +138,7 @@ void	test_valid_PresidentialPardonForm()
 
 void	test_invalid_intern()
 {	std::cout << "==========================================" << std::endl;
-	std::cout << "run test_valid_intern" << std::endl;
+	std::cout << "run test_invalid_intern" << std::endl;
 	try
 	{
 		Bureaucrat	president("president", 3);
