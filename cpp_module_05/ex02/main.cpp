@@ -4,10 +4,10 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
-void	test_invalid_ShrubberyCreationForm()
+void	testInvalidShrubberyCreationForm()
 {
 	std::cout << "==========================================" << std::endl;
-	std::cout << "run test_invalid_ShrubberyCreationForm" << std::endl;
+	std::cout << "run testInvalidShrubberyCreationForm" << std::endl;
 	try
 	{
 		Bureaucrat				president("president", 3);
@@ -26,10 +26,10 @@ void	test_invalid_ShrubberyCreationForm()
 	
 }
 
-void	test_valid_ShrubberyCreationForm()
+void	testValidShrubberyCreationForm()
 {
 	std::cout << "==========================================" << std::endl;
-	std::cout << "run test_valid_ShrubberyCreationForm" << std::endl;
+	std::cout << "run testValidShrubberyCreationForm" << std::endl;
 	try
 	{
 		Bureaucrat				president("president", 3);
@@ -52,10 +52,10 @@ void	test_valid_ShrubberyCreationForm()
 	
 }
 
-void	test_invalid_RobotomyRequestForm()
+void	testInvalidRobotomyRequestForm()
 {
 	std::cout << "==========================================" << std::endl;
-	std::cout << "run test_invalid_RobotomyRequestForm" << std::endl;
+	std::cout << "run testInvalidRobotomyRequestForm" << std::endl;
 	try
 	{
 		Bureaucrat				president("president", 3);
@@ -73,10 +73,10 @@ void	test_invalid_RobotomyRequestForm()
 	}
 }
 
-void	test_valid_RobotomyRequestForm()
+void	testValidRobotomyRequestForm()
 {
 	std::cout << "==========================================" << std::endl;
-	std::cout << "run test_valid_RobotomyRequestForm" << std::endl;
+	std::cout << "run testValidRobotomyRequestForm" << std::endl;
 	try
 	{
 		Bureaucrat				president("president", 3);
@@ -95,10 +95,10 @@ void	test_valid_RobotomyRequestForm()
 	}
 }
 
-void	test_invalid_PresidentialPardonForm()
+void	testInvalidPresidentialPardonForm()
 {
 	std::cout << "==========================================" << std::endl;
-	std::cout << "run test_invalid_PresidentialPardonForm" << std::endl;
+	std::cout << "run testInvalidPresidentialPardonForm" << std::endl;
 	try
 	{
 		Bureaucrat				president("president", 3);
@@ -116,10 +116,10 @@ void	test_invalid_PresidentialPardonForm()
 	}
 }
 
-void	test_valid_PresidentialPardonForm()
+void	testValidPresidentialPardonForm()
 {
 	std::cout << "==========================================" << std::endl;
-	std::cout << "run test_valid_PresidentialPardonForm" << std::endl;
+	std::cout << "run testValidPresidentialPardonForm" << std::endl;
 	try
 	{
 		Bureaucrat				president("president", 3);
@@ -140,11 +140,11 @@ void	test_valid_PresidentialPardonForm()
 
 int main()
 {
-	test_invalid_ShrubberyCreationForm();
-	test_valid_ShrubberyCreationForm();
-	test_invalid_RobotomyRequestForm();
-	test_valid_RobotomyRequestForm();
-	test_invalid_PresidentialPardonForm();
-	test_valid_PresidentialPardonForm();
+	testInvalidShrubberyCreationForm();
+	testValidShrubberyCreationForm();
+	testInvalidRobotomyRequestForm();
+	testValidRobotomyRequestForm();
+	testInvalidPresidentialPardonForm();
+	testValidPresidentialPardonForm();
 	return (0);
 }
