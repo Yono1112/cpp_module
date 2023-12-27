@@ -36,11 +36,11 @@ ShrubberyCreationForm&	ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 void	writeAsciiTree(std::ofstream& ofs)
 {
-   	int padding = 9;
+	int padding = 9;
 	for (int i = 1; i <= 15; i += 2) {
 		ofs << std::setw(padding--);
 		for (int j = 0; j < i; j++) {
-		    ofs << "X";
+			ofs << "X";
 		}
 		ofs << std::endl;
 	}
