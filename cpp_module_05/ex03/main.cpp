@@ -167,14 +167,15 @@ void	testValidIntern()
 	{
 		Bureaucrat	president("president", 3);
 		Intern  	someRandomIntern;
-		AForm*   	rrf;
+		AForm*   	rrf1;
+		AForm*   	rrf2;
 
-		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-		president.signForm(*rrf);
-		president.executeForm(*rrf);
-		rrf = someRandomIntern.makeForm("president pardon", "Bender");
-		president.signForm(*rrf);
-		president.executeForm(*rrf);
+		rrf1 = someRandomIntern.makeForm("robotomy request", "Bender");
+		president.signForm(*rrf1);
+		president.executeForm(*rrf1);
+		rrf2 = someRandomIntern.makeForm("president pardon", "Bender");
+		president.signForm(*rrf2);
+		president.executeForm(*rrf2);
 	}
 	catch(const char* e)
 	{
