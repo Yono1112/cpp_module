@@ -1,6 +1,12 @@
 #include "RobotomyRequestForm.hpp"
 #include <cstdlib>
 
+RobotomyRequestForm::RobotomyRequestForm()
+	: AForm("default", false, 72, 45)
+{
+	std::cout << "RobotomyRequestForm Default Constructor Called" << std::endl;
+}
+
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
 	: AForm(target, false, 72, 45)
 {

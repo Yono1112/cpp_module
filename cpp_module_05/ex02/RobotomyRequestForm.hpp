@@ -7,6 +7,7 @@
 class RobotomyRequestForm: public AForm
 {
 	public:
+		RobotomyRequestForm();
 		RobotomyRequestForm(const std::string& target);
 		~RobotomyRequestForm();
 		RobotomyRequestForm(const RobotomyRequestForm& other);

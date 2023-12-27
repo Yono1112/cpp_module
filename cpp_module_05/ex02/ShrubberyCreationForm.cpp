@@ -2,6 +2,12 @@
 #include <iomanip>
 #include <fstream>
 
+ShrubberyCreationForm::ShrubberyCreationForm()
+	: AForm("default", false, 145, 137)
+{
+	std::cout << "ShrubberyCreationForm Default Constructor Called" << std::endl;
+}
+
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
 	: AForm(target, false, 145, 137)
 {
