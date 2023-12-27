@@ -58,7 +58,7 @@ void	testGradeTooHighException(void)
 	std::cout << "run testGradeTooHighException" << std::endl;
 	try
 	{
-		Bureaucrat	a("jim", 1000);
+		Bureaucrat	a("jim", -1);
 		std::cout << a << ", bureaucrat grade " << a.getGrade() << "." << std::endl;
 	}
 	catch(const std::exception& e)
@@ -74,7 +74,7 @@ void	testGradeTooLowException(void)
 	std::cout << "run testGradeTooLowException" << std::endl;
 	try
 	{
-		Bureaucrat	a("jim", -1);
+		Bureaucrat	a("jim", 1000);
 		std::cout << a << ", bureaucrat grade " << a.getGrade() << "." << std::endl;
 	}
 	catch(const std::exception& e)
