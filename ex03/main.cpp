@@ -1,7 +1,7 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
-#include "RobotRequestForm.hpp"
+#include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
 
@@ -50,14 +50,14 @@ void	test_valid_ShrubberyCreationForm()
 	
 }
 
-void	test_invalid_RobotRequestForm()
+void	test_invalid_RobotomyRequestForm()
 {
 	std::cout << "==========================================" << std::endl;
-	std::cout << "run test_invalid_RobotRequestForm" << std::endl;
+	std::cout << "run test_invalid_RobotomyRequestForm" << std::endl;
 	try
 	{
 		Bureaucrat				president("president", 3);
-		RobotRequestForm	form1("form1");
+		RobotomyRequestForm	form1("form1");
 
 		president.executeForm(form1);
 	}
@@ -71,14 +71,14 @@ void	test_invalid_RobotRequestForm()
 	}
 }
 
-void	test_valid_RobotRequestForm()
+void	test_valid_RobotomyRequestForm()
 {
 	std::cout << "==========================================" << std::endl;
-	std::cout << "run test_valid_RobotRequestForm" << std::endl;
+	std::cout << "run test_valid_RobotomyRequestForm" << std::endl;
 	try
 	{
 		Bureaucrat				president("president", 3);
-		RobotRequestForm	form1("form1");
+		RobotomyRequestForm	form1("form1");
 
 		president.signForm(form1);
 		president.executeForm(form1);
@@ -190,8 +190,8 @@ int main()
 {
 	// test_invalid_ShrubberyCreationForm();
 	// test_valid_ShrubberyCreationForm();
-	// test_invalid_RobotRequestForm();
-	// test_valid_RobotRequestForm();
+	// test_invalid_RobotomyRequestForm();
+	// test_valid_RobotomyRequestForm();
 	// test_invalid_PresidentialPardonForm();
 	// test_valid_PresidentialPardonForm();
 	test_invalid_intern();

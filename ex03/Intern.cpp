@@ -27,7 +27,7 @@ AForm*	Intern::makeForm(const std::string& name, const std::string& target)
 			obj = new ShrubberyCreationForm(target);
 			break ;
 		case 1:
-			obj = new RobotRequestForm(target);
+			obj = new RobotomyRequestForm(target);
 			break ;
 		case 2:
 			obj = new PresidentialPardonForm(target);

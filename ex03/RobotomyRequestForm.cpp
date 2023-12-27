@@ -1,26 +1,26 @@
-#include "RobotRequestForm.hpp"
+#include "RobotomyRequestForm.hpp"
 #include <cstdlib>
 
-RobotRequestForm::RobotRequestForm(const std::string& target)
+RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
 	: AForm(target, false, 72, 45)
 {
-	std::cout << "RobotRequestForm Argument Constructor Called" << std::endl;
+	std::cout << "RobotomyRequestForm Argument Constructor Called" << std::endl;
 }
 
-RobotRequestForm::~RobotRequestForm()
+RobotomyRequestForm::~RobotomyRequestForm()
 {
-	std::cout << "RobotRequestForm Destructor Called" << std::endl;
+	std::cout << "RobotomyRequestForm Destructor Called" << std::endl;
 }
 
-RobotRequestForm::RobotRequestForm(const RobotRequestForm& other)
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other)
 	: AForm(other._name, other._is_signed, other._required_sign_grade, other._required_execute_grade)
 {
-	std::cout << "RobotRequestForm Copy Constructor Called" << std::endl;
+	std::cout << "RobotomyRequestForm Copy Constructor Called" << std::endl;
 }
 
-RobotRequestForm&	RobotRequestForm::operator=(const RobotRequestForm& other)
+RobotomyRequestForm&	RobotomyRequestForm::operator=(const RobotomyRequestForm& other)
 {
-	std::cout << "RobotRequestForm Copy assignment operator called" << std::endl;
+	std::cout << "RobotomyRequestForm Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
 		if (other._required_sign_grade < 1 || other._required_execute_grade < 1) {
@@ -33,9 +33,9 @@ RobotRequestForm&	RobotRequestForm::operator=(const RobotRequestForm& other)
 	return (*this);
 }
 
-void	RobotRequestForm::execute(Bureaucrat const& executor) const
+void	RobotomyRequestForm::execute(Bureaucrat const& executor) const
 {
-	std::cout << "RobotRequestForm Hello " << executor.getName() << "!" << std::endl;
+	std::cout << "RobotomyRequestForm Hello " << executor.getName() << "!" << std::endl;
 	std::cout << "Drilling noise: Brrrrrr..." << std::endl;
 	std::srand(time(NULL));
 	if (rand() % 2 == 0)
