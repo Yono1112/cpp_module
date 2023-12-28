@@ -2,14 +2,14 @@
 #define EASYFIND_HPP
 
 #include <vector>
+#include <iostream>
 
 template<typename T>
-T::iterator	easyfind(T container, int num) {
-	T::iterator it = std::find(container.begin(), container.end(), num);
-	if (it == container.end())
+bool	easyfind(T container, int num) {
+	if (std::find(container.begin(), container.end(), num) == container.end())
 		throw std::out_of_range("cannot find the given argument");
 	else
-		return (it);
+		return (true);
 }
 
 #endif
