@@ -12,7 +12,6 @@
 #define INT_LITERAL 1
 #define FLOAT_LITERAL 2
 #define DOUBLE_LITERAL 3
-#define PSEUDO_LITERAL 4
 
 class ScalarConverter {
 	public:
@@ -36,7 +35,6 @@ class ScalarConverter {
 		static int	detectLiteral(const std::string& str);
 		static bool	checkCharLiteral(const std::string& str);
 		static bool	checkIntLiteral(const std::string& str);
-		static bool	checkPreudoLiteral(const std::string& str);
 		static bool	checkDoubleLiteral(const std::string& str);
 		static bool	checkFloatLiteral(std::string str);
 };

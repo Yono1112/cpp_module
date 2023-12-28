@@ -11,19 +11,6 @@ void	ScalarConverter::printCharLiteral(const std::string& str) {
 	std::cout << "double: " << static_cast<double>(str[0]) << ".0" << std::endl;
 }
 
-void	ScalarConverter::printPreudoLiteral(const std::string& str) {
-	std::cout << "char: impossible" << std::endl;
-	std::cout << "int: impossible" << std::endl;
-	if (str == "-inff" || str == "+inff" || str == "nanf") {
-		std::string tmp_str = str;
-		std::cout << "float: " << str << std::endl;
-		std::cout << "double: " << tmp_str.erase(tmp_str.length() - 1, 1) << std::endl;
-	} else {
-		std::cout << "float: " << str << "f" << std::endl;
-		std::cout << "double: " << str << std::endl;
-	}
-}
-
 void	ScalarConverter::printIntLiteral(const std::string& str) {
 	std::istringstream	iss(str);
 	int num;
@@ -92,7 +79,6 @@ void	ScalarConverter::printDoubleLiteral(std::string str) {
 		if (static_cast<long>(num) < std::numeric_limits<int>::min() || std::numeric_limits<int>::max() < static_cast<long>(num)) {
 			std::cout << "int: impossible ( overflow )" << std::endl;
 		} else {
-			// std::cout << "int: " << std::numeric_limits<double>::quiet_NaN() << std::endl;
 			std::cout << "int: " << static_cast<int>(num) << std::endl;
 		}
 		if (str.find(".") == std::string::npos || num == static_cast<int>(num)) {
@@ -125,10 +111,6 @@ void	ScalarConverter::convert(const std::string& str) {
 			std::cout << "double literal" << std::endl;
 			printDoubleLiteral(str);
 			break;
-		case PSEUDO_LITERAL:
-			std::cout << "pseudo literal" << std::endl;
-			printPreudoLiteral(str);
-			break;
 		default:
 			std::cout << "undefined literal" << std::endl;
 	}
@@ -154,10 +136,6 @@ bool	ScalarConverter::checkIntLiteral(const std::string& str) {
 	return (true);
 }
 
-bool	ScalarConverter::checkPreudoLiteral(const std::string& str) {
-	return (str == "-inff" || str == "+inff" || str == "nanf" || str == "-inf" || str == "+inf" || str == "nan");
-}
-
 bool	ScalarConverter::checkDoubleLiteral(const std::string& str) {
 	double num;
 	std::istringstream iss(str);
@@ -179,8 +157,6 @@ bool	ScalarConverter::checkFloatLiteral(std::string str) {
 }
 
 int	ScalarConverter::detectLiteral(const std::string& str) {
-	// if (checkPreudoLiteral(str))
-	// 	return (PSEUDO_LITERAL);
 	if (checkFloatLiteral(str))
 		return (FLOAT_LITERAL);
 	else if (checkIntLiteral(str))
