@@ -40,3 +40,17 @@ void	Span::addNumber(int num) {
 		std::cout << _vec.size() << ": " << _vec.at(num) << std::endl;
 	}
 }
+
+std::vector<int>::iterator	Span::shortestSpan() {
+	if (_vec.empty() ||_vec.size() < 2) {
+		throw std::range_error("the number of elements is too small");
+	}
+	return (std::min_element(_vec.begin(), _vec.end()));
+}
+
+std::vector<int>::iterator	Span::longestSpan() {
+	if (_vec.empty() ||_vec.size() < 2) {
+		throw std::range_error("the number of elements is too small");
+	}
+	return (std::max_element(_vec.begin(), _vec.end()));
+}
