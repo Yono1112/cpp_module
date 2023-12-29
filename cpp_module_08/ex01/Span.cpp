@@ -1,4 +1,5 @@
 #include "Span.hpp"
+#include <cstddef>
 
 Span::Span() 
 	: _max_elements(0)
@@ -37,20 +38,31 @@ void	Span::addNumber(int num) {
 		throw std::length_error("there are already max elements stored");
 	} else {
 		_vec.push_back(num);
-		std::cout << _vec.size() << ": " << _vec.at(num) << std::endl;
 	}
 }
 
-std::vector<int>::iterator	Span::shortestSpan() {
+int	Span::shortestSpan() {
 	if (_vec.empty() ||_vec.size() < 2) {
 		throw std::range_error("the number of elements is too small");
 	}
-	return (std::min_element(_vec.begin(), _vec.end()));
+	std::vector<int> sort_vec = _vec;
+	int shortest_span = INT_MAX;
+	std::sort(sort_vec.begin(), sort_vec.end());
+	// for (size_t i = 0; i < sort_vec.size(); i++) {
+	// 	std::cout << i << ": " << sort_vec.at(i) << std::endl;
+	// }
+	for (size_t i = 0; i < sort_vec.size() - 1; i++) {
+		if (sort_vec.at(i + 1) - sort_vec.at(i) < shortest_span)
+			shortest_span = sort_vec.at(i + 1) - sort_vec.at(i);
+	}
+	return (shortest_span);
 }
 
-std::vector<int>::iterator	Span::longestSpan() {
+int	Span::longestSpan() {
 	if (_vec.empty() ||_vec.size() < 2) {
 		throw std::range_error("the number of elements is too small");
 	}
-	return (std::max_element(_vec.begin(), _vec.end()));
+	std::vector<int>::iterator min = std::min_element(_vec.begin(), _vec.end());
+	std::vector<int>::iterator max = std::max_element(_vec.begin(), _vec.end());
+	return (*(max) - *(min));
 }
