@@ -28,7 +28,6 @@ class ScalarConverter {
 		ScalarConverter();
 		~ScalarConverter();
 		static void	printCharLiteral(const std::string& str);
-		static void	printPreudoLiteral(const std::string& str);
 		static void	printIntLiteral(const std::string& str);
 		static void	printFloatLiteral(std::string str);
 		static void	printDoubleLiteral(std::string str);
