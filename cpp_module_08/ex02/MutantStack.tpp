@@ -43,3 +43,8 @@ T&	MutantStack<T, Container>::top() {
 	return (_container.back());
 }
 
+template<typename T, typename Container>
+bool	MutantStack<T, Container>::empty() {
+	return (_container.empty());
+}
+

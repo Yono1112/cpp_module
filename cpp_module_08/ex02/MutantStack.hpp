@@ -14,9 +14,7 @@ class MutantStack {
 		void	push(const T& value);
 		void	pop();
 		T&	top();
-		bool	empty() {
-			return (_container.empty());
-		};
+		bool	empty();
 		size_t	size() {
 			return (_container.size());
 		};
