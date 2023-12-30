@@ -16,6 +16,9 @@ int	main() {
 		}
 		std::cout << "mtack empty: " << std::boolalpha << mstack1.empty() << std::endl;
 		std::cout << "mstack size: " << mstack1.size() << std::endl;
+		for (MutantStack<int>::iterator it = mstack1.begin(); it != mstack1.end(); ++it) {
+			std::cout << *it << std::endl;
+		}
 	} catch (const std::exception& e) {
 		std::cout << "catch std::exception: " << e.what() << std::endl;
 	}

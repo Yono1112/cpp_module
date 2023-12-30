@@ -7,6 +7,7 @@
 template<typename T, typename Container = std::deque<T> >
 class MutantStack {
 	public:
+		typedef typename Container::iterator iterator;
 		MutantStack();
 		MutantStack(const MutantStack& other);
 		~MutantStack();
@@ -16,6 +17,14 @@ class MutantStack {
 		T&	top();
 		bool	empty();
 		size_t	size();
+		iterator	begin()
+		{
+			return (_container.begin());
+		};
+		iterator	end()
+		{
+			return (_container.end());
+		}
 	private:
 		Container _container;
 };
