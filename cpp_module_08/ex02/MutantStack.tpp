@@ -28,3 +28,10 @@ template<typename T, typename Container>
 void	MutantStack<T, Container>::push(const T& value) {
 	_container.push_back(value);
 }
+
+template<typename T, typename Container>
+void	MutantStack<T, Container>::pop() {
+	if (_container.empty())
+		return ;
+	_container.pop_back();
+}

@@ -12,11 +12,7 @@ class MutantStack {
 		~MutantStack();
 		MutantStack& operator=(const MutantStack& other);
 		void	push(const T& value);
-		void	pop() {
-			if (_container.empty())
-				return ;
-			_container.pop_back();
-		};
+		void	pop();
 		T&	top() {
 			if (_container.empty())
 				throw std::out_of_range("stack is empty");
