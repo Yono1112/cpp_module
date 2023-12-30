@@ -73,3 +73,7 @@ typename Container::reverse_iterator	MutantStack<T, Container>::rend() {
 	return (_container.rend());
 }
 
+template<typename T, typename Container>
+Container&	MutantStack<T, Container>::getContainer() {
+	return (_container);
+}
