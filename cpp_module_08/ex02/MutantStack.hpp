@@ -8,6 +8,7 @@ template<typename T, typename Container = std::deque<T> >
 class MutantStack {
 	public:
 		typedef typename Container::iterator iterator;
+		typedef typename Container::reverse_iterator reverse_iterator;
 		MutantStack();
 		MutantStack(const MutantStack& other);
 		~MutantStack();
@@ -19,6 +20,14 @@ class MutantStack {
 		size_t	size();
 		iterator	begin();
 		iterator	end();
+		reverse_iterator	rbegin()
+		{
+			return (_container.rbegin());
+		};
+		reverse_iterator	rend()
+		{
+			return (_container.rend());
+		};
 	private:
 		Container _container;
 };

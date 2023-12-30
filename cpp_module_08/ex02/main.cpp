@@ -19,6 +19,9 @@ int	main() {
 		for (MutantStack<int>::iterator it = mstack1.begin(); it != mstack1.end(); ++it) {
 			std::cout << *it << std::endl;
 		}
+		for (MutantStack<int>::reverse_iterator it = mstack1.rbegin(); it != mstack1.rend(); ++it) {
+			std::cout << *it << std::endl;
+		}
 	} catch (const std::exception& e) {
 		std::cout << "catch std::exception: " << e.what() << std::endl;
 	}
