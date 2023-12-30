@@ -15,9 +15,7 @@ class MutantStack {
 		void	pop();
 		T&	top();
 		bool	empty();
-		size_t	size() {
-			return (_container.size());
-		};
+		size_t	size();
 	private:
 		Container _container;
 };

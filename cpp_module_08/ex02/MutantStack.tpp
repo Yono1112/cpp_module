@@ -48,3 +48,7 @@ bool	MutantStack<T, Container>::empty() {
 	return (_container.empty());
 }
 
+template<typename T, typename Container>
+size_t	MutantStack<T, Container>::size() {
+	return (_container.size());
+}
