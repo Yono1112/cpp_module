@@ -11,9 +11,7 @@ class MutantStack {
 		MutantStack(const MutantStack& other);
 		~MutantStack();
 		MutantStack& operator=(const MutantStack& other);
-		void	push(const T& value) {
-			_container.push_back(value);
-		};
+		void	push(const T& value);
 		void	pop() {
 			if (_container.empty())
 				return ;

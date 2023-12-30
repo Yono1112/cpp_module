@@ -23,3 +23,8 @@ template<typename T, typename Container>
 MutantStack<T, Container>::~MutantStack() {
 	std::cout << "Destructor Called" << std::endl;
 }
+
+template<typename T, typename Container>
+void	MutantStack<T, Container>::push(const T& value) {
+	_container.push_back(value);
+}
