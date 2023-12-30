@@ -20,14 +20,8 @@ class MutantStack {
 		size_t	size();
 		iterator	begin();
 		iterator	end();
-		reverse_iterator	rbegin()
-		{
-			return (_container.rbegin());
-		};
-		reverse_iterator	rend()
-		{
-			return (_container.rend());
-		};
+		reverse_iterator	rbegin();
+		reverse_iterator	rend();
 	private:
 		Container _container;
 };
