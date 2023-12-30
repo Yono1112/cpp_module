@@ -69,7 +69,7 @@ void	testInvalidList() {
 		std::cerr << "catch std::exception: " << e.what() << std::endl;
 	}
 	try {
-		std::cout << "-1: "<< std::boolalpha << easyfind(lst, -1) << std::endl;
+		std::cout << "11: "<< std::boolalpha << easyfind(lst, 11) << std::endl;
 	} catch (const std::exception& e) {
 		std::cerr << "catch std::exception: " << e.what() << std::endl;
 	}
