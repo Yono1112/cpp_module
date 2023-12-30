@@ -52,3 +52,14 @@ template<typename T, typename Container>
 size_t	MutantStack<T, Container>::size() {
 	return (_container.size());
 }
+
+template<typename T, typename Container>
+typename Container::iterator	MutantStack<T, Container>::begin() {
+	return (_container.begin());
+}
+
+template<typename T, typename Container>
+typename Container::iterator	MutantStack<T, Container>::end() {
+	return (_container.end());
+}
+

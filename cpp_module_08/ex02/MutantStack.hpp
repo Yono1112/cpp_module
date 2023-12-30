@@ -17,14 +17,8 @@ class MutantStack {
 		T&	top();
 		bool	empty();
 		size_t	size();
-		iterator	begin()
-		{
-			return (_container.begin());
-		};
-		iterator	end()
-		{
-			return (_container.end());
-		}
+		iterator	begin();
+		iterator	end();
 	private:
 		Container _container;
 };
