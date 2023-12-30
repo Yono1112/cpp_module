@@ -35,3 +35,11 @@ void	MutantStack<T, Container>::pop() {
 		return ;
 	_container.pop_back();
 }
+
+template<typename T, typename Container>
+T&	MutantStack<T, Container>::top() {
+	if (_container.empty())
+		throw std::out_of_range("stack is empty");
+	return (_container.back());
+}
+
