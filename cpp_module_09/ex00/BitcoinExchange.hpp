@@ -16,9 +16,10 @@ class BitcoinExchange {
 		static void	printError(std::string error_message);
 		static bool	canOpenFiles(const char *arg_file);
 		void	addCSVToBitcoinMap();
+		void	addInputToBitcoinMap(const char *file_name);
 	private:
-		std::map<std::string, int> _data_map;
-		// std::map<std::string, int> _input_map;
+		std::map<std::string, double> _data_map;
+		std::map<std::string, std::string> _input_map;
 };
 
 #endif

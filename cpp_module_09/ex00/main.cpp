@@ -10,7 +10,7 @@ int	main(int argc, char **argv) {
 	}
 	BitcoinExchange	btc;
 	btc.addCSVToBitcoinMap();
-	// addInputToBitcoinMap(argv[1]);
+	btc.addInputToBitcoinMap(argv[1]);
 	// outputBitcoinExchange();
 	(void)argv;
 	return (0);
