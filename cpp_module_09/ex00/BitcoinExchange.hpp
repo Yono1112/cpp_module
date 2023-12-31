@@ -1,0 +1,19 @@
+#ifndef BITCOINEXCHANGE_HPP
+#define BITCOINEXCHANGE_HPP
+
+#include <iostream>
+#include <string>
+#include <map>
+
+class BitcoinExchange {
+	public:
+		BitcoinExchange();
+		BitcoinExchange(const BitcoinExchange& other);
+		~BitcoinExchange();
+		BitcoinExchange& operator=(const BitcoinExchange& other);
+	private:
+		std::map<std::string, size_t> _data_map;
+		// std::map<std::string, size_t> _input_map;
+};
+
+#endif
