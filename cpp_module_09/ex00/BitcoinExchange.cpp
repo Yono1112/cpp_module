@@ -71,14 +71,12 @@ void	BitcoinExchange::addCSVToBitcoinMap() {
 }
 
 void	BitcoinExchange::addInputToBitcoinMap(const char *file_name) {
-	std::cout << file_name << std::endl;
+	std::cout << "run addInputToBitcoinMap" << std::endl;
+
 	std::ifstream	input_file(file_name);
 	std::string	line;
-	std::size_t	line_num = 0;
 
 	while (getline(input_file, line)) {
-		line_num++;
-		std::cout << "--------------" << std::endl;
 		if (line.size() >= 2 && line.substr(0, 2) == "20") {
 			std::size_t pos = line.find('|');
 			if (pos != std::string::npos) {
@@ -89,22 +87,17 @@ void	BitcoinExchange::addInputToBitcoinMap(const char *file_name) {
 				ex_rate_str.erase(std::remove(ex_rate_str.begin(), ex_rate_str.end(), ' '), ex_rate_str.end());
 				ex_rate_str.erase(std::remove(ex_rate_str.begin(), ex_rate_str.end(), '\t'), ex_rate_str.end());
 				std::cout << "before comma: " << date_str << ". after comma: " << ex_rate_str << std::endl;
-
-				std::stringstream ss;
-				ss << date_str << "_" << line_num;
-				_input_map[ss.str()] = ex_rate_str;
+				_input_map.push_back(std::make_pair(date_str, ex_rate_str));
 			} else {
 				std::cout << "could not find '|'" << std::endl;
 				line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
 				line.erase(std::remove(line.begin(), line.end(), '\t'), line.end());
-				std::stringstream ss;
-				ss << line << "_" << line_num;
-				_input_map[ss.str()];
+				_input_map.push_back(std::make_pair(line, ""));
 			}
 		}
 	}
-	for (std::map<std::string, std::string>::iterator it = _input_map.begin(); it != _input_map.end(); ++it) {
-		std::cout << "key: " << it->first << ", value: " << it->second << std::endl;
+	for (std::size_t i = 0; i < _input_map.size(); i++) {
+		std::cout << "key: " << _input_map[i].first << ", value: " << _input_map[i].second << std::endl;
 	}
 	input_file.close();
 }

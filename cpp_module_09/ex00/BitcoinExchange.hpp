@@ -6,6 +6,7 @@
 #include <map>
 #include <fstream>
 #include <sstream>
+#include <vector>
 
 class BitcoinExchange {
 	public:
@@ -19,7 +20,7 @@ class BitcoinExchange {
 		void	addInputToBitcoinMap(const char *file_name);
 	private:
 		std::map<std::string, double> _data_map;
-		std::map<std::string, std::string> _input_map;
+		std::vector<std::pair<std::string, std::string> > _input_map;
 };
 
 #endif
