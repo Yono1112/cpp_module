@@ -46,7 +46,7 @@ bool	BitcoinExchange::canOpenFiles(const char *arg_file) {
 void	BitcoinExchange::addCSVToBitcoinMap() {
 	std::cout << "run addCSVToBitcoinMap" << std::endl;
 
-	std::ifstream	csv_file("data.csv");
+	std::ifstream	csv_file("data.csv.org");
 	std::string	line;
 
 	while (getline(csv_file, line)) {
@@ -64,9 +64,9 @@ void	BitcoinExchange::addCSVToBitcoinMap() {
 			}
 		}
 	}
-	for (std::map<std::string, double>::iterator it = _data_map.begin(); it != _data_map.end(); ++it) {
-		std::cout << "key: " << it->first << ", value: " << it->second << std::endl;
-	}
+	// for (std::map<std::string, double>::iterator it = _data_map.begin(); it != _data_map.end(); ++it) {
+	// 	std::cout << "key: " << it->first << ", value: " << it->second << std::endl;
+	// }
 	csv_file.close();
 }
 
@@ -100,4 +100,54 @@ void	BitcoinExchange::addInputToBitcoinMap(const char *file_name) {
 		std::cout << "key: " << _input_map[i].first << ", value: " << _input_map[i].second << std::endl;
 	}
 	input_file.close();
+}
+
+void	BitcoinExchange::outputBitcoinExchange() {
+	std::cout << std::endl << "run outputBitcoinExchange" << std::endl;
+
+	std::cout << std::endl;
+	for (std::size_t i = 0; i < _input_map.size(); i++) {
+		std::cout << "key: " << _input_map[i].first << ", value: " << _input_map[i].second << std::endl;
+	}
+	for (std::size_t i = 0; i < _input_map.size(); i++) {
+		std::string key_input_map = _input_map[i].first;
+		if (_data_map.find(key_input_map) != _data_map.end()) {
+			// std::cout << "can find date: " << key_input_map  << std::endl;
+			std::stringstream	iss(_input_map[i].second);
+			long	num;
+
+			iss >> num;
+			if (num < 0) {
+				printError("not a positive number.");
+			} else if (num > 100) {
+				printError("too large a number.");
+			} else {
+				std::cout << key_input_map << " => " << _input_map[i].second << " = " << num * _data_map[key_input_map] << std::endl;
+			}
+		} else {
+			std::map<std::string, double>::iterator it = _data_map.begin();
+			for (; it != _data_map.end(); ++it) {
+				if (it->first > key_input_map) {
+					break ;
+				}
+			}
+			if (it != _data_map.begin()) {
+				--it;
+				// std::cout << "can find the closest past date: " << it->first  << std::endl;
+				std::stringstream	iss(_input_map[i].second);
+				double	num;
+
+				iss >> num;
+				if (num < 0) {
+					printError("not a positive number.");
+				} else if (num > 100) {
+					printError("too large a number.");
+				} else {
+					std::cout << key_input_map << " => " << _input_map[i].second << " = " << num * it->second << std::endl;
+				}
+			} else {
+				printError("bad input => " + key_input_map);
+			}
+		}
+	}
 }

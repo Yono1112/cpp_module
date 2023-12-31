@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include <fstream>
+#include <istream>
 #include <sstream>
 #include <vector>
 
@@ -18,6 +19,7 @@ class BitcoinExchange {
 		static bool	canOpenFiles(const char *arg_file);
 		void	addCSVToBitcoinMap();
 		void	addInputToBitcoinMap(const char *file_name);
+		void	outputBitcoinExchange();
 	private:
 		std::map<std::string, double> _data_map;
 		std::vector<std::pair<std::string, std::string> > _input_map;
