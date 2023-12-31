@@ -2,7 +2,6 @@
 #define MUTANTSTACK_HPP
 
 #include <deque>
-#include <stack>
 #include <iostream>
 
 template<typename T, typename Container = std::deque<T> >
