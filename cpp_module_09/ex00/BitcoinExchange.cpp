@@ -47,6 +47,22 @@ void	BitcoinExchange::addCSVToBitcoinMap() {
 	std::string	line;
 
 	while (getline(csv_file, line)) {
-		std::cout << line << std::endl;
+		if (line.size() >= 2 && line.substr(0, 2) == "20") {
+			std::size_t pos = line.find(',');
+			if (pos != std::string::npos) {
+				std::string date_str = line.substr(0, pos);
+				std::string ex_rate_str = line.substr(pos + 1);
+				std::cout << "before comma: " << date_str << ". after comma: " << ex_rate_str << std::endl;
+				std::istringstream iss(ex_rate_str);
+				int ex_rate;
+				if (iss >> ex_rate) {
+					_data_map[date_str] = ex_rate;
+				}
+			}
+		}
 	}
+	for (std::map<std::string, int>::iterator it = _data_map.begin(); it != _data_map.end(); ++it) {
+		std::cout << "key: " << it->first << ", value: " << it->second << std::endl;
+	}
+	csv_file.close();
 }
