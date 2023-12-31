@@ -28,6 +28,7 @@ void	testInvalidSpan() {
 	Span sp2(sp1);
 
 	try {
+		std::cout << "test adding more than the maximum number of elements" << std::endl;
 		for (unsigned int i = 0; i < N + 1; i ++) {
 			std::cout << "addNumber: " << i << std::endl;
 			sp1.addNumber(i);
@@ -36,11 +37,14 @@ void	testInvalidSpan() {
 		std::cout << "catch exception: " << e.what() << std::endl;
 	}
 	try {
+		std::cout << "test shortestSpan() when there are no numbers stored" << std::endl;
 		std::cout << "shortestSpan: " << sp2.shortestSpan() << std::endl;
 	} catch (const std::exception& e) {
 		std::cout << "catch exception: " << e.what() << std::endl;
 	}
 	try {
+		std::cout << "test longestSpan() when there are only one numbers stored" << std::endl;
+		sp2.addNumber(N);
 		std::cout << "longestSpan: " << sp2.longestSpan() << std::endl;
 	} catch (const std::exception& e) {
 		std::cout << "catch exception: " << e.what() << std::endl;
