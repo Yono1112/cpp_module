@@ -48,9 +48,6 @@ int	Span::shortestSpan() {
 	std::vector<int> sort_vec = _vec;
 	int shortest_span = INT_MAX;
 	std::sort(sort_vec.begin(), sort_vec.end());
-	// for (size_t i = 0; i < sort_vec.size(); i++) {
-	// 	std::cout << i << ": " << sort_vec.at(i) << std::endl;
-	// }
 	for (size_t i = 0; i < sort_vec.size() - 1; i++) {
 		if (sort_vec.at(i + 1) - sort_vec.at(i) < shortest_span)
 			shortest_span = sort_vec.at(i + 1) - sort_vec.at(i);
@@ -65,4 +62,11 @@ int	Span::longestSpan() {
 	std::vector<int>::iterator min = std::min_element(_vec.begin(), _vec.end());
 	std::vector<int>::iterator max = std::max_element(_vec.begin(), _vec.end());
 	return (*(max) - *(min));
+}
+
+void	Span::fillNumbers(std::vector<int>::iterator begin, std::vector<int>::iterator end) {
+	while (begin != end) {
+		addNumber(*begin);
+		begin++;
+	}
 }

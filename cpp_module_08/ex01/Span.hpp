@@ -15,6 +15,7 @@ class Span {
 		void	addNumber(int num);
 		int	shortestSpan();
 		int	longestSpan();
+		void	fillNumbers(std::vector<int>::iterator begin, std::vector<int>::iterator end);
 	private:
 		unsigned int _max_elements;
 		std::vector<int> _vec;
