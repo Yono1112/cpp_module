@@ -1,10 +1,10 @@
 #include "BitcoinExchange.hpp"
 
-int	main() {
-	BitcoinExchange	btc1;
-	BitcoinExchange	btc2(btc1);
-	BitcoinExchange	btc3;
-
-	btc3 = btc1;
+int	main(int argc, char **argv) {
+	if (argc != 2) {
+		BitcoinExchange::printError("could not open the file");
+		return (1);
+	}
+	(void)argv;
 	return (0);
 }

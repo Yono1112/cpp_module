@@ -11,6 +11,7 @@ class BitcoinExchange {
 		BitcoinExchange(const BitcoinExchange& other);
 		~BitcoinExchange();
 		BitcoinExchange& operator=(const BitcoinExchange& other);
+		static void	printError(std::string error_message);
 	private:
 		std::map<std::string, size_t> _data_map;
 		// std::map<std::string, size_t> _input_map;

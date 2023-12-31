@@ -21,3 +21,7 @@ BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange& other) {
 	}
 	return (*this);
 }
+
+void	BitcoinExchange::printError(std::string error_message) {
+	std::cerr << "ERROR: " << error_message << std::endl;
+}
