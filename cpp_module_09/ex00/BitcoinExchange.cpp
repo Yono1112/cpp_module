@@ -44,7 +44,7 @@ bool	BitcoinExchange::canOpenFiles(const char *arg_file) {
 }
 
 void	BitcoinExchange::addCSVToBitcoinMap() {
-	std::cout << "run addCSVToBitcoinMap" << std::endl;
+	// std::cout << "run addCSVToBitcoinMap" << std::endl;
 
 	std::ifstream	csv_file("data.csv.org");
 	std::string	line;
@@ -55,7 +55,7 @@ void	BitcoinExchange::addCSVToBitcoinMap() {
 			if (pos != std::string::npos) {
 				std::string date_str = line.substr(0, pos);
 				std::string ex_rate_str = line.substr(pos + 1);
-				std::cout << "before comma: " << date_str << ". after comma: " << ex_rate_str << std::endl;
+				// std::cout << "before comma: " << date_str << ". after comma: " << ex_rate_str << std::endl;
 				std::istringstream iss(ex_rate_str);
 				double ex_rate;
 				if (iss >> ex_rate) {
@@ -71,7 +71,7 @@ void	BitcoinExchange::addCSVToBitcoinMap() {
 }
 
 void	BitcoinExchange::addInputToBitcoinMap(const char *file_name) {
-	std::cout << "run addInputToBitcoinMap" << std::endl;
+	// std::cout << "run addInputToBitcoinMap" << std::endl;
 
 	std::ifstream	input_file(file_name);
 	std::string	line;
@@ -86,10 +86,9 @@ void	BitcoinExchange::addInputToBitcoinMap(const char *file_name) {
 				std::string ex_rate_str = line.substr(pos + 1);
 				ex_rate_str.erase(std::remove(ex_rate_str.begin(), ex_rate_str.end(), ' '), ex_rate_str.end());
 				ex_rate_str.erase(std::remove(ex_rate_str.begin(), ex_rate_str.end(), '\t'), ex_rate_str.end());
-				std::cout << "before comma: " << date_str << ". after comma: " << ex_rate_str << std::endl;
+				// std::cout << "before comma: " << date_str << ". after comma: " << ex_rate_str << std::endl;
 				_input_map.push_back(std::make_pair(date_str, ex_rate_str));
 			} else {
-				std::cout << "could not find '|'" << std::endl;
 				line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
 				line.erase(std::remove(line.begin(), line.end(), '\t'), line.end());
 				_input_map.push_back(std::make_pair(line, ""));
@@ -102,40 +101,48 @@ void	BitcoinExchange::addInputToBitcoinMap(const char *file_name) {
 	input_file.close();
 }
 
+bool	BitcoinExchange::checkValidDate(const std::string& date_key) {
+	// std::cout << "date_key: " << date_key << std::endl;
+	if (date_key.size() != 10 || date_key.substr(0, 2) != "20") {
+		return (false);
+	} else if (date_key[4] != '-' || date_key[7] != '-') {
+		return (false);
+	}
+	for (std::size_t i = 0; i < date_key.size(); i++) {
+		if ((i != 4 && i != 7) && !std::isdigit(date_key[i])) {
+			return (false);
+		}
+	}
+	int month, day;
+	std::stringstream(date_key.substr(5, 2)) >> month;
+	std::stringstream(date_key.substr(8, 2)) >> day;
+	if (month < 1 || 12 < month) {
+		return (false);
+	} else if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) {
+		return (false);
+	} else if (month == 2 && day > 29) {
+		return (false);
+	}
+	return (true);
+}
+
 void	BitcoinExchange::outputBitcoinExchange() {
-	std::cout << std::endl << "run outputBitcoinExchange" << std::endl;
+	// std::cout << std::endl << "run outputBitcoinExchange" << std::endl;
 
 	std::cout << std::endl;
-	for (std::size_t i = 0; i < _input_map.size(); i++) {
-		std::cout << "key: " << _input_map[i].first << ", value: " << _input_map[i].second << std::endl;
-	}
+	// for (std::size_t i = 0; i < _input_map.size(); i++) {
+	// 	std::cout << "key: " << _input_map[i].first << ", value: " << _input_map[i].second << std::endl;
+	// }
 	for (std::size_t i = 0; i < _input_map.size(); i++) {
 		std::string key_input_map = _input_map[i].first;
-		if (_data_map.find(key_input_map) != _data_map.end()) {
-			// std::cout << "can find date: " << key_input_map  << std::endl;
-			std::stringstream	iss(_input_map[i].second);
-			long	num;
-
-			iss >> num;
-			if (num < 0) {
-				printError("not a positive number.");
-			} else if (num > 100) {
-				printError("too large a number.");
-			} else {
-				std::cout << key_input_map << " => " << _input_map[i].second << " = " << num * _data_map[key_input_map] << std::endl;
-			}
+		// std::cout << "key_input_map: " << key_input_map << std::endl;
+		if (!checkValidDate(key_input_map)) {
+			printError("bac input => " + key_input_map);
 		} else {
-			std::map<std::string, double>::iterator it = _data_map.begin();
-			for (; it != _data_map.end(); ++it) {
-				if (it->first > key_input_map) {
-					break ;
-				}
-			}
-			if (it != _data_map.begin()) {
-				--it;
-				// std::cout << "can find the closest past date: " << it->first  << std::endl;
+			if (_data_map.find(key_input_map) != _data_map.end()) {
+				// std::cout << "can find date: " << key_input_map  << std::endl;
 				std::stringstream	iss(_input_map[i].second);
-				double	num;
+				long	num;
 
 				iss >> num;
 				if (num < 0) {
@@ -143,10 +150,32 @@ void	BitcoinExchange::outputBitcoinExchange() {
 				} else if (num > 100) {
 					printError("too large a number.");
 				} else {
-					std::cout << key_input_map << " => " << _input_map[i].second << " = " << num * it->second << std::endl;
+					std::cout << key_input_map << " => " << _input_map[i].second << " = " << num * _data_map[key_input_map] << std::endl;
 				}
 			} else {
-				printError("bad input => " + key_input_map);
+				std::map<std::string, double>::iterator it = _data_map.begin();
+				for (; it != _data_map.end(); ++it) {
+					if (it->first > key_input_map) {
+						break ;
+					}
+				}
+				if (it != _data_map.begin()) {
+					--it;
+					// std::cout << "can find the closest past date: " << it->first  << std::endl;
+					std::stringstream	iss(_input_map[i].second);
+					double	num;
+
+					iss >> num;
+					if (num < 0) {
+						printError("not a positive number.");
+					} else if (num > 100) {
+						printError("too large a number.");
+					} else {
+						std::cout << key_input_map << " => " << _input_map[i].second << " = " << num * it->second << std::endl;
+					}
+				} else {
+					printError("bad input => " + key_input_map);
+				}
 			}
 		}
 	}
