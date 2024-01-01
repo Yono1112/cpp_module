@@ -9,6 +9,8 @@
 #include <sstream>
 #include <vector>
 
+#define CSV_FILE "data.csv.org"
+
 class BitcoinExchange {
 	public:
 		BitcoinExchange();
