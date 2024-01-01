@@ -43,7 +43,7 @@ bool	BitcoinExchange::canOpenFiles(const char *arg_file) {
 	return (true);
 }
 
-void	BitcoinExchange::addCSVToBitcoinMap() {
+void	BitcoinExchange::addCSVToMap() {
 	// std::cout << "run addCSVToBitcoinMap" << std::endl;
 
 	std::ifstream	csv_file(CSV_FILE);
@@ -71,7 +71,7 @@ void	BitcoinExchange::addCSVToBitcoinMap() {
 	csv_file.close();
 }
 
-void	BitcoinExchange::addInputToBitcoinMap(const char *file_name) {
+void	BitcoinExchange::addInputToVector(const char *file_name) {
 	// std::cout << "run addInputToBitcoinMap" << std::endl;
 
 	std::ifstream	input_file(file_name);
@@ -139,7 +139,7 @@ void	BitcoinExchange::outputBitcoinExchange() {
 		std::string key_input_map = _input_map[i].first;
 		// std::cout << "key_input_map: " << key_input_map << std::endl;
 		if (!checkValidDate(key_input_map)) {
-			printError("bac input => " + key_input_map);
+			printError("bad input => " + key_input_map);
 		} else {
 			if (_data_map.find(key_input_map) != _data_map.end()) {
 				// std::cout << "can find date: " << key_input_map  << std::endl;

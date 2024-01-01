@@ -19,8 +19,8 @@ class BitcoinExchange {
 		BitcoinExchange& operator=(const BitcoinExchange& other);
 		static void	printError(std::string error_message);
 		static bool	canOpenFiles(const char *arg_file);
-		void	addCSVToBitcoinMap();
-		void	addInputToBitcoinMap(const char *file_name);
+		void	addCSVToMap();
+		void	addInputToVector(const char *file_name);
 		void	outputBitcoinExchange();
 		bool	checkValidDate(const std::string& date_key);
 	private:

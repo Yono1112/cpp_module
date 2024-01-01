@@ -9,8 +9,8 @@ int	main(int argc, char **argv) {
 		return (1);
 	}
 	BitcoinExchange	btc;
-	btc.addCSVToBitcoinMap();
-	btc.addInputToBitcoinMap(argv[1]);
+	btc.addCSVToMap();
+	btc.addInputToVector(argv[1]);
 	btc.outputBitcoinExchange();
 	return (0);
 }
