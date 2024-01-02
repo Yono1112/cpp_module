@@ -22,8 +22,8 @@ class BitcoinExchange {
 		void	addCSVToMap();
 		void	addInputToVector(const char *file_name);
 		void	outputBitcoinExchange();
-		bool	checkValidDate(const std::string& date_key);
 	private:
+		bool	checkValidDate(const std::string& date_key);
 		std::map<std::string, double> _data_map;
 		std::vector<std::pair<std::string, std::string> > _input_map;
 };

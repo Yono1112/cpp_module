@@ -43,20 +43,25 @@ bool	BitcoinExchange::canOpenFiles(const char *arg_file) {
 	return (true);
 }
 
+void	removeSpaceAndTabStr(std::string& str) {
+	str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+	str.erase(std::remove(str.begin(), str.end(), '\t'), str.end());
+}
+
 void	BitcoinExchange::addCSVToMap() {
 	// std::cout << "run addCSVToBitcoinMap" << std::endl;
 
 	std::ifstream	csv_file(CSV_FILE);
-	// std::ifstream	csv_file("data.csv");
 	std::string	line;
 
 	while (getline(csv_file, line)) {
+		removeSpaceAndTabStr(line);
 		if (line.size() >= 2 && line.substr(0, 2) == "20") {
 			std::size_t pos = line.find(',');
 			if (pos != std::string::npos) {
 				std::string date_str = line.substr(0, pos);
 				std::string ex_rate_str = line.substr(pos + 1);
-				// std::cout << "before comma: " << date_str << ". after comma: " << ex_rate_str << std::endl;
+				// std::cout << "before comma: " << date_str << ". after comma: " << ex_rate_str << "." << std::endl;
 				std::istringstream iss(ex_rate_str);
 				double ex_rate;
 				if (iss >> ex_rate && !_data_map[date_str]) {
@@ -78,22 +83,18 @@ void	BitcoinExchange::addInputToVector(const char *file_name) {
 	std::string	line;
 
 	while (getline(input_file, line)) {
+		removeSpaceAndTabStr(line);
 		if (line.size() >= 2 && line.substr(0, 2) == "20") {
+			std::string date_str, ex_rate_str;
 			std::size_t pos = line.find('|');
 			if (pos != std::string::npos) {
-				std::string date_str = line.substr(0, pos);
-				date_str.erase(std::remove(date_str.begin(), date_str.end(), ' '), date_str.end());
-				date_str.erase(std::remove(date_str.begin(), date_str.end(), '\t'), date_str.end());
-				std::string ex_rate_str = line.substr(pos + 1);
-				ex_rate_str.erase(std::remove(ex_rate_str.begin(), ex_rate_str.end(), ' '), ex_rate_str.end());
-				ex_rate_str.erase(std::remove(ex_rate_str.begin(), ex_rate_str.end(), '\t'), ex_rate_str.end());
-				// std::cout << "before comma: " << date_str << ". after comma: " << ex_rate_str << std::endl;
-				_input_map.push_back(std::make_pair(date_str, ex_rate_str));
+				date_str = line.substr(0, pos);
+				ex_rate_str = line.substr(pos + 1);
 			} else {
-				line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
-				line.erase(std::remove(line.begin(), line.end(), '\t'), line.end());
-				_input_map.push_back(std::make_pair(line, ""));
+				date_str = line;
+				ex_rate_str = "";
 			}
+			_input_map.push_back(std::make_pair(date_str, ex_rate_str));
 		}
 	}
 	// for (std::size_t i = 0; i < _input_map.size(); i++) {
@@ -141,6 +142,7 @@ void	BitcoinExchange::outputBitcoinExchange() {
 		if (!checkValidDate(key_input_map)) {
 			printError("bad input => " + key_input_map);
 		} else {
+			std::cout << key_input_map << std::endl;
 			if (_data_map.find(key_input_map) != _data_map.end()) {
 				// std::cout << "can find date: " << key_input_map  << std::endl;
 				std::stringstream	ss(_input_map[i].second);
@@ -148,7 +150,7 @@ void	BitcoinExchange::outputBitcoinExchange() {
 
 				ss >> num;
 				if (ss.fail()) {
-						printError("bad input => " + _input_map[i].second);
+					printError("bad input => " + _input_map[i].second);
 				} else if (num < 0) {
 					printError("not a positive number.");
 				} else if (num > 100) {
