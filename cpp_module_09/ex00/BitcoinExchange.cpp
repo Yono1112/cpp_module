@@ -130,6 +130,57 @@ bool	BitcoinExchange::checkValidDate(const std::string& date_key) {
 	return (true);
 }
 
+bool	BitcoinExchange::checkValidExRate(const std::string& value, double& ex_num) {
+	std::stringstream ss(value);
+	ss >> ex_num;
+	if (ss.fail()) {
+		printError("bad input => " + value);
+		return (false);
+	} else if (ex_num < 0) {
+		printError("not a positive number.");
+		return (false);
+	} else if (ex_num > 100) {
+		printError("too large a number.");
+		return (false);
+	}
+	return (true);
+}
+
+std::map<std::string, double>::iterator	BitcoinExchange::findClosestDate(const std::string& key) {
+	std::map<std::string, double>::iterator it = _data_map.begin();
+	for (; it != _data_map.end(); ++it) {
+		if (it->first == key) {
+			return (it);
+		} else if (it->first > key) {
+			break ;
+		}
+	}
+	if (it == _data_map.begin() && it->first != key) {
+		throw std::out_of_range("cannot find the closest past date");
+	}
+	return (--it);
+}
+
+void	BitcoinExchange::processInputEntry(const std::string& key, const std::string& value) {
+	if (!checkValidDate(key)) {
+		printError("bad input => " + key);
+		return ;
+	}
+	double ex_num;
+	if (!checkValidExRate(value, ex_num)) {
+		return ;
+	}
+	std::map<std::string, double>::iterator it;
+	try {
+		it = findClosestDate(key);
+		if (it != _data_map.end()) {
+			std::cout << key << " => " << value << " = " << ex_num * it->second << std::endl;
+		}
+	} catch (const std::exception& e) {
+		printError("bad input => " + key);
+	}
+}
+
 void	BitcoinExchange::outputBitcoinExchange() {
 	// std::cout << std::endl << "run outputBitcoinExchange" << std::endl;
 
@@ -137,55 +188,6 @@ void	BitcoinExchange::outputBitcoinExchange() {
 	// 	std::cout << "key: " << _input_map[i].first << ", value: " << _input_map[i].second << std::endl;
 	// }
 	for (std::size_t i = 0; i < _input_map.size(); i++) {
-		std::string key_input_map = _input_map[i].first;
-		// std::cout << "key_input_map: " << key_input_map << std::endl;
-		if (!checkValidDate(key_input_map)) {
-			printError("bad input => " + key_input_map);
-		} else {
-			std::cout << key_input_map << std::endl;
-			if (_data_map.find(key_input_map) != _data_map.end()) {
-				// std::cout << "can find date: " << key_input_map  << std::endl;
-				std::stringstream	ss(_input_map[i].second);
-				double	num;
-
-				ss >> num;
-				if (ss.fail()) {
-					printError("bad input => " + _input_map[i].second);
-				} else if (num < 0) {
-					printError("not a positive number.");
-				} else if (num > 100) {
-					printError("too large a number.");
-				} else {
-					std::cout << key_input_map << " => " << _input_map[i].second << " = " << num * _data_map[key_input_map] << std::endl;
-				}
-			} else {
-				std::map<std::string, double>::iterator it = _data_map.begin();
-				for (; it != _data_map.end(); ++it) {
-					if (it->first > key_input_map) {
-						break ;
-					}
-				}
-				if (it != _data_map.begin() && it != _data_map.end()) {
-					--it;
-					// std::cout << "can find the closest past date: " << it->first  << std::endl;
-					std::stringstream	ss(_input_map[i].second);
-					double	num;
-
-					ss >> num;
-					if (ss.fail()) {
-						printError("bad input => " + _input_map[i].second);
-					} else if (num < 0) {
-						printError("not a positive number.");
-					} else if (num > 100) {
-						printError("too large a number.");
-					} else {
-						std::cout << key_input_map << " => " << _input_map[i].second << " = " << num * it->second << std::endl;
-					}
-				} else {
-					// std::cout << "could not find the closest past date"  << std::endl;
-					printError("bad input => " + key_input_map);
-				}
-			}
-		}
+		processInputEntry(_input_map[i].first, _input_map[i].second);
 	}
 }
