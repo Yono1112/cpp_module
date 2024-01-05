@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <stack>
+#include <sstream>
 
 class RPN {
 	public:
@@ -16,6 +17,8 @@ class RPN {
 	private:
 		std::stack<int> _stack;
 	private:
+		void popStackAndCalc(const char c);
+		void pushStack(const char c);
 		void skipSpace(const std::string& str, size_t& i);
 		static bool checkValidChar(const char c);
 		static bool isArithmetic(const char c);
