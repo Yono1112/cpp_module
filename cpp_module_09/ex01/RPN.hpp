@@ -11,7 +11,12 @@ class RPN {
 		RPN(const RPN& other);
 		~RPN();
 		RPN& operator=(const RPN& other);
+		static bool checkArguments(const char *argv);
 	private:
+		std::stack<int> _stack;
+	private:
+		static bool checkValidChar(const char c);
+		static bool isArithmetic(const char c);
 };
 
 #endif
