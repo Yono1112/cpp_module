@@ -33,3 +33,20 @@ bool	PmergeMe::checkValidArgs(const char *str) {
 	}
 	return (true);
 }
+
+void	PmergeMe::setVectorAndList(const char *c_str) {
+	std::string str(c_str);
+	std::istringstream iss(str);
+	unsigned int num;
+
+	while (iss >> num) {
+		_vec.push_back(num);
+		_lst.push_back(num);
+	}
+	for (size_t i = 0; i < _vec.size(); i++) {
+		std::cout << "vec[" << i << "]: " << _vec.at(i) << std::endl;
+	}
+	for (std::list<unsigned int>::iterator it = _lst.begin(); it != _lst.end(); it++) {
+		std::cout << "lst: " << *it << std::endl;
+	}
+}
