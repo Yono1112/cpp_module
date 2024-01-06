@@ -82,7 +82,7 @@ void	PmergeMe::runInsertionSortVector() {
 	}
 }
 
-void	PmergeMe::merge(int left, int middle, int right) {
+void	PmergeMe::mergeVector(int left, int middle, int right) {
 	// std::cout << "merge" << std::endl;
 	int left_index = left;
 	int right_index = middle + 1;
@@ -115,7 +115,7 @@ void	PmergeMe::runMergeSortVector(int left, int right) {
 	// std::cout << "left: " << left << ", right: " << right << ", middle: " << middle << std::endl;
 	runMergeSortVector(left, middle);
 	runMergeSortVector(middle + 1, right);
-	merge(left, middle, right);
+	mergeVector(left, middle, right);
 }
 
 void	PmergeMe::sortVector() {
@@ -142,10 +142,20 @@ void	PmergeMe::insert(std::list<unsigned int>::iterator sorted_index, const unsi
 	*sorted_index = element;
 }
 
-void	PmergeMe::sortList() {
+void	PmergeMe::runInsertionSortList() {
 	for (std::list<unsigned int>::iterator it = _lst.begin(); it != _lst.end(); it++) {
 		insert(it, *it);
 	}
+}
+
+void	PmergeMe::sortList() {
+	// if (_lst.size() > 100) {
+		// std::cout << "runMergeSortList" << std::endl;
+		// runMergeSortList(0, _lst.size() - 1);
+	// } else {
+		std::cout << "runInsertionSortList" << std::endl;
+		runInsertionSortList();
+	// }
 	// for (std::list<unsigned int>::iterator it = _lst.begin(); it != _lst.end(); it++) {
 	// 	std::cout << "lst: " << *it << std::endl;
 	// }

@@ -19,14 +19,17 @@ class PmergeMe {
 		static bool checkValidArgs(const char *str);
 	private:
 		void printFirstSecondLine(const std::string& str);
-		void sortVector();
-		void insert(int sorted_index, const unsigned int element);
-		void insert(std::list<unsigned int>::iterator sorted_index, const unsigned int element);
-		void sortList();
 		void printSortTime(const std::string& container, const double time, const size_t size);
-		void runInsertionSortVector();
+		// vector
+		void sortVector();
+		void mergeVector(int left, int middle, int right);
 		void runMergeSortVector(int left, int right);
-		void merge(int left, int middle, int right);
+		void insert(int sorted_index, const unsigned int element);
+		void runInsertionSortVector();
+		// list
+		void insert(std::list<unsigned int>::iterator sorted_index, const unsigned int element);
+		void runInsertionSortList();
+		void sortList();
 	private:
 		std::vector<unsigned int> _vec;
 		std::list<unsigned int> _lst;
