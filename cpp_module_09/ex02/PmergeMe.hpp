@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <list>
-#include <deque>
+#include <vector>
 
 class PmergeMe {
 	public:
@@ -12,7 +12,10 @@ class PmergeMe {
 		PmergeMe(const PmergeMe& other);
 		~PmergeMe();
 		PmergeMe& operator=(const PmergeMe& other);
+		static bool checkValidArgs(const char *str);
 	private:
+		std::vector<unsigned int> _vec;
+		std::list<unsigned int> _lst;
 };
 
 #endif
