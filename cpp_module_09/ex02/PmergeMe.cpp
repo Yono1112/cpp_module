@@ -131,6 +131,54 @@ void	PmergeMe::sortVector() {
 	// }
 }
 
+void	PmergeMe::mergeList(std::list<unsigned int>::iterator left, std::list<unsigned int>::iterator middle, std::list<unsigned int>::iterator right) {
+	// std::cout << "merge" << std::endl;
+	std::list<unsigned int>::iterator left_it = left;
+	std::list<unsigned int>::iterator right_it = middle;
+	std::list<unsigned int> tmp_lst;
+
+	while (left_it != middle && right_it != right) {
+		if (*left_it < *right_it) {
+			tmp_lst.push_back(*left_it++);
+		} else {
+			tmp_lst.push_back(*right_it++);
+		}
+	}
+
+	while (left_it != middle) {
+		tmp_lst.push_back(*left_it++);
+	}
+	while (right_it != right) {
+		tmp_lst.push_back(*right_it++);
+	}
+	std::list<unsigned int>::iterator tmp_it = tmp_lst.begin();
+	for (std::list<unsigned int>::iterator it = left; it != right; it++, tmp_it++) {
+		*it = *tmp_it;
+	}
+}
+
+std::list<unsigned int>::iterator	PmergeMe::findMiddle(std::list<unsigned int>::iterator start, std::list<unsigned int>::iterator end) {
+	std::list<unsigned int>::iterator first_step = start;
+	std::list<unsigned int>::iterator second_step = start;
+
+	while (second_step != end && std::next(second_step) != end) {
+		first_step = std::next(first_step);
+		second_step = std::next(second_step);
+		second_step = std::next(second_step);
+	}
+	return (first_step);
+}
+
+void PmergeMe::runMergeSortList(std::list<unsigned int>::iterator left, std::list<unsigned int>::iterator right) {
+	if (std::next(left) == right) {
+		return ;
+	}
+	std::list<unsigned int>::iterator middle = findMiddle(left, right);
+	runMergeSortList(left, middle);
+	runMergeSortList(middle, right);
+	mergeList(left, middle, right);
+}
+
 void	PmergeMe::insert(std::list<unsigned int>::iterator sorted_index, const unsigned int element) {
 	while (sorted_index != _lst.begin()) {
 		if (element > *std::prev(sorted_index)) {
@@ -150,11 +198,11 @@ void	PmergeMe::runInsertionSortList() {
 
 void	PmergeMe::sortList() {
 	// if (_lst.size() > 100) {
-		// std::cout << "runMergeSortList" << std::endl;
-		// runMergeSortList(0, _lst.size() - 1);
+		std::cout << "runMergeSortList" << std::endl;
+		runMergeSortList(_lst.begin(), _lst.end());
 	// } else {
-		std::cout << "runInsertionSortList" << std::endl;
-		runInsertionSortList();
+	//	std::cout << "runInsertionSortList" << std::endl;
+	//	runInsertionSortList();
 	// }
 	// for (std::list<unsigned int>::iterator it = _lst.begin(); it != _lst.end(); it++) {
 	// 	std::cout << "lst: " << *it << std::endl;

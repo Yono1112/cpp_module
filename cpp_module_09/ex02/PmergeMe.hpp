@@ -27,9 +27,12 @@ class PmergeMe {
 		void insert(int sorted_index, const unsigned int element);
 		void runInsertionSortVector();
 		// list
+		void sortList();
+		void mergeList(std::list<unsigned int>::iterator left, std::list<unsigned int>::iterator middle, std::list<unsigned int>::iterator right);
+		std::list<unsigned int>::iterator findMiddle(std::list<unsigned int>::iterator start, std::list<unsigned int>::iterator end);
+		void runMergeSortList(std::list<unsigned int>::iterator left, std::list<unsigned int>::iterator right);
 		void insert(std::list<unsigned int>::iterator sorted_index, const unsigned int element);
 		void runInsertionSortList();
-		void sortList();
 	private:
 		std::vector<unsigned int> _vec;
 		std::list<unsigned int> _lst;
