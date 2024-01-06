@@ -23,6 +23,7 @@ class PmergeMe {
 		void insert(int sorted_index, const unsigned int element);
 		void insert(std::list<unsigned int>::iterator sorted_index, const unsigned int element);
 		void sortList();
+		void printSortTime(const std::string& container, const double time, const size_t size);
 	private:
 		std::vector<unsigned int> _vec;
 		std::list<unsigned int> _lst;

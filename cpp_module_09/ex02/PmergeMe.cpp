@@ -75,9 +75,9 @@ void	PmergeMe::sortVector() {
 	for (size_t i = 1; i < _vec.size(); i++) {
 		insert(i - 1, _vec[i]);
 	}
-	for (size_t i = 0; i < _vec.size(); i++) {
-		std::cout << "vec[" << i << "]: " << _vec.at(i) << std::endl;
-	}
+	// for (size_t i = 0; i < _vec.size(); i++) {
+	// 	std::cout << "vec[" << i << "]: " << _vec.at(i) << std::endl;
+	// }
 }
 
 void	PmergeMe::insert(std::list<unsigned int>::iterator sorted_index, const unsigned int element) {
@@ -95,15 +95,27 @@ void	PmergeMe::sortList() {
 	for (std::list<unsigned int>::iterator it = _lst.begin(); it != _lst.end(); it++) {
 		insert(it, *it);
 	}
-	for (std::list<unsigned int>::iterator it = _lst.begin(); it != _lst.end(); it++) {
-		std::cout << "lst: " << *it << std::endl;
-	}
+	// for (std::list<unsigned int>::iterator it = _lst.begin(); it != _lst.end(); it++) {
+	// 	std::cout << "lst: " << *it << std::endl;
+	// }
+}
+
+void	PmergeMe::printSortTime(const std::string& container, const double time, const size_t size) {
+	std::cout << "Time to process a range of " << size << " elements with std::" << container << " : " << time << " us" << std::endl;
 }
 
 void	PmergeMe::sortMergeInsertion() {
 	// std::cout << "==============" << std::endl;
 	// std::cout << "run sortMergeInsertion" << std::endl;
+	std::clock_t start_vec = std::clock();
 	sortVector();
+	std::clock_t end_vec = std::clock();
+	std::clock_t start_lst = std::clock();
 	sortList();
+	std::clock_t end_lst = std::clock();
+	double time_vec = 1000000.0 * (static_cast<double>(end_vec) - static_cast<double>(start_vec)) / CLOCKS_PER_SEC;
+	double time_lst = 1000000.0 * (static_cast<double>(end_lst) - static_cast<double>(start_lst)) / CLOCKS_PER_SEC;
 	printFirstSecondLine("After: ");
+	printSortTime("vector", time_vec, _vec.size());
+	printSortTime("list", time_lst, _lst.size());
 }
