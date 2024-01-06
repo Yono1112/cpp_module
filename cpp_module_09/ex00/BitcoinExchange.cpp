@@ -2,13 +2,13 @@
 
 BitcoinExchange::BitcoinExchange() 
 	: _data_map()
-	, _input_map(){
+	, _input_deq(){
 	// std::cout << "Default Constructor Called" << std::endl;
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) 
 	: _data_map(other._data_map)
-	, _input_map(other._input_map){
+	, _input_deq(other._input_deq){
 	// std::cout << "Copy Constructor Called" << std::endl;
 }
 
@@ -20,7 +20,7 @@ BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange& other) {
 	// std::cout << "Copy Assignment Operator Called" << std::endl;
 	if (this != &other) {
 		this->_data_map = other._data_map;
-		this->_input_map = other._input_map;
+		this->_input_deq = other._input_deq;
 	}
 	return (*this);
 }
@@ -94,11 +94,11 @@ void	BitcoinExchange::addInputToVector(const char *file_name) {
 				date_str = line;
 				ex_rate_str = "";
 			}
-			_input_map.push_back(std::make_pair(date_str, ex_rate_str));
+			_input_deq.push_back(std::make_pair(date_str, ex_rate_str));
 		}
 	}
-	// for (std::size_t i = 0; i < _input_map.size(); i++) {
-	// 	std::cout << "key: " << _input_map[i].first << ", value: " << _input_map[i].second << std::endl;
+	// for (std::size_t i = 0; i < _input_deq.size(); i++) {
+	// 	std::cout << "key: " << _input_deq[i].first << ", value: " << _input_deq[i].second << std::endl;
 	// }
 	input_file.close();
 }
@@ -184,10 +184,10 @@ void	BitcoinExchange::processInputEntry(const std::string& key, const std::strin
 void	BitcoinExchange::outputBitcoinExchange() {
 	// std::cout << std::endl << "run outputBitcoinExchange" << std::endl;
 
-	// for (std::size_t i = 0; i < _input_map.size(); i++) {
-	// 	std::cout << "key: " << _input_map[i].first << ", value: " << _input_map[i].second << std::endl;
+	// for (std::size_t i = 0; i < _input_deq.size(); i++) {
+	// 	std::cout << "key: " << _input_deq[i].first << ", value: " << _input_deq[i].second << std::endl;
 	// }
-	for (std::size_t i = 0; i < _input_map.size(); i++) {
-		processInputEntry(_input_map[i].first, _input_map[i].second);
+	for (std::size_t i = 0; i < _input_deq.size(); i++) {
+		processInputEntry(_input_deq[i].first, _input_deq[i].second);
 	}
 }

@@ -7,7 +7,7 @@
 #include <fstream>
 #include <istream>
 #include <sstream>
-#include <vector>
+#include <deque>
 
 #define CSV_FILE "data.csv.org"
 
@@ -28,7 +28,7 @@ class BitcoinExchange {
 		std::map<std::string, double>::iterator	findClosestDate(const std::string& date_key);
 		void	processInputEntry(const std::string& key, const std::string& value);
 		std::map<std::string, double> _data_map;
-		std::vector<std::pair<std::string, std::string> > _input_map;
+		std::deque<std::pair<std::string, std::string> > _input_deq;
 };
 
 #endif
