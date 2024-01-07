@@ -119,13 +119,13 @@ void	PmergeMe::runMergeSortVector(int left, int right) {
 }
 
 void	PmergeMe::sortVector() {
-	// if (_vec.size() > 100) {
+	if (_vec.size() > 1700) {
 		std::cout << "runMergeSortVector" << std::endl;
 		runMergeSortVector(0, _vec.size() - 1);
-	// } else {
-	// 	std::cout << "runInsertionSortVector" << std::endl;
-	// 	runInsertionSortVector();
-	// }
+	} else {
+		std::cout << "runInsertionSortVector" << std::endl;
+		runInsertionSortVector();
+	}
 	// for (size_t i = 0; i < _vec.size(); i++) {
 	// 	std::cout << "vec[" << i << "]: " << _vec.at(i) << std::endl;
 	// }
