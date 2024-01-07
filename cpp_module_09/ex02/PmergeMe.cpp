@@ -56,7 +56,6 @@ void	PmergeMe::setVectorAndList(const char *c_str) {
 		_vec.push_back(num);
 		_lst.push_back(num);
 	}
-	printFirstSecondLine("Before: ");
 	// for (size_t i = 0; i < _vec.size(); i++) {
 	// 	std::cout << "vec[" << i << "]: " << _vec.at(i) << std::endl;
 	// }
@@ -197,13 +196,13 @@ void	PmergeMe::runInsertionSortList() {
 }
 
 void	PmergeMe::sortList() {
-	// if (_lst.size() > 100) {
-		std::cout << "runMergeSortList" << std::endl;
-		runMergeSortList(_lst.begin(), _lst.end());
-	// } else {
-	//	std::cout << "runInsertionSortList" << std::endl;
-	//	runInsertionSortList();
-	// }
+	if (_lst.size() > 150) {
+	     std::cout << "runMergeSortList" << std::endl;
+	     runMergeSortList(_lst.begin(), _lst.end());
+	} else {
+	     std::cout << "runInsertionSortList" << std::endl;
+	     runInsertionSortList();
+	}
 	// for (std::list<unsigned int>::iterator it = _lst.begin(); it != _lst.end(); it++) {
 	// 	std::cout << "lst: " << *it << std::endl;
 	// }
@@ -216,6 +215,7 @@ void	PmergeMe::printSortTime(const std::string& container, const double time, co
 void	PmergeMe::sortMergeInsertion() {
 	// std::cout << "==============" << std::endl;
 	// std::cout << "run sortMergeInsertion" << std::endl;
+	printFirstSecondLine("Before: ");
 	std::clock_t start_vec = std::clock();
 	sortVector();
 	std::clock_t end_vec = std::clock();
