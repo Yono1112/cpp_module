@@ -50,6 +50,7 @@ void	testInvalidStack() {
 	}
 	try {
 		MutantStack<int>	mstack1;
+		// if you comment in under two lines and compile, the compiler should output the error message because each type of container is different(mstack1 is std::deque and mstack2 is std::vector)!
 		// MutantStack<double>	mstack2(mstack1);
 		// MutantStack<int, std::vector<int> >	mstack2(mstack1);
 		std::cout <<  mstack1.size() << std::endl;
@@ -65,6 +66,8 @@ void	testIterator() {
 	try {
 		MutantStack<int>	 mstack1;
 
+		std::cout << "mtack empty: " << std::boolalpha << mstack1.empty() << std::endl;
+		std::cout << "mstack size: " << mstack1.size() << std::endl;
 		for (int i = 0; i < 10; i++) {
 			std::cout << "push: " << i << std::endl;
 			mstack1.push(i);
