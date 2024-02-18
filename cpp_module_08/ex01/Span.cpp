@@ -48,9 +48,9 @@ int	Span::shortestSpan() {
 	std::vector<int> sort_vec = _vec;
 	int shortest_span = INT_MAX;
 	std::sort(sort_vec.begin(), sort_vec.end());
-	for (size_t i = 0; i < sort_vec.size() - 1; i++) {
-		if (sort_vec.at(i + 1) - sort_vec.at(i) < shortest_span)
-			shortest_span = sort_vec.at(i + 1) - sort_vec.at(i);
+	for (size_t i = 1; i < sort_vec.size(); i++) {
+		if (sort_vec.at(i) - sort_vec.at(i - 1) < shortest_span)
+			shortest_span = sort_vec.at(i) - sort_vec.at(i - 1);
 	}
 	return (shortest_span);
 }
