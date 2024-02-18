@@ -160,6 +160,36 @@ std::vector<unsigned int>	PmergeMe::setSmallerPair(const std::vector<std::vector
 	return (smaller_vec);
 }
 
+void	PmergeMe::runBinarySearch(std::vector<unsigned int>& vec, unsigned int num) {
+	std::cout << "start runBinarySearch" << std::endl;
+	int left = 0;
+	int right = vec.size() - 1;
+	int middle;
+	while (right - left > 1) {
+		middle = (right - left) / 2;
+		if (vec[middle] == num) {
+			break ;
+		} else if (num > vec[middle]) {
+			left = middle;
+		} else {
+			right = middle;
+		}
+	}
+	if (vec[middle] == num) {
+		vec.insert(vec.begin() + middle, num);
+	}
+	// for (size_t i = 0; i < smaller_vec.size(); i++) {
+	// 	std::cout << "smaller_vec[" << i << "]: " << smaller_vec[i] << std::endl;
+	// }
+}
+
+std::vector<unsigned int>	PmergeMe::insertSmallerToLarger(std::vector<unsigned int>& larger_vec, std::vector<unsigned int>& smaller_vec) {
+	// runBinarySearch(larger_vec, smaller_vec[0]);
+	// larger_vec.insert(larger_vec.begin(), smaller_vec[0]);
+	(void)smaller_vec;
+	return (larger_vec);
+}
+
 void	PmergeMe::sortVector() {
 	std::cout << "=====================================" << std::endl;
 	std::cout << "start sortVector" << std::endl;
@@ -175,7 +205,10 @@ void	PmergeMe::sortVector() {
 	sortPair(pair_vec);
 	std::vector<unsigned int> larger_vec = setAndSortLargerPair(pair_vec);
 	std::vector<unsigned int> smaller_vec = setSmallerPair(pair_vec);
-	// std::vector<unsigned int> sorted_vec = insertSmallerToLarger(larger_vec, smaller_vec);
+	std::vector<unsigned int> sorted_vec = insertSmallerToLarger(larger_vec, smaller_vec);
+	for (size_t i = 0; i < sorted_vec.size(); i++) {
+		std::cout << "sorted_vec[" << i << "]: " << sorted_vec.at(i) << std::endl;
+	}
 	// if (_vec.size() % 2 == 1) {
 	// 	// insertBinary(last_element);
 	// }

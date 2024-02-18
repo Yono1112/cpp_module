@@ -28,6 +28,8 @@ class PmergeMe {
 		void mergeVector(int left, int middle, int right, std::vector<unsigned int>& vec);
 		void runMergeSortVector(int left, int right, std::vector<unsigned int>& vec);
 		std::vector<unsigned int> setSmallerPair(const std::vector<std::vector<unsigned int> >& pair_vec);
+		std::vector<unsigned int> insertSmallerToLarger(std::vector<unsigned int>& larger_vec, std::vector<unsigned int>& smaller_vec);
+		void runBinarySearch(std::vector<unsigned int>& vec, unsigned int num);
 		// void mergeVector(int left, int middle, int right);
 		// void runMergeSortVector(int left, int right);
 		// void insert(int sorted_index, const unsigned int element);
