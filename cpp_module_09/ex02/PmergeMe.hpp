@@ -15,9 +15,15 @@ class PmergeMe {
 		~PmergeMe();
 		PmergeMe& operator=(const PmergeMe& other);
 		void setVectorAndList(const char *str);
-		void sortMergeInsertion();
+		// void sortMergeInsertion();
+		void sortVectorAndList();
 		static bool checkValidArgs(const char *str);
 	private:
+		std::vector<int> runMergeInsertionSort(const std::vector<int>& vec);
+		void	runBinaryInsertionSort(std::vector<int>& main_chain, const int sub_chain_element);
+		std::vector<unsigned int>	createJacobstalIndex(const std::vector<int>& smaller_vec);
+		std::vector<unsigned int>	createJacobstalVector(const size_t max_num);
+		unsigned int	jacobsthal(const unsigned int n);
 		void printFirstSecondLine(const std::string& str);
 		void printSortTime(const std::string& container, const double time, const size_t size);
 		// vector
@@ -42,7 +48,7 @@ class PmergeMe {
 		// void insert(std::list<unsigned int>::iterator sorted_index, const unsigned int element);
 		// void runInsertionSortList();
 	private:
-		std::vector<unsigned int> _vec;
+		std::vector<int> _vec;
 		std::list<unsigned int> _lst;
 };
 

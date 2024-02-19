@@ -66,15 +66,104 @@ void	PmergeMe::setVectorAndList(const char *c_str) {
 	// }
 }
 
+unsigned int	PmergeMe::jacobsthal(const unsigned int n) {
+	if (n == 0) {
+		return (0);
+	} else if (n == 1) {
+		return (1);
+	}
+	std::vector<unsigned int> jacobsthal_nums(n + 1);
+	jacobsthal_nums[0] = 0;
+	jacobsthal_nums[1] = 1;
+	for (unsigned int i = 2; i <= n; ++i) {
+		jacobsthal_nums[i] = jacobsthal_nums[i - 1] + 2 * jacobsthal_nums[i - 2];
+	}
+	return (jacobsthal_nums[n]);
+}
+
+std::vector<unsigned int>	PmergeMe::createJacobstalVector(const size_t max_num) {
+	std::vector<unsigned int> jacobsthal_vec;
+	for (size_t i = 0;; ++i) {
+		unsigned int jacob_num = jacobsthal(i);
+		if (jacob_num >= max_num) {
+			jacobsthal_vec.push_back(max_num);
+			break ;
+		}
+		jacobsthal_vec.push_back(jacob_num);
+	}
+	return (jacobsthal_vec);
+}
+
+std::vector<unsigned int>	PmergeMe::createJacobstalIndex(const std::vector<int>& smaller_vec) {
+	std::vector<unsigned int> jacobsthal_vec = createJacobstalVector(smaller_vec.size());
+	std::vector<unsigned int> index_vec;
+	for (size_t i = 1; i < jacobsthal_vec.size(); ++i) {
+		unsigned int prev_num = jacobsthal_vec[i - 1];
+		for (size_t j = jacobsthal_vec[i]; j > prev_num; --j) {
+			index_vec.push_back(j);
+		}
+	}
+	// for (unsigned int i = 0; i < index_vec.size(); ++i) {
+	// 	std::cout << index_vec[i] << ", ";
+	// }
+	// std::cout << std::endl;
+	return (index_vec);
+}
+
+void	PmergeMe::runBinaryInsertionSort(std::vector<int>& main_chain, const int sub_chain_element) {
+	std::vector<int>::iterator it = std::lower_bound(main_chain.begin(), main_chain.end(), sub_chain_element);
+	main_chain.insert(it, sub_chain_element);
+}
+
+std::vector<int> PmergeMe::runMergeInsertionSort(const std::vector<int>& vec) {
+	if (vec.size() < 2) {
+		return (vec);
+	}
+
+	std::vector<std::vector<int> > pair_vec;
+	std::size_t i = 0;
+	while (i < vec.size()) {
+		std::vector<int> tmp_vec;
+		tmp_vec.push_back(vec[i++]);
+		if (i < vec.size()) {
+			tmp_vec.push_back(vec[i++]);
+		} else {
+			tmp_vec.push_back(-1);
+			i++;
+		}
+		pair_vec.push_back(tmp_vec);
+	}
+
+	std::vector<int> larger_vec, smaller_vec;
+	for (size_t i = 0; i < pair_vec.size(); ++i) {
+		if (pair_vec[i][1] != -1 && pair_vec[i][0] < pair_vec[i][1]) {
+			std::swap(pair_vec[i][0], pair_vec[i][1]);
+		}
+		larger_vec.push_back(pair_vec[i][0]);
+		smaller_vec.push_back(pair_vec[i][1]);
+	}
+
+	std::vector<int> main_chain = runMergeInsertionSort(larger_vec);
+	std::vector<unsigned int>jacobsthal_vec = createJacobstalIndex(smaller_vec);
+	for (size_t i = 0; i < smaller_vec.size(); ++i) {
+		unsigned int jacobsthal_index = jacobsthal_vec[i] - 1;
+		if (smaller_vec[jacobsthal_index] != -1) {
+			runBinaryInsertionSort(main_chain, smaller_vec[jacobsthal_index]);
+		}
+	}
+	return (main_chain);
+}
+
 void	PmergeMe::printSortTime(const std::string& container, const double time, const size_t size) {
 	std::cout << "Time to process a range of " << size << " elements with std::" << container << " : " << time << " us" << std::endl;
 }
 
-void	PmergeMe::sortMergeInsertion() {
+void	PmergeMe::sortVectorAndList() {
 	// std::cout << "==============" << std::endl;
 	// std::cout << "run sortMergeInsertion" << std::endl;
 	printFirstSecondLine("Before: ");
 	std::clock_t start_vec = std::clock();
+	_vec = runMergeInsertionSort(_vec);
 	// sortVector();
 	std::clock_t end_vec = std::clock();
 	double time_vec = 1000000.0 * (static_cast<double>(end_vec) - static_cast<double>(start_vec)) / CLOCKS_PER_SEC;
