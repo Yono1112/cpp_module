@@ -21,7 +21,7 @@ class PmergeMe {
 		void printFirstSecondLine(const std::string& str);
 		void printSortTime(const std::string& container, const double time, const size_t size);
 		// vector
-		void sortVector();
+		// void sortVector();
 		std::vector<std::vector<unsigned int> > createPair(const std::vector<unsigned int>& vec);
 		void sortPair(std::vector<std::vector<unsigned int> >& pair_vec);
 		std::vector<unsigned int> setAndSortLargerPair(const std::vector<std::vector<unsigned int> >& pair_vec);

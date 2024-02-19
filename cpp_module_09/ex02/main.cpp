@@ -178,38 +178,44 @@ std::vector<int> sortRecursivelyNotJacob(const std::vector<int>& vec) {
 
 #include <ctime>
 #include <cstdlib>
-int main(void) {
+int main(int argc, char **argv) {
 	// int arr[] = {5, 12, 8, 10, 3, 7, 6, 4, 9, 2, 1, 11, 13};
 	// int arr[];
-	std::vector<int> vec1, vec2;
-	srand(time(NULL));
-	for (size_t i = 0; i < 5000; ++i) {
-		int num = rand() % 10000 + 1;
-		vec1.push_back(num);
-		vec2.push_back(num);
-	}
+	// std::vector<int> vec1, vec2;
+	// srand(time(NULL));
+	// for (size_t i = 0; i < 5000; ++i) {
+	// 	int num = rand() % 10000 + 1;
+	// 	vec1.push_back(num);
+	// 	vec2.push_back(num);
+	// }
 	// size_t arr_size = sizeof(arr) / sizeof(arr[0]);
 	// int arr[] = {1, 1, 1, 1};
 	// std::vector<int> vec(arr, arr + arr_size);
-
-	std::clock_t start_vec1 = std::clock();
-	std::vector<int> sorted_vec1 = sortRecursively(vec1);
-	std::clock_t end_vec1 = std::clock();
-	double time_vec1 = 1000000.0 * (static_cast<double>(end_vec1) - static_cast<double>(start_vec1)) / CLOCKS_PER_SEC;
-	// double time_vec1 = (static_cast<double>(end_vec1) - static_cast<double>(start_vec1)) / CLOCKS_PER_SEC;
-	std::cout << "sort time jacob: " << time_vec1 << std::endl;
-
-	std::clock_t start_vec2 = std::clock();
-	std::vector<int> sorted_vec2 = sortRecursivelyNotJacob(vec2);
-	std::clock_t end_vec2 = std::clock();
-	double time_vec2 = 1000000.0 * (static_cast<double>(end_vec2) - static_cast<double>(start_vec2)) / CLOCKS_PER_SEC;
-	// double time_vec2 = (static_cast<double>(end_vec2) - static_cast<double>(start_vec2)) / CLOCKS_PER_SEC;
-	std::cout << "sort time not jacob: " << time_vec2 << std::endl;
-
-	for (size_t i = 0; i < sorted_vec1.size(); ++i) {
-		std::cout << sorted_vec1[i] << ", ";
+	if (argc != 2 || !PmergeMe::checkValidArgs(argv[1])) {
+		std::cerr << "Error" << std::endl;
+		return (1);
 	}
-	std::cout << std::endl;
+	PmergeMe arr;
+	arr.setVectorAndList(argv[1]);
+
+	// std::clock_t start_vec1 = std::clock();
+	// std::vector<int> sorted_vec1 = sortRecursively(vec1);
+	// std::clock_t end_vec1 = std::clock();
+	// double time_vec1 = 1000000.0 * (static_cast<double>(end_vec1) - static_cast<double>(start_vec1)) / CLOCKS_PER_SEC;
+	// // double time_vec1 = (static_cast<double>(end_vec1) - static_cast<double>(start_vec1)) / CLOCKS_PER_SEC;
+	// std::cout << "sort time jacob: " << time_vec1 << std::endl;
+
+	// std::clock_t start_vec2 = std::clock();
+	// std::vector<int> sorted_vec2 = sortRecursivelyNotJacob(vec2);
+	// std::clock_t end_vec2 = std::clock();
+	// double time_vec2 = 1000000.0 * (static_cast<double>(end_vec2) - static_cast<double>(start_vec2)) / CLOCKS_PER_SEC;
+	// // double time_vec2 = (static_cast<double>(end_vec2) - static_cast<double>(start_vec2)) / CLOCKS_PER_SEC;
+	// std::cout << "sort time not jacob: " << time_vec2 << std::endl;
+
+	// for (size_t i = 0; i < sorted_vec1.size(); ++i) {
+	// 	std::cout << sorted_vec1[i] << ", ";
+	// }
+	// std::cout << std::endl;
 	return 0;
 }
 
