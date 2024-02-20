@@ -41,6 +41,10 @@ class PmergeMe {
 		// void insert(int sorted_index, const unsigned int element);
 		// void runInsertionSortVector();
 		// list
+		std::list<int> runMergeInsertionSort(const std::list<int>& lst);
+		void	runBinaryInsertionSort(std::list<int>& main_chain, const int sub_chain_element);
+		std::list<unsigned int>	createJacobstalIndex(const std::list<int>& smaller_lst);
+		std::list<unsigned int>	createJacobstalList(const size_t max_num);
 		// void sortList();
 		// void mergeList(std::list<unsigned int>::iterator left, std::list<unsigned int>::iterator middle, std::list<unsigned int>::iterator right);
 		// std::list<unsigned int>::iterator findMiddle(std::list<unsigned int>::iterator start, std::list<unsigned int>::iterator end);
@@ -49,7 +53,7 @@ class PmergeMe {
 		// void runInsertionSortList();
 	private:
 		std::vector<int> _vec;
-		std::list<unsigned int> _lst;
+		std::list<int> _lst;
 };
 
 #endif

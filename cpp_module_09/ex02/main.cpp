@@ -196,8 +196,12 @@ int main(int argc, char **argv) {
 		return (1);
 	}
 	PmergeMe arr;
-	arr.setVectorAndList(argv[1]);
-	arr.sortVectorAndList();
+	try {
+		arr.setVectorAndList(argv[1]);
+		arr.sortVectorAndList();
+	} catch (const std::exception& e) {
+		std::cerr << "ERROR: catch std::exception: " << e.what() << std::endl;
+	}
 
 	// std::clock_t start_vec1 = std::clock();
 	// std::vector<int> sorted_vec1 = sortRecursively(vec1);
@@ -217,7 +221,7 @@ int main(int argc, char **argv) {
 	// 	std::cout << sorted_vec1[i] << ", ";
 	// }
 	// std::cout << std::endl;
-	return 0;
+	return (0);
 }
 
 // int	main(int argc, char **argv) {
