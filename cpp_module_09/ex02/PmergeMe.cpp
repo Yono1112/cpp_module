@@ -59,14 +59,6 @@ void	PmergeMe::setVectorAndList(const char *c_str) {
 		_vec.push_back(num);
 		_lst.push_back(num);
 	}
-	// std::cout << "_vec: ";
-	// for (size_t i = 0; i < _vec.size(); i++) {
-	// 	std::cout << _vec.at(i) << ", ";
-	// }
-	// std::cout << std::endl;
-	// for (std::list<int>::iterator it = _lst.begin(); it != _lst.end(); it++) {
-	// 	std::cout << "lst: " << *it << std::endl;
-	// }
 }
 
 unsigned int	PmergeMe::jacobsthal(const unsigned int n) {
@@ -106,10 +98,6 @@ std::vector<unsigned int>	PmergeMe::createJacobstalIndex(const std::vector<int>&
 			index_vec.push_back(j);
 		}
 	}
-	// for (unsigned int i = 0; i < index_vec.size(); ++i) {
-	// 	std::cout << index_vec[i] << ", ";
-	// }
-	// std::cout << std::endl;
 	return (index_vec);
 }
 
@@ -147,6 +135,7 @@ std::vector<int> PmergeMe::runMergeInsertionSort(const std::vector<int>& vec) {
 	}
 
 	std::vector<int> main_chain = runMergeInsertionSort(larger_vec);
+
 	std::vector<unsigned int>jacobsthal_vec = createJacobstalIndex(smaller_vec);
 	for (size_t i = 0; i < smaller_vec.size(); ++i) {
 		unsigned int jacobsthal_index = jacobsthal_vec[i] - 1;
@@ -154,6 +143,7 @@ std::vector<int> PmergeMe::runMergeInsertionSort(const std::vector<int>& vec) {
 			runBinaryInsertionSort(main_chain, smaller_vec[jacobsthal_index]);
 		}
 	}
+
 	return (main_chain);
 }
 
@@ -182,16 +172,6 @@ std::list<unsigned int>	PmergeMe::createJacobstalIndex(const std::list<int>& sma
 			index_lst.push_back(it_j);
 		}
 	}
-	// for (size_t i = 1; i < jacobsthal_lst.size(); ++i) {
-	// 	unsigned int prev_num = jacobsthal_lst[i - 1];
-	// 	for (size_t j = jacobsthal_lst[i]; j > prev_num; --j) {
-	// 		index_lst.push_back(j);
-	// 	}
-	// }
-	// for (unsigned int i = 0; i < index_vec.size(); ++i) {
-	// 	std::cout << index_vec[i] << ", ";
-	// }
-	// std::cout << std::endl;
 	return (index_lst);
 }
 
@@ -201,10 +181,7 @@ void	PmergeMe::runBinaryInsertionSort(std::list<int>& main_chain, const int sub_
 }
 
 std::list<int> PmergeMe::runMergeInsertionSort(const std::list<int>& lst) {
-	// std::cout << "=========================================" << std::endl;
-	// std::cout << "start runMergeInsertionSort" << std::endl;
 	if (lst.size() < 2) {
-		// std::cout << "finish recursive!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
 		return (lst);
 	}
 
@@ -218,7 +195,6 @@ std::list<int> PmergeMe::runMergeInsertionSort(const std::list<int>& lst) {
 		} else {
 			tmp_pair = std::make_pair(first_element, -1);
 		}
-		// std::cout << tmp_pair.first << ", " << tmp_pair.second << std::endl;
 		pair_lst.push_back(tmp_pair);
 	}
 
@@ -232,24 +208,10 @@ std::list<int> PmergeMe::runMergeInsertionSort(const std::list<int>& lst) {
 			smaller_lst.push_back(it->second);
 		}
 	}
-	// std::cout << "larger_lst: ";
-	// for (std::list<int>::iterator it = larger_lst.begin(); it != larger_lst.end(); ++it) {
-	// 	std::cout << *it << ", ";
-	// }
-	// std::cout << std::endl;
-	// std::cout << "smaller_lst: ";
-	// for (std::list<int>::iterator it = smaller_lst.begin(); it != smaller_lst.end(); ++it) {
-	// 	std::cout << *it << ", ";
-	// }
-	// std::cout << std::endl;
 
 	std::list<int> main_chain = runMergeInsertionSort(larger_lst);
+
 	std::list<unsigned int>jacobsthal_lst = createJacobstalIndex(smaller_lst);
-	// std::cout << "jacobsthal_lst: ";
-	// for (std::list<unsigned int>::iterator it = jacobsthal_lst.begin(); it != jacobsthal_lst.end(); ++it) {
-	// 	std::cout << *it << ", ";
-	// }
-	// std::cout << std::endl;
 	for (std::list<unsigned int>::iterator it = jacobsthal_lst.begin(); it != jacobsthal_lst.end(); ++it) {
 		int jacobsthal_index = *it - 1;
 		std::list<int>::iterator jacobsthal_it = smaller_lst.begin();
@@ -258,11 +220,7 @@ std::list<int> PmergeMe::runMergeInsertionSort(const std::list<int>& lst) {
 			runBinaryInsertionSort(main_chain, *jacobsthal_it);
 		}
 	}
-	// std::cout << "main_chain: ";
-	// for (std::list<int>::iterator it_j = main_chain.begin(); it_j != main_chain.end(); it_j++) {
-	// 	std::cout << *it_j << ", ";
-	// }
-	// std::cout << std::endl;
+
 	return (main_chain);
 }
 
@@ -271,8 +229,6 @@ void	PmergeMe::printSortTime(const std::string& container, const double time, co
 }
 
 void	PmergeMe::sortVectorAndList() {
-	// std::cout << "==============" << std::endl;
-	// std::cout << "run sortMergeInsertion" << std::endl;
 	printFirstSecondLine("Before: ");
 	std::clock_t start_vec = std::clock();
 	_vec = runMergeInsertionSort(_vec);
@@ -286,164 +242,3 @@ void	PmergeMe::sortVectorAndList() {
 	printSortTime("vector", time_vec, _vec.size());
 	printSortTime("list", time_lst, _lst.size());
 }
-
-// void	PmergeMe::sortMergeInsertion() {
-// 	// std::cout << "==============" << std::endl;
-// 	// std::cout << "run sortMergeInsertion" << std::endl;
-// 	printFirstSecondLine("Before: ");
-// 	std::clock_t start_vec = std::clock();
-// 	sortVector();
-// 	std::clock_t end_vec = std::clock();
-// 	// std::clock_t start_lst = std::clock();
-// 	// sortList();
-// 	// std::clock_t end_lst = std::clock();
-// 	double time_vec = 1000000.0 * (static_cast<double>(end_vec) - static_cast<double>(start_vec)) / CLOCKS_PER_SEC;
-// 	// double time_lst = 1000000.0 * (static_cast<double>(end_lst) - static_cast<double>(start_lst)) / CLOCKS_PER_SEC;
-// 	printFirstSecondLine("After: ");
-// 	printSortTime("vector", time_vec, _vec.size());
-// 	// printSortTime("list", time_lst, _lst.size());
-// }
-
-// void	PmergeMe::insert(int sorted_index, const unsigned int element) {
-// 	while (sorted_index >= 0) {
-// 		if (element > _vec[sorted_index]) {
-// 			break ;
-// 		}
-// 		_vec[sorted_index + 1] = _vec[sorted_index];
-// 		sorted_index--;
-// 	}
-// 	_vec[sorted_index + 1] = element;
-// }
-// 
-// void	PmergeMe::runInsertionSortVector() {
-// 	for (size_t i = 1; i < _vec.size(); i++) {
-// 		insert(i - 1, _vec[i]);
-// 	}
-// }
-// 
-// void	PmergeMe::mergeVector(int left, int middle, int right) {
-// 	// std::cout << "merge" << std::endl;
-// 	int left_index = left;
-// 	int right_index = middle + 1;
-// 	std::vector<unsigned int> tmp_vec;
-// 
-// 	while (left_index <= middle && right_index <= right) {
-// 		if (_vec[left_index] < _vec[right_index]) {
-// 			tmp_vec.push_back(_vec[left_index++]);
-// 		} else {
-// 			tmp_vec.push_back(_vec[right_index++]);
-// 		}
-// 	}
-// 
-// 	while (left_index <= middle) {
-// 		tmp_vec.push_back(_vec[left_index++]);
-// 	}
-// 	while (right_index <= right) {
-// 		tmp_vec.push_back(_vec[right_index++]);
-// 	}
-// 	for (int i = left; i <= right; i++) {
-// 		_vec[i] = tmp_vec[i - left];
-// 	}
-// }
-// 
-// void	PmergeMe::runMergeSortVector(int left, int right) {
-// 	if (left == right) {
-// 		return ;
-// 	}
-// 	int middle = (right + left) / 2;
-// 	// std::cout << "left: " << left << ", right: " << right << ", middle: " << middle << std::endl;
-// 	runMergeSortVector(left, middle);
-// 	runMergeSortVector(middle + 1, right);
-// 	mergeVector(left, middle, right);
-// }
-// 
-// void	PmergeMe::sortVector() {
-// 	if (_vec.size() > 1700) {
-// 		std::cout << "runMergeSortVector" << std::endl;
-// 		runMergeSortVector(0, _vec.size() - 1);
-// 	} else {
-// 		std::cout << "runInsertionSortVector" << std::endl;
-// 		runInsertionSortVector();
-// 	}
-// 	// for (size_t i = 0; i < _vec.size(); i++) {
-// 	// 	std::cout << "vec[" << i << "]: " << _vec.at(i) << std::endl;
-// 	// }
-// }
-// 
-// void	PmergeMe::mergeList(std::list<unsigned int>::iterator left, std::list<unsigned int>::iterator middle, std::list<unsigned int>::iterator right) {
-// 	// std::cout << "merge" << std::endl;
-// 	std::list<unsigned int>::iterator left_it = left;
-// 	std::list<unsigned int>::iterator right_it = middle;
-// 	std::list<unsigned int> tmp_lst;
-// 
-// 	while (left_it != middle && right_it != right) {
-// 		if (*left_it < *right_it) {
-// 			tmp_lst.push_back(*left_it++);
-// 		} else {
-// 			tmp_lst.push_back(*right_it++);
-// 		}
-// 	}
-// 
-// 	while (left_it != middle) {
-// 		tmp_lst.push_back(*left_it++);
-// 	}
-// 	while (right_it != right) {
-// 		tmp_lst.push_back(*right_it++);
-// 	}
-// 	std::list<unsigned int>::iterator tmp_it = tmp_lst.begin();
-// 	for (std::list<unsigned int>::iterator it = left; it != right; it++, tmp_it++) {
-// 		*it = *tmp_it;
-// 	}
-// }
-// 
-// std::list<unsigned int>::iterator	PmergeMe::findMiddle(std::list<unsigned int>::iterator start, std::list<unsigned int>::iterator end) {
-// 	std::list<unsigned int>::iterator first_step = start;
-// 	std::list<unsigned int>::iterator second_step = start;
-// 
-// 	while (second_step != end && std::next(second_step) != end) {
-// 		first_step = std::next(first_step);
-// 		second_step = std::next(second_step);
-// 		second_step = std::next(second_step);
-// 	}
-// 	return (first_step);
-// }
-// 
-// void PmergeMe::runMergeSortList(std::list<unsigned int>::iterator left, std::list<unsigned int>::iterator right) {
-// 	if (std::next(left) == right) {
-// 		return ;
-// 	}
-// 	std::list<unsigned int>::iterator middle = findMiddle(left, right);
-// 	runMergeSortList(left, middle);
-// 	runMergeSortList(middle, right);
-// 	mergeList(left, middle, right);
-// }
-// 
-// void	PmergeMe::insert(std::list<unsigned int>::iterator sorted_index, const unsigned int element) {
-// 	while (sorted_index != _lst.begin()) {
-// 		if (element > *std::prev(sorted_index)) {
-// 			break ;
-// 		}
-// 		*sorted_index = *std::prev(sorted_index);
-// 		sorted_index--;
-// 	}
-// 	*sorted_index = element;
-// }
-// 
-// void	PmergeMe::runInsertionSortList() {
-// 	for (std::list<unsigned int>::iterator it = _lst.begin(); it != _lst.end(); it++) {
-// 		insert(it, *it);
-// 	}
-// }
-// 
-// void	PmergeMe::sortList() {
-// 	if (_lst.size() > 150) {
-// 	     std::cout << "runMergeSortList" << std::endl;
-// 	     runMergeSortList(_lst.begin(), _lst.end());
-// 	} else {
-// 	     std::cout << "runInsertionSortList" << std::endl;
-// 	     runInsertionSortList();
-// 	}
-// 	// for (std::list<unsigned int>::iterator it = _lst.begin(); it != _lst.end(); it++) {
-// 	// 	std::cout << "lst: " << *it << std::endl;
-// 	// }
-// }
