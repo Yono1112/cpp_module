@@ -141,3 +141,39 @@ int	main() {
 // {
 // 	system("leaks -q stack");
 // }
+
+// Sample code for problems when inheriting std::stack
+// 
+// #include <iostream>
+// #include <stack>
+// #include <deque>
+
+// class MyStack : public std::stack<int> {
+// 	public:
+// 		MyStack() {
+// 			std::cout << "MyStack Constructor" << std::endl;
+// 			a = new int(1);
+// 		}
+// 		~MyStack() {
+// 			delete a;
+// 			std::cout << "MyStack Destructor" << std::endl;
+// 		}
+// 	private:
+// 		int* a;
+// };
+
+// int main() {
+// 	std::stack<int>* ptr = new MyStack();
+// 	// MyStack* mystack_ptr = new MyStack();
+
+// 	delete ptr;
+// 	// delete mystack_ptr;
+
+// 	return 0;
+// }
+
+// __attribute__((destructor))
+// static void	destructor(void)
+// {
+// 	system("leaks -q a.out");
+// }
