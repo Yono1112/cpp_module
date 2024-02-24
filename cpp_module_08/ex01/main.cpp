@@ -54,16 +54,16 @@ void	testInvalidSpan() {
 void	testValidSpan() {
 	std::cout << "====================================" << std::endl;
 	std::cout << "run testValidSpan" << std::endl;
-	{
-		const unsigned int N = 20000;
-		Span sp(N);
-		std::vector<int> vec;
+	const unsigned int N = 20000;
+	Span sp(N);
+	std::vector<int> vec;
 
-		std::cout << "std::vector size: " << vec.size() << std::endl;
-		for (unsigned int i = 1; i < N + 1; ++i) {
-			vec.push_back(i);
-		}
-		std::cout << "std::vector size: " << vec.size() << std::endl;
+	std::cout << "std::vector size: " << vec.size() << std::endl;
+	for (unsigned int i = 1; i < N + 1; ++i) {
+		vec.push_back(i);
+	}
+	std::cout << "std::vector size: " << vec.size() << std::endl;
+	{
 		try {
 			sp.fillNumbers(vec.begin(), vec.end());
 
@@ -75,20 +75,36 @@ void	testValidSpan() {
 	}
 	{
 		srand(time(NULL));
-		const unsigned int N = 10000;
+		const unsigned int N = 100;
 		Span sp(N);
 		std::vector<int> vec;
 
 		std::cout << "std::vector size: " << vec.size() << std::endl;
-		for (unsigned int i = 1; i < N + 1; ++i) {
-			vec.push_back(rand());
+		for (unsigned int i = 0; i < N ; ++i) {
+			vec.push_back(rand() % 10000);
 		}
 		std::cout << "std::vector size: " << vec.size() << std::endl;
 		try {
 			sp.fillNumbers(vec.begin(), vec.end());
-
+	     	
 			std::cout << "shortestSpan: " << sp.shortestSpan() << std::endl;
 			std::cout << "longestSpan: " << sp.longestSpan() << std::endl;
+		} catch (const std::exception& e) {
+			std::cout << "catch exception: " << e.what() << std::endl;
+		}
+	}
+	{
+		Span span(3);
+		try {
+			span.addNumber(-2147483648);
+			span.addNumber(2147483647);
+
+			std::cout << "shortestSpan: " << span.shortestSpan() << std::endl;
+			std::cout << "longestSpan: " << span.longestSpan() << std::endl;
+			std::cout << "addNumber(0)" << std::endl;
+			span.addNumber(0);
+			std::cout << "shortestSpan: " << span.shortestSpan() << std::endl;
+			std::cout << "longestSpan: " << span.longestSpan() << std::endl;
 		} catch (const std::exception& e) {
 			std::cout << "catch exception: " << e.what() << std::endl;
 		}

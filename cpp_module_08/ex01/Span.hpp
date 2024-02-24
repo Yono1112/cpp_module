@@ -2,8 +2,8 @@
 #define SPAN_HPP
 
 #include <iostream>
-#include <vector>
 #include <algorithm>
+#include <set>
 
 class Span {
 	public:
@@ -13,12 +13,12 @@ class Span {
 		Span& operator=(const Span& other);
 		~Span();
 		void	addNumber(int num);
-		int	shortestSpan();
-		int	longestSpan();
+		unsigned int	shortestSpan();
+		unsigned int	longestSpan();
 		void	fillNumbers(std::vector<int>::iterator begin, std::vector<int>::iterator end);
 	private:
 		unsigned int _max_elements;
-		std::vector<int> _vec;
+		std::multiset<int> _mset;
 };
 
 #endif
