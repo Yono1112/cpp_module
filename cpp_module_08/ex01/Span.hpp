@@ -15,10 +15,19 @@ class Span {
 		void	addNumber(int num);
 		unsigned int	shortestSpan();
 		unsigned int	longestSpan();
-		void	fillNumbers(std::vector<int>::iterator begin, std::vector<int>::iterator end);
+		template <typename Iterator>
+		void	fillNumbers(Iterator begin, Iterator end);
 	private:
 		unsigned int _max_elements;
 		std::multiset<int> _mset;
 };
+
+template <typename Iterator>
+void	Span::fillNumbers(Iterator begin, Iterator end) {
+	while (begin != end) {
+		addNumber(*begin);
+		begin++;
+	}
+}
 
 #endif

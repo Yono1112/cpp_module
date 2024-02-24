@@ -1,5 +1,6 @@
 #include "Span.hpp"
 #include <cstdlib>
+#include <vector>
 
 void	testSubject() {
 	std::cout << "====================================" << std::endl;

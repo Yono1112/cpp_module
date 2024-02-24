@@ -79,10 +79,3 @@ unsigned int	Span::longestSpan() {
 	}
 	return (*max - min_num);
 }
-
-void	Span::fillNumbers(std::vector<int>::iterator begin, std::vector<int>::iterator end) {
-	while (begin != end) {
-		addNumber(*begin);
-		begin++;
-	}
-}
