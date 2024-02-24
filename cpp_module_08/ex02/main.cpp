@@ -75,11 +75,22 @@ void	testIterator() {
 		}
 		std::cout << "mtack empty: " << std::boolalpha << mstack1.empty() << std::endl;
 		std::cout << "mstack size: " << mstack1.size() << std::endl;
+
 		std::cout << "iterator begin() and end()" << std::endl;
 		for (MutantStack<int>::iterator it = mstack1.begin(); it != mstack1.end(); ++it) {
 			std::cout << *it << std::endl;
 		}
 		std::cout << "revese_iterator rbegin() and rend()" << std::endl;
+		for (MutantStack<int>::reverse_iterator it = mstack1.rbegin(); it != mstack1.rend(); ++it) {
+			std::cout << *it << std::endl;
+		}
+
+		const MutantStack<int>	 cmstack1(mstack1);
+		std::cout << "const_iterator begin() and end()" << std::endl;
+		for (MutantStack<int>::const_iterator it = cmstack1.begin(); it != cmstack1.end(); ++it) {
+			std::cout << *it << std::endl;
+		}
+		std::cout << "const_revese_iterator rbegin() and rend()" << std::endl;
 		for (MutantStack<int>::reverse_iterator it = mstack1.rbegin(); it != mstack1.rend(); ++it) {
 			std::cout << *it << std::endl;
 		}

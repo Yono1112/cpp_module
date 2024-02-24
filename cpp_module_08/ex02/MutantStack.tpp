@@ -55,6 +55,7 @@ size_t	MutantStack<T, Container>::size() {
 
 template<typename T, typename Container>
 typename Container::iterator	MutantStack<T, Container>::begin() {
+	// std::cout << "iterator" << std::endl;
 	return (_container.begin());
 }
 
@@ -64,12 +65,35 @@ typename Container::iterator	MutantStack<T, Container>::end() {
 }
 
 template<typename T, typename Container>
+typename Container::const_iterator	MutantStack<T, Container>::begin() const {
+	// std::cout << "const_iterator" << std::endl;
+	return (_container.begin());
+}
+
+template<typename T, typename Container>
+typename Container::const_iterator	MutantStack<T, Container>::end() const {
+	return (_container.end());
+}
+
+template<typename T, typename Container>
 typename Container::reverse_iterator	MutantStack<T, Container>::rbegin() {
+	// std::cout << "reverse_iterator" << std::endl;
 	return (_container.rbegin());
 }
 
 template<typename T, typename Container>
 typename Container::reverse_iterator	MutantStack<T, Container>::rend() {
+	return (_container.rend());
+}
+
+template<typename T, typename Container>
+typename Container::const_reverse_iterator	MutantStack<T, Container>::rbegin() const {
+	// std::cout << "const_reverse_iterator" << std::endl;
+	return (_container.rbegin());
+}
+
+template<typename T, typename Container>
+typename Container::const_reverse_iterator	MutantStack<T, Container>::rend() const {
 	return (_container.rend());
 }
 
