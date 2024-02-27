@@ -101,6 +101,49 @@ std::vector<unsigned int>	PmergeMe::createJacobstalIndex(const std::vector<int>&
 	return (index_vec);
 }
 
+void	printPairVec(const t_pair& pair, int depth = 0) {
+	std::cout << std::string(depth, ' ') << "num: " << pair.num << std::endl;
+	
+	for (size_t i = 0; i < pair.pair_vec.size(); ++i) {
+		printPairVec(pair.pair_vec[i], depth + 2);
+	}
+}
+
+std::vector<t_pair>	PmergeMe::createJacobstalIndex(std::vector<t_pair>& main_chain) {
+	// std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+	std::vector<unsigned int> jacobsthal_vec = createJacobstalVector(main_chain.size() - 1);
+	// std::cout << "jacobsthal_vec: ";
+	// for (size_t i = 0; i < jacobsthal_vec.size(); ++i) {
+	// 	std::cout << jacobsthal_vec[i] << ", ";
+	// }
+	// std::cout << std::endl;
+	std::vector<unsigned int> index_vec;
+	for (size_t i = 1; i < jacobsthal_vec.size(); ++i) {
+		unsigned int prev_num = jacobsthal_vec[i - 1];
+		for (unsigned int j = jacobsthal_vec[i]; j > prev_num; --j) {
+			index_vec.push_back(j);
+		}
+	}
+	// std::cout << "index_vec: ";
+	// for (size_t i = 0; i < index_vec.size(); ++i) {
+	// 	std::cout << index_vec[i] << ", ";
+	// }
+	// std::cout << std::endl;
+	std::vector<t_pair> index_pair_vec;
+	for (size_t i = 0; i < index_vec.size(); ++i) {
+		t_pair tmp = main_chain[index_vec[i]];
+		index_pair_vec.push_back(tmp);
+		if (main_chain[0].pair_vec.size() < main_chain[index_vec[i]].pair_vec.size()) {
+			main_chain[index_vec[i]].pair_vec.pop_back();
+		}
+	}
+	// for (size_t i = 0; i < index_pair_vec.size(); ++i) {
+	// 	printPairVec(index_pair_vec[i]);
+	// }
+	// std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+	return (index_pair_vec);
+}
+
 void	PmergeMe::runBinaryInsertionSort(std::vector<int>& main_chain, const int sub_chain_element) {
 	std::vector<int>::iterator it = std::lower_bound(main_chain.begin(), main_chain.end(), sub_chain_element);
 	main_chain.insert(it, sub_chain_element);
@@ -128,33 +171,28 @@ std::vector<int> PmergeMe::convertToPairVector(const std::vector<int>& vec) {
 	return (sorted_vec);
 }
 
-void printPairVec(const t_pair& pair, int depth = 0) {
-	std::cout << std::string(depth, ' ') << "num: " << pair.num << std::endl;
-	
-	for (size_t i = 0; i < pair.pair_vec.size(); ++i) {
-		printPairVec(pair.pair_vec[i], depth + 2);
-	}
-}
-
 bool	PmergeMe::comp(const t_pair& first, const t_pair& second) {
 	return (first.num < second.num);
 }
 
-void	PmergeMe::runBinaryInsertionSort(std::vector<t_pair>& main_chain, t_pair& insert_element, const size_t index) {
+void	PmergeMe::runBinaryInsertionSort(std::vector<t_pair>& main_chain, t_pair& insert_element) {
 	// std::cout << "start runBinaryInsertionSort" << std::endl;
-	std::cout << "insert_element: " << insert_element.num << ", main_chain[" << index << "]: " << main_chain[index].num << std::endl;
+	// std::cout << "insert_element: " << insert_element.num << ", main_chain[" << index << "]: " << main_chain[index].num << std::endl;
+	// std::cout << "0000000000000000000" << std::endl;
 	// for (size_t i = 0; i < main_chain.size(); ++i) {
 	// 	printPairVec(main_chain[i]);
 	// }
-
 	// std::cout << "0000000000000000000" << std::endl;
-	std::vector<t_pair>::iterator it = std::lower_bound(main_chain.begin(), main_chain.begin() + index, insert_element, comp);
+
+	std::vector<t_pair>::iterator it = std::lower_bound(main_chain.begin() + 1, main_chain.end(), insert_element, comp);
 	// std::cout << "it: " << it->num << std::endl;
 	main_chain.insert(it, insert_element);
 
+	// std::cout << "0000000000000000000" << std::endl;
 	// for (size_t i = 0; i < main_chain.size(); ++i) {
 	// 	printPairVec(main_chain[i]);
 	// }
+	// std::cout << "0000000000000000000" << std::endl;
 	// std::cout << "finish runBinaryInsertionSort" << std::endl;
 }
 
@@ -203,19 +241,41 @@ std::vector<t_pair> PmergeMe::runMergeInsertionSort(std::vector<t_pair>& vec) {
 		printPairVec(main_chain[i]);
 	}
 
-	for (size_t i = 1; i < main_chain.size(); ++i) {
-		// if (vec.size() == main_chain.size()) {
-		// 	break ;
-		// }
-		if (!main_chain[i].pair_vec.empty() && main_chain[0].pair_vec.size() < main_chain[i].pair_vec.size()) {
-			t_pair insert_element = main_chain[i].pair_vec.back();
-			main_chain[i].pair_vec.pop_back();
-			if (insert_element.num != -1) {
-				runBinaryInsertionSort(main_chain, insert_element, i);
-				i++;
+	std::vector<t_pair>jacobsthal_vec = createJacobstalIndex(main_chain);
+	// std::cout << "jacobsthal_vec: ";
+	// for (size_t i = 0; i < jacobsthal_vec.size(); ++i) {
+	// 	// unsigned int jacobsthal_index = jacobsthal_vec[i];
+	// 	// std::cout << jacobsthal_index << ", ";
+	// 	std::cout << jacobsthal_vec[i].num << ", ";
+	// }
+	// std::cout << std::endl;
+	if (!jacobsthal_vec.empty()) {
+		for (size_t i = 0; i < jacobsthal_vec.size() ; ++i) {
+			// std::cout << "jacobsthal_vec.num: " << jacobsthal_vec[i].num << std::endl;
+			if (!jacobsthal_vec[i].pair_vec.empty() && main_chain[0].pair_vec.size() < jacobsthal_vec[i].pair_vec.size()) {
+				t_pair insert_element = jacobsthal_vec[i].pair_vec.back();
+				// main_chain[jacobsthal_index].pair_vec.pop_back();
+				// std::cout << "insert_element.num: " << insert_element.num << std::endl;
+				if (insert_element.num != -1) {
+					runBinaryInsertionSort(main_chain, insert_element);
+				}
 			}
 		}
 	}
+	// for (size_t i = 1; i < main_chain.size(); ++i) {
+	// 	if (!jacobsthal_vec.empty()) {
+	// 		unsigned int jacobsthal_index = jacobsthal_vec[i - 1] + i;
+	// 		std::cout << "jacobsthal_index: " << jacobsthal_index << ", " << jacobsthal_vec[i - 1] + i << std::endl;
+	// 	}
+	// 	if (!main_chain[i].pair_vec.empty() && main_chain[0].pair_vec.size() < main_chain[i].pair_vec.size()) {
+	// 		t_pair insert_element = main_chain[i].pair_vec.back();
+	// 		main_chain[i].pair_vec.pop_back();
+	// 		if (insert_element.num != -1) {
+	// 			runBinaryInsertionSort(main_chain, insert_element, i);
+	// 			i++;
+	// 		}
+	// 	}
+	// }
 	std::cout << "#############################################" << std::endl;
 	for (size_t i = 0; i < main_chain.size(); ++i) {
 		printPairVec(main_chain[i]);
