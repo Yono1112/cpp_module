@@ -8,6 +8,11 @@
 #include <sstream>
 #include <ctime>
 
+typedef struct s_pair {
+	int		num;
+	std::vector<struct s_pair> pair_vec;
+}	t_pair;
+
 class PmergeMe {
 	public:
 		PmergeMe();
@@ -27,6 +32,10 @@ class PmergeMe {
 		void printFirstSecondLine(const std::string& str);
 		void printSortTime(const std::string& container, const double time, const size_t size);
 		void runBinarySearch(std::vector<unsigned int>& vec, unsigned int num);
+		std::vector<int> convertToPairVector(const std::vector<int>& vec);
+		std::vector<t_pair> runMergeInsertionSort(std::vector<t_pair>& vec);
+		void runBinaryInsertionSort(std::vector<t_pair>& main_chain, t_pair& insert_element, const size_t index);
+		static bool comp(const t_pair& first, const t_pair& second);
 		// list
 		std::list<int> runMergeInsertionSort(const std::list<int>& lst);
 		void	runBinaryInsertionSort(std::list<int>& main_chain, const int sub_chain_element);

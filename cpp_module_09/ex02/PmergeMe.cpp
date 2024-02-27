@@ -106,6 +106,126 @@ void	PmergeMe::runBinaryInsertionSort(std::vector<int>& main_chain, const int su
 	main_chain.insert(it, sub_chain_element);
 }
 
+std::vector<int> PmergeMe::convertToPairVector(const std::vector<int>& vec) {
+	std::vector<t_pair> pair_vec(vec.size());
+
+	for (size_t i = 0; i < vec.size(); ++i) {
+		pair_vec[i].num = vec[i];
+	}
+	for (size_t i = 0; i < pair_vec.size(); ++i) {
+		std::cout << pair_vec[i].num << ", ";
+	}
+	std::cout << std::endl;
+
+	// pair_vec[0].pair_vec.push_back(pair_vec[1]);
+	// std::cout << pair_vec[0].pair_vec[0].num << std::endl;
+
+	std::vector<t_pair> sorted_pair_vec = runMergeInsertionSort(pair_vec);
+	std::vector<int> sorted_vec(vec.size());
+	for (size_t i = 0; i < sorted_vec.size(); ++i) {
+		sorted_vec[i] = sorted_pair_vec[i].num;
+	}
+	return (sorted_vec);
+}
+
+void printPairVec(const t_pair& pair, int depth = 0) {
+	std::cout << std::string(depth, ' ') << "num: " << pair.num << std::endl;
+	
+	for (size_t i = 0; i < pair.pair_vec.size(); ++i) {
+		printPairVec(pair.pair_vec[i], depth + 2);
+	}
+}
+
+bool	PmergeMe::comp(const t_pair& first, const t_pair& second) {
+	return (first.num < second.num);
+}
+
+void	PmergeMe::runBinaryInsertionSort(std::vector<t_pair>& main_chain, t_pair& insert_element, const size_t index) {
+	// std::cout << "start runBinaryInsertionSort" << std::endl;
+	std::cout << "insert_element: " << insert_element.num << ", main_chain[" << index << "]: " << main_chain[index].num << std::endl;
+	// for (size_t i = 0; i < main_chain.size(); ++i) {
+	// 	printPairVec(main_chain[i]);
+	// }
+
+	// std::cout << "0000000000000000000" << std::endl;
+	std::vector<t_pair>::iterator it = std::lower_bound(main_chain.begin(), main_chain.begin() + index, insert_element, comp);
+	// std::cout << "it: " << it->num << std::endl;
+	main_chain.insert(it, insert_element);
+
+	// for (size_t i = 0; i < main_chain.size(); ++i) {
+	// 	printPairVec(main_chain[i]);
+	// }
+	// std::cout << "finish runBinaryInsertionSort" << std::endl;
+}
+
+std::vector<t_pair> PmergeMe::runMergeInsertionSort(std::vector<t_pair>& vec) {
+	std::cout << "=================================================" << std::endl;
+	if (vec.size() < 2) {
+		return (vec);
+	}
+
+	std::vector<t_pair> recursive_vec;
+	for (size_t i = 0; i < vec.size(); i += 2) {
+		if (i + 1 < vec.size()) {
+			if (vec[i].num > vec[i + 1].num) {
+				vec[i].pair_vec.push_back(vec[i + 1]);
+				recursive_vec.push_back(vec[i]);
+			} else {
+				vec[i + 1].pair_vec.push_back(vec[i]);
+				recursive_vec.push_back(vec[i + 1]);
+			}
+		} else {
+			t_pair tmp;
+			tmp.num = -1;
+			vec[i].pair_vec.push_back(tmp);
+			recursive_vec.push_back(vec[i]);
+		}
+	}
+	for (size_t i = 0; i < recursive_vec.size(); ++i) {
+		printPairVec(recursive_vec[i]);
+	}
+
+	std::vector<t_pair> main_chain = runMergeInsertionSort(recursive_vec);
+
+	std::cout << "main_chain---------------------------------------------" << std::endl;
+	for (size_t i = 0; i < main_chain.size(); ++i) {
+		printPairVec(main_chain[i]);
+	}
+
+	t_pair front = main_chain[0].pair_vec.back();
+	main_chain[0].pair_vec.pop_back();
+	// printPairVec(front);
+	std::cout << "main_chain after insert index 0th ---------------------------------------------" << std::endl;
+	if (front.num != -1) {
+		main_chain.insert(main_chain.begin(), front);
+	}
+	for (size_t i = 0; i < main_chain.size(); ++i) {
+		printPairVec(main_chain[i]);
+	}
+
+	for (size_t i = 1; i < main_chain.size(); ++i) {
+		// if (vec.size() == main_chain.size()) {
+		// 	break ;
+		// }
+		if (!main_chain[i].pair_vec.empty() && main_chain[0].pair_vec.size() < main_chain[i].pair_vec.size()) {
+			t_pair insert_element = main_chain[i].pair_vec.back();
+			main_chain[i].pair_vec.pop_back();
+			if (insert_element.num != -1) {
+				runBinaryInsertionSort(main_chain, insert_element, i);
+				i++;
+			}
+		}
+	}
+	std::cout << "#############################################" << std::endl;
+	for (size_t i = 0; i < main_chain.size(); ++i) {
+		printPairVec(main_chain[i]);
+	}
+	std::cout << "#############################################" << std::endl;
+
+	// std::exit(0);
+	return (main_chain);
+}
+
 std::vector<int> PmergeMe::runMergeInsertionSort(const std::vector<int>& vec) {
 	if (vec.size() < 2) {
 		return (vec);
@@ -231,7 +351,8 @@ void	PmergeMe::printSortTime(const std::string& container, const double time, co
 void	PmergeMe::sortVectorAndList() {
 	printFirstSecondLine("Before: ");
 	std::clock_t start_vec = std::clock();
-	_vec = runMergeInsertionSort(_vec);
+	// _vec = runMergeInsertionSort(_vec);
+	_vec = convertToPairVector(_vec);
 	std::clock_t end_vec = std::clock();
 	std::clock_t start_lst = std::clock();
 	_lst = runMergeInsertionSort(_lst);
