@@ -24,7 +24,6 @@ class PmergeMe {
 		static bool checkValidArgs(const char *str);
 	private:
 		// vector
-		std::vector<int> runMergeInsertionSort(const std::vector<int>& vec);
 		void	runBinaryInsertionSort(std::vector<int>& main_chain, const int sub_chain_element);
 		std::vector<unsigned int>	createJacobstalIndex(const std::vector<int>& smaller_vec);
 		std::vector<unsigned int>	createJacobstalVector(const size_t max_num);
