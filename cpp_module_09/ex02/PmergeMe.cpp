@@ -164,7 +164,7 @@ void	PmergeMe::runBinaryInsertionSort(std::vector<t_pair>& main_chain, t_pair& i
 	// }
 	// std::cout << "0000000000000000000" << std::endl;
 
-	std::vector<t_pair>::iterator it = std::lower_bound(main_chain.begin() + 1, main_chain.end(), insert_element, comp);
+	std::vector<t_pair>::iterator it = std::lower_bound(main_chain.begin() , main_chain.end(), insert_element, comp);
 	// std::cout << "it: " << it->num << std::endl;
 	main_chain.insert(it, insert_element);
 
