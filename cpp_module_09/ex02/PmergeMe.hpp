@@ -31,7 +31,6 @@ class PmergeMe {
 		void printFirstSecondLine(const std::string& str);
 		void printSortTime(const std::string& container, const double time, const size_t size);
 		void runBinarySearch(std::vector<unsigned int>& vec, unsigned int num);
-		std::vector<int> convertToPairVector(const std::vector<int>& vec);
 		std::vector<t_pair> runMergeInsertionSort(std::vector<t_pair>& vec);
 		void runBinaryInsertionSort(std::vector<t_pair>& main_chain, t_pair& insert_element);
 		static bool comp(const t_pair& first, const t_pair& second);
@@ -42,7 +41,8 @@ class PmergeMe {
 		std::list<unsigned int>	createJacobstalIndex(const std::list<int>& smaller_lst);
 		std::list<unsigned int>	createJacobstalList(const size_t max_num);
 	private:
-		std::vector<int> _vec;
+		// std::vector<int> _vec;
+		std::vector<t_pair> _vec;
 		std::list<int> _lst;
 };
 

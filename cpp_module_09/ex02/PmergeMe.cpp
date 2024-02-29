@@ -37,7 +37,7 @@ bool	PmergeMe::checkValidArgs(const char *str) {
 void	PmergeMe::printFirstSecondLine(const std::string& str) {
 	std::cout << "std::vec " << str;
 	for (size_t i = 0; i < _vec.size(); i++) {
-		std::cout << _vec.at(i) << " ";
+		std::cout << _vec[i].num << " ";
 	}
 	std::cout << std::endl;
 	std::cout << "std::lst " << str;
@@ -56,7 +56,9 @@ void	PmergeMe::setVectorAndList(const char *c_str) {
 		if (std::numeric_limits<int>::max() < num || std::numeric_limits<int>::min() > num) {
 			throw std::out_of_range("int out of range");
 		}
-		_vec.push_back(num);
+		t_pair tmp_pair;
+		tmp_pair.num = num;
+		_vec.push_back(tmp_pair);
 		_lst.push_back(num);
 	}
 }
@@ -147,28 +149,6 @@ std::vector<t_pair>	PmergeMe::createJacobstalIndex(std::vector<t_pair>& main_cha
 void	PmergeMe::runBinaryInsertionSort(std::vector<int>& main_chain, const int sub_chain_element) {
 	std::vector<int>::iterator it = std::lower_bound(main_chain.begin(), main_chain.end(), sub_chain_element);
 	main_chain.insert(it, sub_chain_element);
-}
-
-std::vector<int> PmergeMe::convertToPairVector(const std::vector<int>& vec) {
-	std::vector<t_pair> pair_vec(vec.size());
-
-	for (size_t i = 0; i < vec.size(); ++i) {
-		pair_vec[i].num = vec[i];
-	}
-	for (size_t i = 0; i < pair_vec.size(); ++i) {
-		std::cout << pair_vec[i].num << ", ";
-	}
-	std::cout << std::endl;
-
-	// pair_vec[0].pair_vec.push_back(pair_vec[1]);
-	// std::cout << pair_vec[0].pair_vec[0].num << std::endl;
-
-	std::vector<t_pair> sorted_pair_vec = runMergeInsertionSort(pair_vec);
-	std::vector<int> sorted_vec(vec.size());
-	for (size_t i = 0; i < sorted_vec.size(); ++i) {
-		sorted_vec[i] = sorted_pair_vec[i].num;
-	}
-	return (sorted_vec);
 }
 
 bool	PmergeMe::comp(const t_pair& first, const t_pair& second) {
@@ -370,8 +350,8 @@ void	PmergeMe::printSortTime(const std::string& container, const double time, co
 void	PmergeMe::sortVectorAndList() {
 	printFirstSecondLine("Before: ");
 	std::clock_t start_vec = std::clock();
-	// _vec = runMergeInsertionSort(_vec);
-	_vec = convertToPairVector(_vec);
+	_vec = runMergeInsertionSort(_vec);
+	// _vec = convertToPairVector(_vec);
 	std::clock_t end_vec = std::clock();
 	std::clock_t start_lst = std::clock();
 	_lst = runMergeInsertionSort(_lst);
