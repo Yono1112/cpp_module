@@ -195,6 +195,15 @@ void	PmergeMe::create_recursive_vec(std::vector<t_pair>& recursive_vec, std::vec
 	}
 }
 
+void	PmergeMe::insert_first_element(std::vector<t_pair>& main_chain) {
+	t_pair front = main_chain[0].pair_vec.back();
+	main_chain[0].pair_vec.pop_back();
+	// std::cout << "main_chain after insert index 0th ---------------------------------------------" << std::endl;
+	if (front.num != -1) {
+		main_chain.insert(main_chain.begin(), front);
+	}
+}
+
 std::vector<t_pair> PmergeMe::runMergeInsertionSort(std::vector<t_pair>& vec) {
 	// std::cout << "=================================================" << std::endl;
 	if (vec.size() < 2) {
@@ -214,12 +223,8 @@ std::vector<t_pair> PmergeMe::runMergeInsertionSort(std::vector<t_pair>& vec) {
 	// 	printPairVec(main_chain[i]);
 	// }
 
-	t_pair front = main_chain[0].pair_vec.back();
-	main_chain[0].pair_vec.pop_back();
+	insert_first_element(main_chain);
 	// std::cout << "main_chain after insert index 0th ---------------------------------------------" << std::endl;
-	if (front.num != -1) {
-		main_chain.insert(main_chain.begin(), front);
-	}
 	// for (size_t i = 0; i < main_chain.size(); ++i) {
 	// 	printPairVec(main_chain[i]);
 	// }

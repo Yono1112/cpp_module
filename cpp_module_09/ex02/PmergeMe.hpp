@@ -36,6 +36,7 @@ class PmergeMe {
 		static bool comp(const t_pair& first, const t_pair& second);
 		std::vector<t_pair> createJacobstalIndex(std::vector<t_pair>& main_chain);
 		void create_recursive_vec(std::vector<t_pair>& recursive_vec, std::vector<t_pair> vec);
+		void insert_first_element(std::vector<t_pair>& main_chain);
 		// list
 		std::list<int> runMergeInsertionSort(const std::list<int>& lst);
 		void	runBinaryInsertionSort(std::list<int>& main_chain, const int sub_chain_element);
