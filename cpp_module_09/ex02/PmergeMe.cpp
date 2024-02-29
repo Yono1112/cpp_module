@@ -176,13 +176,7 @@ void	PmergeMe::runBinaryInsertionSort(std::vector<t_pair>& main_chain, t_pair& i
 	// std::cout << "finish runBinaryInsertionSort" << std::endl;
 }
 
-std::vector<t_pair> PmergeMe::runMergeInsertionSort(std::vector<t_pair>& vec) {
-	// std::cout << "=================================================" << std::endl;
-	if (vec.size() < 2) {
-		return (vec);
-	}
-
-	std::vector<t_pair> recursive_vec;
+void	PmergeMe::create_recursive_vec(std::vector<t_pair>& recursive_vec, std::vector<t_pair> vec) {
 	for (size_t i = 0; i < vec.size(); i += 2) {
 		if (i + 1 < vec.size()) {
 			if (vec[i].num > vec[i + 1].num) {
@@ -199,6 +193,16 @@ std::vector<t_pair> PmergeMe::runMergeInsertionSort(std::vector<t_pair>& vec) {
 			recursive_vec.push_back(vec[i]);
 		}
 	}
+}
+
+std::vector<t_pair> PmergeMe::runMergeInsertionSort(std::vector<t_pair>& vec) {
+	// std::cout << "=================================================" << std::endl;
+	if (vec.size() < 2) {
+		return (vec);
+	}
+
+	std::vector<t_pair> recursive_vec;
+	create_recursive_vec(recursive_vec, vec);
 	// for (size_t i = 0; i < recursive_vec.size(); ++i) {
 	// 	printPairVec(recursive_vec[i]);
 	// }
