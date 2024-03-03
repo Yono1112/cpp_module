@@ -13,6 +13,11 @@ typedef struct s_pair {
 	std::vector<struct s_pair> pair_vec;
 }	t_pair;
 
+typedef struct s_pair_lst {
+	int		num;
+	std::list<struct s_pair_lst> pair_lst;
+}	t_pair_lst;
+
 class PmergeMe {
 	public:
 		PmergeMe();
@@ -25,7 +30,7 @@ class PmergeMe {
 	private:
 		// vector
 		void	runBinaryInsertionSort(std::vector<int>& main_chain, const int sub_chain_element);
-		std::vector<unsigned int>	createJacobstalIndex(const std::vector<int>& smaller_vec);
+		// std::vector<unsigned int>	createJacobstalIndex(const std::vector<int>& smaller_vec);
 		std::vector<unsigned int>	createJacobstalVector(const size_t max_num);
 		unsigned int	jacobsthal(const unsigned int n);
 		void printFirstSecondLine(const std::string& str);
@@ -33,7 +38,7 @@ class PmergeMe {
 		void runBinarySearch(std::vector<unsigned int>& vec, unsigned int num);
 		std::vector<t_pair> runMergeInsertionSort(std::vector<t_pair>& vec);
 		void runBinaryInsertionSort(std::vector<t_pair>& main_chain, t_pair& insert_element);
-		static bool comp(const t_pair& first, const t_pair& second);
+		static bool compVec(const t_pair& first, const t_pair& second);
 		std::vector<t_pair> createJacobstalIndex(std::vector<t_pair>& main_chain);
 		void createRecursiveVec(std::vector<t_pair>& recursive_vec, std::vector<t_pair> vec);
 		void insertFirstElement(std::vector<t_pair>& main_chain);
@@ -41,12 +46,19 @@ class PmergeMe {
 		// list
 		std::list<int> runMergeInsertionSort(const std::list<int>& lst);
 		void	runBinaryInsertionSort(std::list<int>& main_chain, const int sub_chain_element);
-		std::list<unsigned int>	createJacobstalIndex(const std::list<int>& smaller_lst);
+
+		static bool compLst(const t_pair_lst& first, const t_pair_lst& second);
+		void runBinaryInsertionSort(std::list<t_pair_lst>& main_chain, t_pair_lst& insert_element);
+		void insertBasedOnJacobsthal(const std::list<t_pair_lst>& jacobsthal_lst, std::list<t_pair_lst>& main_chain);
 		std::list<unsigned int>	createJacobstalList(const size_t max_num);
+		std::list<t_pair_lst> createJacobstalIndex(std::list<t_pair_lst>& main_chain);
+		void insertFirstElement(std::list<t_pair_lst>& main_chain, std::list<t_pair_lst>::iterator first);
+		void createRecursiveLst(std::list<t_pair_lst>& recursive_lst, std::list<t_pair_lst> lst);
+		std::list<t_pair_lst> runMergeInsertionSort(std::list<t_pair_lst>& lst);
 	private:
 		// std::vector<int> _vec;
 		std::vector<t_pair> _vec;
-		std::list<int> _lst;
+		std::list<t_pair_lst> _lst;
 };
 
 #endif
