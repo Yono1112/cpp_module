@@ -66,6 +66,25 @@ void	PmergeMe::setVectorAndList(const char *c_str) {
 	}
 }
 
+void	PmergeMe::printSortTime(const std::string& container, const double time, const size_t size) {
+	std::cout << "Time to process a range of " << size << " elements with std::" << container << " : " << time << " us" << std::endl;
+}
+
+void	PmergeMe::sortVectorAndList() {
+	printFirstSecondLine("Before: ");
+	std::clock_t start_vec = std::clock();
+	_vec = runMergeInsertionSort(_vec);
+	std::clock_t end_vec = std::clock();
+	std::clock_t start_lst = std::clock();
+	_lst = runMergeInsertionSort(_lst);
+	std::clock_t end_lst = std::clock();
+	double time_vec = 1000000.0 * (static_cast<double>(end_vec) - static_cast<double>(start_vec)) / CLOCKS_PER_SEC;
+	double time_lst = 1000000.0 * (static_cast<double>(end_lst) - static_cast<double>(start_lst)) / CLOCKS_PER_SEC;
+	printFirstSecondLine("After: ");
+	printSortTime("vector", time_vec, _vec.size());
+	printSortTime("list", time_lst, _lst.size());
+}
+
 unsigned int	PmergeMe::jacobsthal(const unsigned int n) {
 	if (n == 0) {
 		return (0);
@@ -80,6 +99,8 @@ unsigned int	PmergeMe::jacobsthal(const unsigned int n) {
 	}
 	return (jacobsthal_nums[n]);
 }
+
+// Implementation of mergeInsertionSort in std::vector
 
 void	PmergeMe::createJacobstalVector(std::vector<unsigned int>& jacobsthal_vec, const size_t max_num) {
 	for (size_t i = 0;; ++i) {
@@ -222,6 +243,8 @@ std::vector<t_pair_vec> PmergeMe::runMergeInsertionSort(std::vector<t_pair_vec>&
 
 	return (main_chain);
 }
+
+// Implementation of mergeInsertionSort in std::list
 
 void	printPairLst(const t_pair_lst& pair, int depth = 0) {
 	std::cout << std::string(depth, ' ') << "num: " << pair.num << std::endl;
@@ -373,23 +396,4 @@ std::list<t_pair_lst> PmergeMe::runMergeInsertionSort(std::list<t_pair_lst>& lst
 	// std::cout << "#############################################" << std::endl;
 
 	return (main_chain);
-}
-
-void	PmergeMe::printSortTime(const std::string& container, const double time, const size_t size) {
-	std::cout << "Time to process a range of " << size << " elements with std::" << container << " : " << time << " us" << std::endl;
-}
-
-void	PmergeMe::sortVectorAndList() {
-	printFirstSecondLine("Before: ");
-	std::clock_t start_vec = std::clock();
-	_vec = runMergeInsertionSort(_vec);
-	std::clock_t end_vec = std::clock();
-	std::clock_t start_lst = std::clock();
-	_lst = runMergeInsertionSort(_lst);
-	std::clock_t end_lst = std::clock();
-	double time_vec = 1000000.0 * (static_cast<double>(end_vec) - static_cast<double>(start_vec)) / CLOCKS_PER_SEC;
-	double time_lst = 1000000.0 * (static_cast<double>(end_lst) - static_cast<double>(start_lst)) / CLOCKS_PER_SEC;
-	printFirstSecondLine("After: ");
-	printSortTime("vector", time_vec, _vec.size());
-	printSortTime("list", time_lst, _lst.size());
 }

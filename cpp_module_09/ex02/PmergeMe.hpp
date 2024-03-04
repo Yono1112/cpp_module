@@ -32,7 +32,6 @@ class PmergeMe {
 		void printFirstSecondLine(const std::string& str);
 		void printSortTime(const std::string& container, const double time, const size_t size);
 		// vector
-		// void runBinarySearch(std::vector<unsigned int>& vec, unsigned int num);
 		void createJacobstalVector(std::vector<unsigned int>& jacobsthal_vec, const size_t max_num);
 		void createJacobstalIndex(std::vector<t_pair_vec>& index_pair_vec, std::vector<t_pair_vec>& main_chain);
 		static bool compVec(const t_pair_vec& first, const t_pair_vec& second);
