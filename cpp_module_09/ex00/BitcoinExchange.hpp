@@ -20,7 +20,7 @@ class BitcoinExchange {
 		static void	printError(std::string error_message);
 		static bool	canOpenFiles(const char *arg_file);
 		void	addCSVToMap();
-		void	addInputToVector(const char *file_name);
+		void	addInputToDeque(const char *file_name);
 		void	outputBitcoinExchange();
 	private:
 		bool	checkValidDate(const std::string& date_key);

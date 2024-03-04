@@ -76,7 +76,7 @@ void	BitcoinExchange::addCSVToMap() {
 	csv_file.close();
 }
 
-void	BitcoinExchange::addInputToVector(const char *file_name) {
+void	BitcoinExchange::addInputToDeque(const char *file_name) {
 	// std::cout << "run addInputToBitcoinMap" << std::endl;
 
 	std::ifstream	input_file(file_name);
