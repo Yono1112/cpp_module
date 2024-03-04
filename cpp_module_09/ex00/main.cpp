@@ -9,7 +9,11 @@ int	main(int argc, char **argv) {
 		return (1);
 	}
 	BitcoinExchange	btc;
-	btc.addCSVToMap();
+	try {
+		btc.addCSVToMap();
+	} catch (const std::exception& e) {
+		return (1);
+	}
 	btc.addInputToDeque(argv[1]);
 	btc.outputBitcoinExchange();
 	return (0);

@@ -49,24 +49,31 @@ void	removeSpaceAndTabStr(std::string& str) {
 }
 
 void	BitcoinExchange::addCSVToMap() {
-	// std::cout << "run addCSVToBitcoinMap" << std::endl;
-
 	std::ifstream	csv_file(CSV_FILE);
 	std::string	line;
 
 	while (getline(csv_file, line)) {
 		removeSpaceAndTabStr(line);
-		if (line.size() >= 2 && line.substr(0, 2) == "20") {
-			std::size_t pos = line.find(',');
-			if (pos != std::string::npos) {
-				std::string date_str = line.substr(0, pos);
-				std::string ex_rate_str = line.substr(pos + 1);
-				// std::cout << "before comma: " << date_str << ". after comma: " << ex_rate_str << "." << std::endl;
-				std::istringstream iss(ex_rate_str);
-				double ex_rate;
-				if (iss >> ex_rate && !_data_map[date_str]) {
-					_data_map[date_str] = ex_rate;
-				}
+		if (line == FIRST_CSV_LINE) {
+			continue ;
+		}
+		if (std::count(line.begin(), line.end(), ',') > 1) {
+			printError("bad input line in csv file (each line must have a single comma) => " + line);
+			throw std::exception();
+		}
+		std::size_t pos = line.find(',');
+		if (pos != std::string::npos) {
+			std::string date_str = line.substr(0, pos);
+			std::string ex_rate_str = line.substr(pos + 1);
+
+			std::istringstream iss(ex_rate_str);
+			double ex_rate;
+			iss >> ex_rate;
+			if (iss.fail() || !checkValidDate(date_str, ex_rate_str) || _data_map[date_str]) {
+				printError("bad input date in csv file => " + date_str);
+				throw std::exception();
+			} else {
+				_data_map[date_str] = ex_rate;
 			}
 		}
 	}
@@ -77,13 +84,14 @@ void	BitcoinExchange::addCSVToMap() {
 }
 
 void	BitcoinExchange::addInputToDeque(const char *file_name) {
-	// std::cout << "run addInputToBitcoinMap" << std::endl;
-
 	std::ifstream	input_file(file_name);
 	std::string	line;
 
 	while (getline(input_file, line)) {
 		removeSpaceAndTabStr(line);
+		if (line == FIRST_INPUT_LINE) {
+			continue ;
+		}
 		std::string date_str, ex_rate_str;
 		std::size_t pos = line.find('|');
 		if (pos != std::string::npos) {
@@ -102,11 +110,11 @@ void	BitcoinExchange::addInputToDeque(const char *file_name) {
 }
 
 bool	BitcoinExchange::checkValidDate(const std::string& date_key, const std::string& ex_rate_value) {
-	// std::cout << "date_key: " << date_key << std::endl;
+	// std::cout << "date_key: " << date_key << ", ex_rate_value: " << ex_rate_value << std::endl;
 	if (ex_rate_value == "") {
 		return (false);
 	}
-	if (date_key.size() != 10 || date_key.substr(0, 2) != "20") {
+	if (date_key.size() != 10) {
 		return (false);
 	} else if (date_key[4] != '-' || date_key[7] != '-') {
 		return (false);
@@ -183,8 +191,6 @@ void	BitcoinExchange::processInputEntry(const std::string& key, const std::strin
 }
 
 void	BitcoinExchange::outputBitcoinExchange() {
-	// std::cout << std::endl << "run outputBitcoinExchange" << std::endl;
-
 	// for (std::size_t i = 0; i < _input_deq.size(); i++) {
 	// 	std::cout << "key: " << _input_deq[i].first << ", value: " << _input_deq[i].second << std::endl;
 	// }

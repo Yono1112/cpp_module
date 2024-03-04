@@ -10,6 +10,8 @@
 #include <deque>
 
 #define CSV_FILE "data.csv.org"
+#define FIRST_INPUT_LINE "date|value"
+#define FIRST_CSV_LINE "date,exchange_rate"
 
 class BitcoinExchange {
 	public:
