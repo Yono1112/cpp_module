@@ -8,10 +8,10 @@
 #include <sstream>
 #include <ctime>
 
-typedef struct s_pair {
+typedef struct s_pair_vec {
 	int		num;
-	std::vector<struct s_pair> pair_vec;
-}	t_pair;
+	std::vector<struct s_pair_vec> pair_vec;
+}	t_pair_vec;
 
 typedef struct s_pair_lst {
 	int		num;
@@ -32,17 +32,17 @@ class PmergeMe {
 		void	runBinaryInsertionSort(std::vector<int>& main_chain, const int sub_chain_element);
 		// std::vector<unsigned int>	createJacobstalIndex(const std::vector<int>& smaller_vec);
 		void createJacobstalVector(std::vector<unsigned int>& jacobsthal_vec, const size_t max_num);
-		unsigned int	jacobsthal(const unsigned int n);
+		unsigned int jacobsthal(const unsigned int n);
 		void printFirstSecondLine(const std::string& str);
 		void printSortTime(const std::string& container, const double time, const size_t size);
 		void runBinarySearch(std::vector<unsigned int>& vec, unsigned int num);
-		std::vector<t_pair> runMergeInsertionSort(std::vector<t_pair>& vec);
-		void runBinaryInsertionSort(std::vector<t_pair>& main_chain, t_pair& insert_element);
-		static bool compVec(const t_pair& first, const t_pair& second);
-		void createJacobstalIndex(std::vector<t_pair>& index_pair_vec, std::vector<t_pair>& main_chain);
-		void createRecursiveVec(std::vector<t_pair>& recursive_vec, std::vector<t_pair> vec);
-		void insertFirstElement(std::vector<t_pair>& main_chain);
-		void insertBasedOnJacobsthal(const std::vector<t_pair>& jacobsthal_vec, std::vector<t_pair>& main_chain);
+		std::vector<t_pair_vec> runMergeInsertionSort(std::vector<t_pair_vec>& vec);
+		void runBinaryInsertionSort(std::vector<t_pair_vec>& main_chain, t_pair_vec& insert_element);
+		static bool compVec(const t_pair_vec& first, const t_pair_vec& second);
+		void createJacobstalIndex(std::vector<t_pair_vec>& index_pair_vec, std::vector<t_pair_vec>& main_chain);
+		void createRecursiveVec(std::vector<t_pair_vec>& recursive_vec, std::vector<t_pair_vec> vec);
+		void insertFirstElement(std::vector<t_pair_vec>& main_chain);
+		void insertBasedOnJacobsthal(const std::vector<t_pair_vec>& jacobsthal_vec, std::vector<t_pair_vec>& main_chain);
 		// list
 		std::list<int> runMergeInsertionSort(const std::list<int>& lst);
 		void	runBinaryInsertionSort(std::list<int>& main_chain, const int sub_chain_element);
@@ -58,7 +58,7 @@ class PmergeMe {
 		std::list<t_pair_lst> runMergeInsertionSort(std::list<t_pair_lst>& lst);
 	private:
 		// std::vector<int> _vec;
-		std::vector<t_pair> _vec;
+		std::vector<t_pair_vec> _vec;
 		std::list<t_pair_lst> _lst;
 };
 
