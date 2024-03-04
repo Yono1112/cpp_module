@@ -101,14 +101,15 @@ void	printPairVec(const t_pair_vec& pair, int depth = 0) {
 }
 
 void	PmergeMe::createJacobstalIndex(std::vector<t_pair_vec>& index_pair_vec, std::vector<t_pair_vec>& main_chain) {
-	// std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
 	std::vector<unsigned int> jacobsthal_vec;
 	createJacobstalVector(jacobsthal_vec, main_chain.size() - 1);
+
 	// std::cout << "jacobsthal_vec: ";
 	// for (size_t i = 0; i < jacobsthal_vec.size(); ++i) {
 	// 	std::cout << jacobsthal_vec[i] << ", ";
 	// }
 	// std::cout << std::endl;
+
 	std::vector<unsigned int> index_vec;
 	for (size_t i = 1; i < jacobsthal_vec.size(); ++i) {
 		unsigned int prev_num = jacobsthal_vec[i - 1];
@@ -116,11 +117,13 @@ void	PmergeMe::createJacobstalIndex(std::vector<t_pair_vec>& index_pair_vec, std
 			index_vec.push_back(j);
 		}
 	}
+
 	// std::cout << "index_vec: ";
 	// for (size_t i = 0; i < index_vec.size(); ++i) {
 	// 	std::cout << index_vec[i] << ", ";
 	// }
 	// std::cout << std::endl;
+
 	for (size_t i = 0; i < index_vec.size(); ++i) {
 		t_pair_vec tmp = main_chain[index_vec[i]];
 		index_pair_vec.push_back(tmp);
@@ -128,15 +131,10 @@ void	PmergeMe::createJacobstalIndex(std::vector<t_pair_vec>& index_pair_vec, std
 			main_chain[index_vec[i]].pair_vec.pop_back();
 		}
 	}
+
 	// for (size_t i = 0; i < index_pair_vec.size(); ++i) {
 	// 	printPairVec(index_pair_vec[i]);
 	// }
-	// std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
-}
-
-void	PmergeMe::runBinaryInsertionSort(std::vector<int>& main_chain, const int sub_chain_element) {
-	std::vector<int>::iterator it = std::lower_bound(main_chain.begin(), main_chain.end(), sub_chain_element);
-	main_chain.insert(it, sub_chain_element);
 }
 
 bool	PmergeMe::compVec(const t_pair_vec& first, const t_pair_vec& second) {
@@ -144,24 +142,8 @@ bool	PmergeMe::compVec(const t_pair_vec& first, const t_pair_vec& second) {
 }
 
 void	PmergeMe::runBinaryInsertionSort(std::vector<t_pair_vec>& main_chain, t_pair_vec& insert_element) {
-	// std::cout << "start runBinaryInsertionSort" << std::endl;
-	// std::cout << "insert_element: " << insert_element.num << ", main_chain[" << index << "]: " << main_chain[index].num << std::endl;
-	// std::cout << "0000000000000000000" << std::endl;
-	// for (size_t i = 0; i < main_chain.size(); ++i) {
-	// 	printPairVec(main_chain[i]);
-	// }
-	// std::cout << "0000000000000000000" << std::endl;
-
 	std::vector<t_pair_vec>::iterator it = std::lower_bound(main_chain.begin() , main_chain.end(), insert_element, compVec);
-	// std::cout << "it: " << it->num << std::endl;
 	main_chain.insert(it, insert_element);
-
-	// std::cout << "0000000000000000000" << std::endl;
-	// for (size_t i = 0; i < main_chain.size(); ++i) {
-	// 	printPairVec(main_chain[i]);
-	// }
-	// std::cout << "0000000000000000000" << std::endl;
-	// std::cout << "finish runBinaryInsertionSort" << std::endl;
 }
 
 void	PmergeMe::createRecursiveVec(std::vector<t_pair_vec>& recursive_vec, std::vector<t_pair_vec> vec) {
@@ -193,10 +175,8 @@ void	PmergeMe::insertFirstElement(std::vector<t_pair_vec>& main_chain) {
 
 void	PmergeMe::insertBasedOnJacobsthal(const std::vector<t_pair_vec>& jacobsthal_vec, std::vector<t_pair_vec>& main_chain) {
 	for (size_t i = 0; i < jacobsthal_vec.size() ; ++i) {
-		// std::cout << "jacobsthal_vec.num: " << jacobsthal_vec[i].num << std::endl;
 		if (!jacobsthal_vec[i].pair_vec.empty() && main_chain[0].pair_vec.size() < jacobsthal_vec[i].pair_vec.size()) {
 			t_pair_vec insert_element = jacobsthal_vec[i].pair_vec.back();
-			// std::cout << "insert_element.num: " << insert_element.num << std::endl;
 			if (insert_element.num != -1) {
 				runBinaryInsertionSort(main_chain, insert_element);
 			}
@@ -231,7 +211,6 @@ std::vector<t_pair_vec> PmergeMe::runMergeInsertionSort(std::vector<t_pair_vec>&
 
 	std::vector<t_pair_vec> jacobsthal_vec;
 	createJacobstalIndex(jacobsthal_vec, main_chain);
-	// std::vector<t_pair_vec>jacobsthal_vec = createJacobstalIndex(main_chain);
 	if (!jacobsthal_vec.empty()) {
 		insertBasedOnJacobsthal(jacobsthal_vec, main_chain);
 	}
@@ -264,10 +243,8 @@ void	PmergeMe::createJacobstalList(std::list<unsigned int>& jacobsthal_lst, cons
 }
 
 void	PmergeMe::createJacobstalIndex(std::list<t_pair_lst>& index_pair_lst, std::list<t_pair_lst>& main_chain) {
-	// std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
 	std::list<unsigned int> jacobsthal_lst;
 	createJacobstalList(jacobsthal_lst, main_chain.size() - 1);
-	// std::list<unsigned int> jacobsthal_lst = createJacobstalList(main_chain.size() - 1);
 
 	// std::cout << "jacobsthal_lst: ";
 	// for (std::list<unsigned int>::iterator it = jacobsthal_lst.begin(); it != jacobsthal_lst.end(); ++it) {
@@ -304,9 +281,6 @@ void	PmergeMe::createJacobstalIndex(std::list<t_pair_lst>& index_pair_lst, std::
 	// for (std::list<t_pair_lst>::iterator it = main_chain.begin(); it != main_chain.end(); it++) {
 	// 	printPairLst(*it);
 	// }
-
-	// std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
-	// std::exit(0);
 }
 
 bool	PmergeMe::compLst(const t_pair_lst& first, const t_pair_lst& second) {
@@ -314,24 +288,9 @@ bool	PmergeMe::compLst(const t_pair_lst& first, const t_pair_lst& second) {
 }
 
 void	PmergeMe::runBinaryInsertionSort(std::list<t_pair_lst>& main_chain, t_pair_lst& insert_element) {
-	// std::cout << "start runBinaryInsertionSort" << std::endl;
-	// std::cout << "insert_element: " << insert_element.num << ", main_chain[" << index << "]: " << main_chain[index].num << std::endl;
-	// std::cout << "0000000000000000000" << std::endl;
-	// for (size_t i = 0; i < main_chain.size(); ++i) {
-	// 	printPairVec(main_chain[i]);
-	// }
-	// std::cout << "0000000000000000000" << std::endl;
-
 	std::list<t_pair_lst>::iterator it = std::lower_bound(main_chain.begin() , main_chain.end(), insert_element, compLst);
-	// std::cout << "it: " << it->num << std::endl;
 	main_chain.insert(it, insert_element);
 
-	// std::cout << "0000000000000000000" << std::endl;
-	// for (size_t i = 0; i < main_chain.size(); ++i) {
-	// 	printPairVec(main_chain[i]);
-	// }
-	// std::cout << "0000000000000000000" << std::endl;
-	// std::cout << "finish runBinaryInsertionSort" << std::endl;
 }
 
 void	PmergeMe::createRecursiveLst(std::list<t_pair_lst>& recursive_lst, std::list<t_pair_lst> lst) {
@@ -362,7 +321,6 @@ void	PmergeMe::insertFirstElement(std::list<t_pair_lst>& main_chain, std::list<t
 	t_pair_lst front = first->pair_lst.back();
 	first->pair_lst.pop_back();
 	if (front.num != -1) {
-		// main_chain.insert(main_chain.begin(), front);
 		main_chain.push_front(front);
 	}
 }
@@ -405,7 +363,6 @@ std::list<t_pair_lst> PmergeMe::runMergeInsertionSort(std::list<t_pair_lst>& lst
 
 	std::list<t_pair_lst> jacobsthal_lst;
 	createJacobstalIndex(jacobsthal_lst, main_chain);
-	// std::list<t_pair_lst> jacobsthal_lst = createJacobstalIndex(main_chain);
 	if (!jacobsthal_lst.empty()) {
 		insertBasedOnJacobsthal(jacobsthal_lst, main_chain);
 	}
@@ -414,7 +371,6 @@ std::list<t_pair_lst> PmergeMe::runMergeInsertionSort(std::list<t_pair_lst>& lst
 	// 	printPairLst(*it);
 	// }
 	// std::cout << "#############################################" << std::endl;
-	// std::exit(0);
 
 	return (main_chain);
 }
@@ -427,7 +383,6 @@ void	PmergeMe::sortVectorAndList() {
 	printFirstSecondLine("Before: ");
 	std::clock_t start_vec = std::clock();
 	_vec = runMergeInsertionSort(_vec);
-	// _vec = convertToPairVector(_vec);
 	std::clock_t end_vec = std::clock();
 	std::clock_t start_lst = std::clock();
 	_lst = runMergeInsertionSort(_lst);
