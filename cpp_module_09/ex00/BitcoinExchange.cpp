@@ -139,7 +139,7 @@ bool	BitcoinExchange::checkValidExRate(const std::string& value, double& ex_num)
 	} else if (ex_num < 0) {
 		printError("not a positive number.");
 		return (false);
-	} else if (ex_num > 100) {
+	} else if (ex_num > 1000) {
 		printError("too large a number.");
 		return (false);
 	}
