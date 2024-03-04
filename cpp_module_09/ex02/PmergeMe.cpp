@@ -253,8 +253,7 @@ void	printPairLst(const t_pair_lst& pair, int depth = 0) {
 	}
 }
 
-std::list<unsigned int>	PmergeMe::createJacobstalList(const size_t max_num) {
-	std::list<unsigned int> jacobsthal_lst;
+void	PmergeMe::createJacobstalList(std::list<unsigned int>& jacobsthal_lst, const size_t max_num) {
 	for (size_t i = 0;; ++i) {
 		unsigned int jacob_num = jacobsthal(i);
 		if (jacob_num >= max_num) {
@@ -263,18 +262,19 @@ std::list<unsigned int>	PmergeMe::createJacobstalList(const size_t max_num) {
 		}
 		jacobsthal_lst.push_back(jacob_num);
 	}
-	return (jacobsthal_lst);
 }
 
-std::list<t_pair_lst>	PmergeMe::createJacobstalIndex(std::list<t_pair_lst>& main_chain) {
+void	PmergeMe::createJacobstalIndex(std::list<t_pair_lst>& index_pair_lst, std::list<t_pair_lst>& main_chain) {
 	// std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
-	std::list<unsigned int> jacobsthal_lst = createJacobstalList(main_chain.size() - 1);
+	std::list<unsigned int> jacobsthal_lst;
+	createJacobstalList(jacobsthal_lst, main_chain.size() - 1);
+	// std::list<unsigned int> jacobsthal_lst = createJacobstalList(main_chain.size() - 1);
 
-	std::cout << "jacobsthal_lst: ";
-	for (std::list<unsigned int>::iterator it = jacobsthal_lst.begin(); it != jacobsthal_lst.end(); ++it) {
-		std::cout << *it << ", ";
-	}
-	std::cout << std::endl;
+	// std::cout << "jacobsthal_lst: ";
+	// for (std::list<unsigned int>::iterator it = jacobsthal_lst.begin(); it != jacobsthal_lst.end(); ++it) {
+	// 	std::cout << *it << ", ";
+	// }
+	// std::cout << std::endl;
 
 	std::list<unsigned int> index_lst;
 	std::list<unsigned int>::iterator it = jacobsthal_lst.begin();
@@ -288,13 +288,12 @@ std::list<t_pair_lst>	PmergeMe::createJacobstalIndex(std::list<t_pair_lst>& main
 		it++;
 	}
 
-	std::cout << "index_lst: ";
-	for (std::list<unsigned int>::iterator it = index_lst.begin(); it != index_lst.end(); ++it) {
-		std::cout << *it << ", ";
-	}
-	std::cout << std::endl;
+	// std::cout << "index_lst: ";
+	// for (std::list<unsigned int>::iterator it = index_lst.begin(); it != index_lst.end(); ++it) {
+	// 	std::cout << *it << ", ";
+	// }
+	// std::cout << std::endl;
 
-	std::list<t_pair_lst> index_pair_lst;
 	for (std::list<unsigned int>::iterator index_it = index_lst.begin(); index_it != index_lst.end(); ++index_it) {
 		std::list<t_pair_lst>::iterator main_it = main_chain.begin();
 		std::advance(main_it, *index_it);
@@ -303,21 +302,12 @@ std::list<t_pair_lst>	PmergeMe::createJacobstalIndex(std::list<t_pair_lst>& main
 			main_it->pair_lst.pop_back();
 		}
 	}
-	// for (size_t i = 0; i < index_lst.size(); ++i) {
-	// 	t_pair tmp = main_chain[index_lst[i]];
-	// 	index_pair_lst.push_back(tmp);
-	// 	if (main_chain[0].pair_lst.size() < main_chain[index_lst[i]].pair_lst.size()) {
-	// 		main_chain[index_lst[i]].pair_lst.pop_back();
-	// 	}
+	// for (std::list<t_pair_lst>::iterator it = main_chain.begin(); it != main_chain.end(); it++) {
+	// 	printPairLst(*it);
 	// }
-	for (std::list<t_pair_lst>::iterator it = main_chain.begin(); it != main_chain.end(); it++) {
-		printPairLst(*it);
-	}
 
 	// std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
 	// std::exit(0);
-	return (index_pair_lst);
-	// return (main_chain);
 }
 
 bool	PmergeMe::compLst(const t_pair_lst& first, const t_pair_lst& second) {
@@ -390,92 +380,45 @@ void	PmergeMe::insertBasedOnJacobsthal(const std::list<t_pair_lst>& jacobsthal_l
 }
 
 std::list<t_pair_lst> PmergeMe::runMergeInsertionSort(std::list<t_pair_lst>& lst) {
-	std::cout << "=================================================" << std::endl;
+	// std::cout << "=================================================" << std::endl;
 	if (lst.size() < 2) {
 		return (lst);
 	}
 
 	std::list<t_pair_lst> recursive_lst;
 	createRecursiveLst(recursive_lst, lst);
-	for (std::list<t_pair_lst>::iterator it = recursive_lst.begin(); it != recursive_lst.end(); it++) {
-		printPairLst(*it);
-	}
+	// for (std::list<t_pair_lst>::iterator it = recursive_lst.begin(); it != recursive_lst.end(); it++) {
+	// 	printPairLst(*it);
+	// }
 
 	std::list<t_pair_lst> main_chain = runMergeInsertionSort(recursive_lst);
 
-	std::cout << "main_chain---------------------------------------------" << std::endl;
-	for (std::list<t_pair_lst>::iterator it = main_chain.begin(); it != main_chain.end(); it++) {
-		printPairLst(*it);
-	}
+	// std::cout << "main_chain---------------------------------------------" << std::endl;
+	// for (std::list<t_pair_lst>::iterator it = main_chain.begin(); it != main_chain.end(); it++) {
+	// 	printPairLst(*it);
+	// }
 
-	std::cout << "main_chain after insert index 0th ---------------------------------------------" << std::endl;
 	insertFirstElement(main_chain, main_chain.begin());
-	for (std::list<t_pair_lst>::iterator it = main_chain.begin(); it != main_chain.end(); it++) {
-		printPairLst(*it);
-	}
+	// std::cout << "main_chain after insert index 0th ---------------------------------------------" << std::endl;
+	// for (std::list<t_pair_lst>::iterator it = main_chain.begin(); it != main_chain.end(); it++) {
+	// 	printPairLst(*it);
+	// }
 
-	std::list<t_pair_lst> jacobsthal_lst = createJacobstalIndex(main_chain);
+	std::list<t_pair_lst> jacobsthal_lst;
+	createJacobstalIndex(jacobsthal_lst, main_chain);
+	// std::list<t_pair_lst> jacobsthal_lst = createJacobstalIndex(main_chain);
 	if (!jacobsthal_lst.empty()) {
 		insertBasedOnJacobsthal(jacobsthal_lst, main_chain);
 	}
-	std::cout << "#############################################" << std::endl;
-	for (std::list<t_pair_lst>::iterator it = main_chain.begin(); it != main_chain.end(); it++) {
-		printPairLst(*it);
-	}
-	std::cout << "#############################################" << std::endl;
+	// std::cout << "#############################################" << std::endl;
+	// for (std::list<t_pair_lst>::iterator it = main_chain.begin(); it != main_chain.end(); it++) {
+	// 	printPairLst(*it);
+	// }
+	// std::cout << "#############################################" << std::endl;
 	// std::exit(0);
 
 	return (main_chain);
 }
-
-// void	PmergeMe::runBinaryInsertionSort(std::list<int>& main_chain, const int sub_chain_element) {
-// 	std::list<int>::iterator it = std::lower_bound(main_chain.begin(), main_chain.end(), sub_chain_element);
-// 	main_chain.insert(it, sub_chain_element);
-// }
-
-// std::list<int> PmergeMe::runMergeInsertionSort(const std::list<int>& lst) {
-// 	if (lst.size() < 2) {
-// 		return (lst);
-// 	}
-// 
-// 	std::list<std::pair<int, int> > pair_lst;
-// 	std::list<int>::const_iterator it = lst.begin();
-// 	while (it != lst.end()) {
-// 		std::pair<int, int> tmp_pair;
-// 		int first_element = *it++;
-// 		if (it != lst.end()) {
-// 			tmp_pair = std::make_pair(first_element, *it++);
-// 		} else {
-// 			tmp_pair = std::make_pair(first_element, -1);
-// 		}
-// 		pair_lst.push_back(tmp_pair);
-// 	}
-// 
-// 	std::list<int> larger_lst, smaller_lst;
-// 	for (std::list<std::pair<int, int> >::iterator it = pair_lst.begin(); it != pair_lst.end(); ++it) {
-// 		if (it->second != -1 && it->first < it->second) {
-// 			larger_lst.push_back(it->second);
-// 			smaller_lst.push_back(it->first);
-// 		} else {
-// 			larger_lst.push_back(it->first);
-// 			smaller_lst.push_back(it->second);
-// 		}
-// 	}
-// 
-// 	std::list<int> main_chain = runMergeInsertionSort(larger_lst);
-// 
-// 	std::list<unsigned int>jacobsthal_lst = createJacobstalIndex(smaller_lst);
-// 	for (std::list<unsigned int>::iterator it = jacobsthal_lst.begin(); it != jacobsthal_lst.end(); ++it) {
-// 		int jacobsthal_index = *it - 1;
-// 		std::list<int>::iterator jacobsthal_it = smaller_lst.begin();
-// 		std::advance(jacobsthal_it, jacobsthal_index);
-// 		if (*jacobsthal_it != -1) {
-// 			runBinaryInsertionSort(main_chain, *jacobsthal_it);
-// 		}
-// 	}
-// 
-// 	return (main_chain);
-// }
 
 void	PmergeMe::printSortTime(const std::string& container, const double time, const size_t size) {
 	std::cout << "Time to process a range of " << size << " elements with std::" << container << " : " << time << " us" << std::endl;

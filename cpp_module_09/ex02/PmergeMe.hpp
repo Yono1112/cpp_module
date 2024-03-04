@@ -50,8 +50,9 @@ class PmergeMe {
 		static bool compLst(const t_pair_lst& first, const t_pair_lst& second);
 		void runBinaryInsertionSort(std::list<t_pair_lst>& main_chain, t_pair_lst& insert_element);
 		void insertBasedOnJacobsthal(const std::list<t_pair_lst>& jacobsthal_lst, std::list<t_pair_lst>& main_chain);
-		std::list<unsigned int>	createJacobstalList(const size_t max_num);
+		void createJacobstalList(std::list<unsigned int>& jacobsthal_lst, const size_t max_num);
 		std::list<t_pair_lst> createJacobstalIndex(std::list<t_pair_lst>& main_chain);
+		void createJacobstalIndex(std::list<t_pair_lst>& index_pair_lst, std::list<t_pair_lst>& main_chain);
 		void insertFirstElement(std::list<t_pair_lst>& main_chain, std::list<t_pair_lst>::iterator first);
 		void createRecursiveLst(std::list<t_pair_lst>& recursive_lst, std::list<t_pair_lst> lst);
 		std::list<t_pair_lst> runMergeInsertionSort(std::list<t_pair_lst>& lst);
