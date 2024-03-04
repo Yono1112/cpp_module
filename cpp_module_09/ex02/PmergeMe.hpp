@@ -31,7 +31,7 @@ class PmergeMe {
 		// vector
 		void	runBinaryInsertionSort(std::vector<int>& main_chain, const int sub_chain_element);
 		// std::vector<unsigned int>	createJacobstalIndex(const std::vector<int>& smaller_vec);
-		std::vector<unsigned int>	createJacobstalVector(const size_t max_num);
+		void createJacobstalVector(std::vector<unsigned int>& jacobsthal_vec, const size_t max_num);
 		unsigned int	jacobsthal(const unsigned int n);
 		void printFirstSecondLine(const std::string& str);
 		void printSortTime(const std::string& container, const double time, const size_t size);
@@ -39,7 +39,7 @@ class PmergeMe {
 		std::vector<t_pair> runMergeInsertionSort(std::vector<t_pair>& vec);
 		void runBinaryInsertionSort(std::vector<t_pair>& main_chain, t_pair& insert_element);
 		static bool compVec(const t_pair& first, const t_pair& second);
-		std::vector<t_pair> createJacobstalIndex(std::vector<t_pair>& main_chain);
+		void createJacobstalIndex(std::vector<t_pair>& index_pair_vec, std::vector<t_pair>& main_chain);
 		void createRecursiveVec(std::vector<t_pair>& recursive_vec, std::vector<t_pair> vec);
 		void insertFirstElement(std::vector<t_pair>& main_chain);
 		void insertBasedOnJacobsthal(const std::vector<t_pair>& jacobsthal_vec, std::vector<t_pair>& main_chain);

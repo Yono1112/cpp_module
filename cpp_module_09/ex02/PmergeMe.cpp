@@ -81,8 +81,7 @@ unsigned int	PmergeMe::jacobsthal(const unsigned int n) {
 	return (jacobsthal_nums[n]);
 }
 
-std::vector<unsigned int>	PmergeMe::createJacobstalVector(const size_t max_num) {
-	std::vector<unsigned int> jacobsthal_vec;
+void	PmergeMe::createJacobstalVector(std::vector<unsigned int>& jacobsthal_vec, const size_t max_num) {
 	for (size_t i = 0;; ++i) {
 		unsigned int jacob_num = jacobsthal(i);
 		if (jacob_num >= max_num) {
@@ -91,7 +90,6 @@ std::vector<unsigned int>	PmergeMe::createJacobstalVector(const size_t max_num) 
 		}
 		jacobsthal_vec.push_back(jacob_num);
 	}
-	return (jacobsthal_vec);
 }
 
 void	printPairVec(const t_pair& pair, int depth = 0) {
@@ -102,9 +100,10 @@ void	printPairVec(const t_pair& pair, int depth = 0) {
 	}
 }
 
-std::vector<t_pair>	PmergeMe::createJacobstalIndex(std::vector<t_pair>& main_chain) {
+void	PmergeMe::createJacobstalIndex(std::vector<t_pair>& index_pair_vec, std::vector<t_pair>& main_chain) {
 	// std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
-	std::vector<unsigned int> jacobsthal_vec = createJacobstalVector(main_chain.size() - 1);
+	std::vector<unsigned int> jacobsthal_vec;
+	createJacobstalVector(jacobsthal_vec, main_chain.size() - 1);
 	// std::cout << "jacobsthal_vec: ";
 	// for (size_t i = 0; i < jacobsthal_vec.size(); ++i) {
 	// 	std::cout << jacobsthal_vec[i] << ", ";
@@ -122,7 +121,6 @@ std::vector<t_pair>	PmergeMe::createJacobstalIndex(std::vector<t_pair>& main_cha
 	// 	std::cout << index_vec[i] << ", ";
 	// }
 	// std::cout << std::endl;
-	std::vector<t_pair> index_pair_vec;
 	for (size_t i = 0; i < index_vec.size(); ++i) {
 		t_pair tmp = main_chain[index_vec[i]];
 		index_pair_vec.push_back(tmp);
@@ -134,7 +132,6 @@ std::vector<t_pair>	PmergeMe::createJacobstalIndex(std::vector<t_pair>& main_cha
 	// 	printPairVec(index_pair_vec[i]);
 	// }
 	// std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
-	return (index_pair_vec);
 }
 
 void	PmergeMe::runBinaryInsertionSort(std::vector<int>& main_chain, const int sub_chain_element) {
@@ -232,7 +229,9 @@ std::vector<t_pair> PmergeMe::runMergeInsertionSort(std::vector<t_pair>& vec) {
 	// 	printPairVec(main_chain[i]);
 	// }
 
-	std::vector<t_pair>jacobsthal_vec = createJacobstalIndex(main_chain);
+	std::vector<t_pair> jacobsthal_vec;
+	createJacobstalIndex(jacobsthal_vec, main_chain);
+	// std::vector<t_pair>jacobsthal_vec = createJacobstalIndex(main_chain);
 	if (!jacobsthal_vec.empty()) {
 		insertBasedOnJacobsthal(jacobsthal_vec, main_chain);
 	}
