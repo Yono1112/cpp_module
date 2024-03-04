@@ -23,7 +23,7 @@ class BitcoinExchange {
 		void	addInputToDeque(const char *file_name);
 		void	outputBitcoinExchange();
 	private:
-		bool	checkValidDate(const std::string& date_key);
+		bool	checkValidDate(const std::string& date_key, const std::string& ex_rate_value);
 		bool	checkValidExRate(const std::string& value, double& ex_num);
 		std::map<std::string, double>::iterator	findClosestDate(const std::string& date_key);
 		void	processInputEntry(const std::string& key, const std::string& value);

@@ -84,18 +84,16 @@ void	BitcoinExchange::addInputToDeque(const char *file_name) {
 
 	while (getline(input_file, line)) {
 		removeSpaceAndTabStr(line);
-		if (line.size() >= 2 && line.substr(0, 2) == "20") {
-			std::string date_str, ex_rate_str;
-			std::size_t pos = line.find('|');
-			if (pos != std::string::npos) {
-				date_str = line.substr(0, pos);
-				ex_rate_str = line.substr(pos + 1);
-			} else {
-				date_str = line;
-				ex_rate_str = "";
-			}
-			_input_deq.push_back(std::make_pair(date_str, ex_rate_str));
+		std::string date_str, ex_rate_str;
+		std::size_t pos = line.find('|');
+		if (pos != std::string::npos) {
+			date_str = line.substr(0, pos);
+			ex_rate_str = line.substr(pos + 1);
+		} else {
+			date_str = line;
+			ex_rate_str = "";
 		}
+		_input_deq.push_back(std::make_pair(date_str, ex_rate_str));
 	}
 	// for (std::size_t i = 0; i < _input_deq.size(); i++) {
 	// 	std::cout << "key: " << _input_deq[i].first << ", value: " << _input_deq[i].second << std::endl;
@@ -103,8 +101,11 @@ void	BitcoinExchange::addInputToDeque(const char *file_name) {
 	input_file.close();
 }
 
-bool	BitcoinExchange::checkValidDate(const std::string& date_key) {
+bool	BitcoinExchange::checkValidDate(const std::string& date_key, const std::string& ex_rate_value) {
 	// std::cout << "date_key: " << date_key << std::endl;
+	if (ex_rate_value == "") {
+		return (false);
+	}
 	if (date_key.size() != 10 || date_key.substr(0, 2) != "20") {
 		return (false);
 	} else if (date_key[4] != '-' || date_key[7] != '-') {
@@ -162,7 +163,7 @@ std::map<std::string, double>::iterator	BitcoinExchange::findClosestDate(const s
 }
 
 void	BitcoinExchange::processInputEntry(const std::string& key, const std::string& value) {
-	if (!checkValidDate(key)) {
+	if (!checkValidDate(key, value)) {
 		printError("bad input => " + key);
 		return ;
 	}
