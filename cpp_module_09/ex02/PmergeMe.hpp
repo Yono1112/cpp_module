@@ -26,7 +26,7 @@ class PmergeMe {
 		PmergeMe& operator=(const PmergeMe& other);
 		void setVectorAndList(const char *str);
 		void sortVectorAndList();
-		static bool checkValidArgs(const char *str);
+		static bool checkValidArgs(const int argc, const char **str);
 	private:
 		unsigned int jacobsthal(const unsigned int n);
 		void printFirstSecondLine(const std::string& str);

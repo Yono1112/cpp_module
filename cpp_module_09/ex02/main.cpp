@@ -1,8 +1,8 @@
 #include "PmergeMe.hpp"
 
-int main(int argc, char **argv) {
-	if (argc != 2 || !PmergeMe::checkValidArgs(argv[1])) {
-		std::cerr << "Error" << std::endl;
+int main(const int argc, const char **argv) {
+	if (argc < 2 || !PmergeMe::checkValidArgs(argc, argv)) {
+		std::cerr << "ERROR: invalid argument" << std::endl;
 		return (1);
 	}
 	PmergeMe arr;

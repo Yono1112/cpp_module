@@ -25,26 +25,29 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
 	return (*this);
 }
 
-bool	PmergeMe::checkValidArgs(const char *str) {
-	for (size_t i = 0; str[i]; i++) {
-		if (!std::isdigit(str[i]) && str[i] != ' ') {
-			return (false);
+bool	PmergeMe::checkValidArgs(const int argc, const char **str) {
+	for (int i = 1; i < argc; ++i) {
+		for (size_t j = 0; str[i][j]; ++j) {
+			if (!std::isdigit(str[i][j]) && str[i][j] != ' ') {
+				return (false);
+			}
 		}
 	}
 	return (true);
 }
 
 void	PmergeMe::printFirstSecondLine(const std::string& str) {
-	std::cout << "std::vec " << str;
+	// std::cout << "std::vec " << str;
+	std::cout << str;
 	for (size_t i = 0; i < _vec.size(); i++) {
 		std::cout << _vec[i].num << " ";
 	}
 	std::cout << std::endl;
-	std::cout << "std::lst " << str;
-	for (std::list<t_pair_lst>::iterator it = _lst.begin(); it != _lst.end(); it++) {
-		std::cout << it->num << " ";
-	}
-	std::cout << std::endl;
+	// std::cout << "std::lst " << str;
+	// for (std::list<t_pair_lst>::iterator it = _lst.begin(); it != _lst.end(); it++) {
+	// 	std::cout << it->num << " ";
+	// }
+	// std::cout << std::endl;
 }
 
 void	PmergeMe::setVectorAndList(const char *c_str) {
