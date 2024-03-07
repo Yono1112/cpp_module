@@ -71,6 +71,9 @@ void	RPN::calcReversePolish(const char *c_str) {
 	while (i < str.size()) {
 		// std::cout << "===================" << std::endl;
 		skipSpace(str, i);
+		if (i == str.size()) {
+			break ;
+		}
 		if (isArithmetic(str[i])) {
 			// std::cout << str[i] << std::endl;
 			popStackAndCalc(str[i]);
