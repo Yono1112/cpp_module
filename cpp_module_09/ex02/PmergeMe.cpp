@@ -50,22 +50,24 @@ void	PmergeMe::printFirstSecondLine(const std::string& str) {
 	// std::cout << std::endl;
 }
 
-void	PmergeMe::setVectorAndList(const char *c_str) {
-	std::string str(c_str);
-	std::istringstream iss(str);
-	long num;
+void	PmergeMe::setVectorAndList(const int argc, const char **c_str) {
+	for (int i = 1; i < argc; ++i) {
+		std::string str(c_str[i]);
+		std::istringstream iss(str);
+		long num;
 
-	while (iss >> num) {
-		if (std::numeric_limits<int>::max() < num || std::numeric_limits<int>::min() > num) {
-			throw std::out_of_range("int out of range");
+		while (iss >> num) {
+			if (std::numeric_limits<int>::max() < num || std::numeric_limits<int>::min() > num) {
+				throw std::out_of_range("int out of range");
+			}
+			t_pair_vec tmp_pair;
+			tmp_pair.num = num;
+			_vec.push_back(tmp_pair);
+
+			t_pair_lst tmp_pair_lst;
+			tmp_pair_lst.num = num;
+			_lst.push_back(tmp_pair_lst);
 		}
-		t_pair_vec tmp_pair;
-		tmp_pair.num = num;
-		_vec.push_back(tmp_pair);
-
-		t_pair_lst tmp_pair_lst;
-		tmp_pair_lst.num = num;
-		_lst.push_back(tmp_pair_lst);
 	}
 }
 

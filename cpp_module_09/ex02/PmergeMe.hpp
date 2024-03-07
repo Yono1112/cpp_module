@@ -24,7 +24,7 @@ class PmergeMe {
 		PmergeMe(const PmergeMe& other);
 		~PmergeMe();
 		PmergeMe& operator=(const PmergeMe& other);
-		void setVectorAndList(const char *str);
+		void setVectorAndList(const int argc, const char **str);
 		void sortVectorAndList();
 		static bool checkValidArgs(const int argc, const char **str);
 	private:

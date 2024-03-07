@@ -7,7 +7,7 @@ int main(const int argc, const char **argv) {
 	}
 	PmergeMe arr;
 	try {
-		arr.setVectorAndList(argv[1]);
+		arr.setVectorAndList(argc, argv);
 		arr.sortVectorAndList();
 	} catch (const std::exception& e) {
 		std::cerr << "ERROR: catch std::exception: " << e.what() << std::endl;
